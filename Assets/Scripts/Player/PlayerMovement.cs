@@ -27,13 +27,13 @@ namespace Nightmare
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
 
-            StartPausible();
+            // StartPausible();
         }
 
-        void OnDestroy()
-        {
-            StopPausible();
-        }
+        // void OnDestroy()
+        // {
+            // StopPausible();
+        // }
 
         void FixedUpdate ()
         {
