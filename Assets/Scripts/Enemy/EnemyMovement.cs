@@ -24,8 +24,8 @@ namespace Nightmare
         void Awake ()
         {
             player = GameObject.FindGameObjectWithTag ("Player").transform;
-            // playerHealth = player.GetComponent <PlayerHealth> ();
-            // enemyHealth = GetComponent <EnemyHealth> ();
+            playerHealth = player.GetComponent <PlayerHealth> ();
+            enemyHealth = GetComponent <EnemyHealth> ();
             nav = GetComponent<NavMeshAgent>();
 
             StartPausible();
@@ -51,15 +51,15 @@ namespace Nightmare
             if (!isPaused)
             {
                 // If both the enemy and the player have health left...
-                // if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
-                // {
+                if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
+                {
                     LookForPlayer();
                     // WanderOrIdle();
-            //     }
-            //     else
-            //     {
-            //         nav.enabled = false;
-            //     }
+                 }
+                 else
+                 {
+                     nav.enabled = false;
+                 }
             }
         }
 
@@ -107,10 +107,10 @@ namespace Nightmare
         private void GoToPosition(Vector3 position)
         {
             timer = -1f;
-            // if (!enemyHealth.IsDead())
-            // {
+            if (!enemyHealth.IsDead())
+             {
                 SetDestination(position);
-            // }
+             }
         }
 
         private void SetDestination(Vector3 position)

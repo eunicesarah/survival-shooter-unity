@@ -22,7 +22,7 @@ namespace Nightmare
         LineRenderer gunLine;
         AudioSource gunAudio;
         Light gunLight;
-		public Light faceLight;
+		//public Light faceLight;
         float effectsDisplayTime = 0.2f;
         int grenadeStock = 99;
   
@@ -102,7 +102,7 @@ namespace Nightmare
         {
             // Disable the line renderer and the light.
             gunLine.enabled = false;
-			faceLight.enabled = false;
+			//faceLight.enabled = false;
             gunLight.enabled = false;
         }
 
@@ -117,7 +117,7 @@ namespace Nightmare
 
             // Enable the lights.
             gunLight.enabled = true;
-			faceLight.enabled = true;
+			//faceLight.enabled = true;
 
             // Stop the particles from playing if they were, then start the particles.
             gunParticles.Stop ();
