@@ -13,6 +13,7 @@ namespace Nightmare
         PlayerHealth playerHealth;
         PlayerMovement playerMovement;
         PlayerShooting playerShooting;
+        Animator anim;
         private List<string> cheatCodeList = new List<string>();
 
         [SerializeField]
@@ -28,55 +29,12 @@ namespace Nightmare
             playerHealth = FindObjectOfType<PlayerHealth>();
             playerMovement = FindObjectOfType<PlayerMovement>();
             playerShooting = FindObjectOfType<PlayerShooting>();
-            cheatCodeList.Add("god");
-            cheatCodeList.Add("infiniteammo");
-            cheatCodeList.Add("infinitehealth");
+            anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
         }
-
 
         void Update()
         {
-            //if (timeBeforeCheatsEnds <= 0)
-            //{
-            //    cheatStarted = false;
-            //    cPressed = false;
-            //    hPressed = false;
-            //    tPressed = false;
-            //}
-
-            //if (cheatStarted)
-            //{
-            //    timeBeforeCheatsEnds -= Time.deltaTime;
-
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.C))
-            //{
-            //    timeBeforeCheatsEnds = maxTimeForCheat;
-            //    cheatStarted = true;
-            //    cPressed = true;
-            //}
-            //if (Input.GetKeyDown(KeyCode.H) && cPressed)
-            //{
-            //    timeBeforeCheatsEnds = maxTimeForCheat;
-            //    hPressed = true;
-            //}
-            //if (Input.GetKeyDown(KeyCode.T) && hPressed)
-            //{
-            //    timeBeforeCheatsEnds = maxTimeForCheat;
-            //    cheatActivated = true;
-            //    tPressed = true;
-            //}
-            //if (cheatActivated)
-            //{
-            //    Debug.Log("cheat activated");
-            //    playerHealth.godMode = true;
-            //    cheatStarted = false;
-            //    cPressed = false;
-            //    hPressed = false;
-            //    tPressed = false;
-            //    cheatActivated = false;
-            //}
+            
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 if (playerTyping)
@@ -118,12 +76,14 @@ namespace Nightmare
             {
                 Debug.Log("Cheat Activate " + _input);
                 playerHealth.godMode = true;
+                anim.SetTrigger("Cheat");
                 return true;
             }
             else if (_input == "fast")
             {
                 Debug.Log("Cheat Activate " + _input);
                 playerMovement.speed = 12f;
+                anim.SetTrigger("Cheat");
                 return true;
 
             }
@@ -131,6 +91,7 @@ namespace Nightmare
             {
                 Debug.Log("Cheat Activate " + _input);
                 playerShooting.damagePerShot = 1000000;
+                anim.SetTrigger("Cheat");
                 return true;
 
             }
