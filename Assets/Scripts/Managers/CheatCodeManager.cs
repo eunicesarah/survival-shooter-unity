@@ -7,21 +7,20 @@ namespace Nightmare
 {
     public class CheatCodeManager : MonoBehaviour
     {
-        float maxTimeForCheat= 15f;
-        float timeBeforeCheatsEnds;
-        bool cheatStarted, cPressed, hPressed, tPressed, cheatActivated;
+
         PlayerHealth playerHealth;
         PlayerMovement playerMovement;
         PlayerShooting playerShooting;
         Animator anim;
-        private List<string> cheatCodeList = new List<string>();
+        GameObject enterMark;
+        ShopManager shopManager;
+        CoinsManager coinsManager;
+
 
         [SerializeField]
         private bool playerTyping = false;
         [SerializeField]
         private string currentString = "";
-
-        private bool enterPressed = false;
 
 
         void Awake()
@@ -30,6 +29,8 @@ namespace Nightmare
             playerMovement = FindObjectOfType<PlayerMovement>();
             playerShooting = FindObjectOfType<PlayerShooting>();
             anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
+            enterMark = GameObject.Find("HUDCanvas").transform.GetChild(6).gameObject;
+            coinsManager = FindObjectOfType<CoinsManager>();
         }
 
         void Update()
@@ -37,6 +38,7 @@ namespace Nightmare
             
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                enterMark.SetActive(!enterMark.activeSelf);
                 if (playerTyping)
                 {
                     CheckCheat(currentString);
@@ -70,8 +72,6 @@ namespace Nightmare
         }
         private bool CheckCheat(string _input)
         {
-            //foreach (string code in cheatCodeList)
-            //{
             if (_input == "god")
             {
                 Debug.Log("Cheat Activate " + _input);
@@ -95,7 +95,15 @@ namespace Nightmare
                 return true;
 
             }
-            //}
+            else if (_input == "rich")
+            {
+                Debug.Log("Cheat Activate " + _input);
+                coinsManager.unlimitedCoins = true;
+                coinsManager.coins = 9999999;
+                coinsManager.UpdateCoinsUI();
+                anim.SetTrigger("Cheat");
+                return true;
+            }
             return false;
         }
     }

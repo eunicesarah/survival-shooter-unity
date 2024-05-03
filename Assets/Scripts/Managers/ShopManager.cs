@@ -10,23 +10,24 @@ namespace Nightmare
 {
     public class ShopManager : MonoBehaviour
     {
-        public int coins;
+        //public int coins;
         public TMP_Text coinsUI;
         public ShopItemSo[] shopItemSO;
         public GameObject[] shopPanelsGO;
         public ShopTemplate[] shopPanels;
         public Button[] myPurchaseButton;
+
+        CoinsManager coinsManager;
+        //public bool unlimitedCoins = false;
         // Start is called before the first frame update
         void Start()
         {
+            coinsManager = FindObjectOfType<CoinsManager>();
             for (int i = 0;i < shopItemSO.Length; i++)
             {
                 shopPanelsGO[i].SetActive(true);
             }
-            Debug.Log("testteste");
-
-
-            coinsUI.text = "Coins : " +coins.ToString();
+            coinsUI.text = "Coins : " + coinsManager.coins.ToString();
             LoadPanels();
             CheckPurchaseable();
         }
@@ -34,24 +35,15 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-        
-        }
-
-        public void AddCoins()
-        {
-            coins+= 40;
-            coinsUI.text = "Coins : "+ coins.ToString();
-            CheckPurchaseable();
+            coinsUI.text = "Coins : " + coinsManager.coins.ToString();
         }
 
         public void CheckPurchaseable()
         {
-            Debug.Log(coins);
             for (int i = 0; i < shopItemSO.Length; i++)
             {
-                if (coins >= shopItemSO[i].price)
+                if (coinsManager.coins >= shopItemSO[i].price)
                 {
-                    Debug.Log("Masuk sini button");
                     myPurchaseButton[i].interactable = true;
                 }
                 else
@@ -61,10 +53,10 @@ namespace Nightmare
 
         public void PurchaseItem(int buttonNo)
         {
-            if (coins >= shopItemSO[buttonNo].price)
+            if (coinsManager.coins >= shopItemSO[buttonNo].price)
             {
-                coins-= shopItemSO[buttonNo].price;
-                coinsUI.text = "Coins : " + coins.ToString();
+                coinsManager.coins -= shopItemSO[buttonNo].price;
+                coinsUI.text = "Coins : " + coinsManager.coins.ToString();
                 CheckPurchaseable();
 
             }
@@ -76,7 +68,7 @@ namespace Nightmare
             {
                 shopPanels[i].titleText.text = shopItemSO[i].title;
                 shopPanels[i].descriptionText.text = shopItemSO[i].description;
-                shopPanels[i].priceText.text = "$" + shopItemSO[i].price.ToString();
+                shopPanels[i].priceText.text = "$ " + shopItemSO[i].price.ToString();
             }
         }
     }
