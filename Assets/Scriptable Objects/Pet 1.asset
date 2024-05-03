@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018f72c0002bb574f9f588768ce5a5b5, type: 3}
   m_Name: Pet 1
   m_EditorClassIdentifier: 
-  title: Pet 1
-  description: Ini bisa attack
+  title: Shroomie
+  description: jamur baik yang akan menambah darahmu
   price: 100

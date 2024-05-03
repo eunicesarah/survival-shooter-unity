@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace Nightmare
 {
     public class ShopManager : MonoBehaviour
@@ -22,6 +23,7 @@ namespace Nightmare
             {
                 shopPanelsGO[i].SetActive(true);
             }
+            Debug.Log("testteste");
 
 
             coinsUI.text = "Coins : " +coins.ToString();
@@ -37,17 +39,21 @@ namespace Nightmare
 
         public void AddCoins()
         {
-            coins++;
+            coins+= 40;
             coinsUI.text = "Coins : "+ coins.ToString();
             CheckPurchaseable();
         }
 
         public void CheckPurchaseable()
         {
+            Debug.Log(coins);
             for (int i = 0; i < shopItemSO.Length; i++)
             {
                 if (coins >= shopItemSO[i].price)
+                {
+                    Debug.Log("Masuk sini button");
                     myPurchaseButton[i].interactable = true;
+                }
                 else
                     myPurchaseButton[i].interactable = false;
             }
@@ -70,7 +76,7 @@ namespace Nightmare
             {
                 shopPanels[i].titleText.text = shopItemSO[i].title;
                 shopPanels[i].descriptionText.text = shopItemSO[i].description;
-                shopPanels[i].priceText.text = shopItemSO[i].price.ToString();
+                shopPanels[i].priceText.text = "$" + shopItemSO[i].price.ToString();
             }
         }
     }
