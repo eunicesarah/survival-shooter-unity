@@ -8,6 +8,7 @@ namespace Nightmare
         public float sinkSpeed = 2.5f;
         public int scoreValue = 10;
         public AudioClip deathClip;
+        public GameObject powerUpOrb;
 
         int currentHealth;
         Animator anim;
@@ -82,6 +83,11 @@ namespace Nightmare
 
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
+            if (Random.value < 0.3f)
+            {
+                GameObject orb = Instantiate(powerUpOrb, transform.position, Quaternion.identity);
+                Destroy(orb, 5f); // orb will be destroyed after 5 seconds
+            }
         }
 
         public void StartSinking ()
