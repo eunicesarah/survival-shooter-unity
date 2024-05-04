@@ -180,7 +180,7 @@ namespace Nightmare
             bulletsShot--;
 
             if (bulletsShot > 0)
-                Invoke("Shoot", 0f);
+                Invoke("Shoot", 0.01f);
             else
                 readyToShoot = true;
 
