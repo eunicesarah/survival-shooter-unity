@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c822a48f69cd100468220e1c1f20194a, type: 3}
+  m_Name: Ending2
+  m_EditorClassIdentifier: 
+  sentences:
+  - text: My son, I just want you to remember one thing.
+    speaker: {fileID: 11400000, guid: 44ea806c2cdc01d4aa5833935a89ffc8, type: 2}
+  - text: what is mom?
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: Don't forget to always spread kindness wherever it is.  A strong person
+      is a person who can make others smile, no matter the circumstances.
+    speaker: {fileID: 11400000, guid: 44ea806c2cdc01d4aa5833935a89ffc8, type: 2}
+  - text: okay mom, I will always remember it.
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  background: {fileID: 21300000, guid: fd19d9fc514eba34787963dc058553b8, type: 3}
+  nextScene: {fileID: 11400000, guid: 0b8928bb2ff03f0498b448d91cb12abd, type: 2}
+  SceneName: Ending2
