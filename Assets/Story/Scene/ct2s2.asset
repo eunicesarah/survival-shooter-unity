@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c822a48f69cd100468220e1c1f20194a, type: 3}
+  m_Name: ct2s2
+  m_EditorClassIdentifier: 
+  sentences:
+  - text: Ah, it's best to rest in your own home.
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: Let's call the commander and report the situation immediately.
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: .........
+    speaker: {fileID: 0}
+  - text: 'Hello commander, I have successfully completed the mission. However, the
+      enemy I faced was different from the usual, the creatures were like zombies
+      that exist in fantasy worlds and novels. They have human-like intelligence
+      even though they are still below us, but still, they are quite dangerous because
+      they have no fear of death at all. I felt like I was fighting a disposable
+      war robot. '
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: Good job, it looks like the creature you encountered is one of the entities
+      created by doctor Binomo.
+    speaker: {fileID: 11400000, guid: f964d77d0ef14d2459ce482e23ddd8cf, type: 2}
+  - text: 'Doctor Binomo? '
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: Yes, he is one of those mad scientists who enjoys conducting experiments
+      to create an army of willing meat shields for him. He is also one of the causes
+      of the incidents of the deaths of prominent figures in the world.
+    speaker: {fileID: 11400000, guid: f964d77d0ef14d2459ce482e23ddd8cf, type: 2}
+  - text: 'It''s been 50 years since our organization tried to capture him, unfortunately
+      none of the operations that have been deployed have yielded any results. Not
+      a single trace has ever been left behind, earning him the nickname the ghost.
+      Your achievement in finding his trail is a feat that I and the other seniors
+      could not do. You deserve to be called the strongest lone wolf. '
+    speaker: {fileID: 11400000, guid: f964d77d0ef14d2459ce482e23ddd8cf, type: 2}
+  - text: 'You are too much, commander. '
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: That's all for today's information, you must be tired.  Meet me tomorrow
+      at the office, I have something important to talk about.
+    speaker: {fileID: 11400000, guid: f964d77d0ef14d2459ce482e23ddd8cf, type: 2}
+  - text: Yes, thank you Commander
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: .........
+    speaker: {fileID: 0}
+  - text: Let's sleep now, so I won't be late tomorrow
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: .........
+    speaker: {fileID: 0}
+  background: {fileID: 21300000, guid: 20702893632d32947984882020cf088e, type: 3}
+  nextScene: {fileID: 11400000, guid: 2656d437908826842921111d5a7d87d4, type: 2}
+  SceneName: ct2s2

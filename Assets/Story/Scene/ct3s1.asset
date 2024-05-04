@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c822a48f69cd100468220e1c1f20194a, type: 3}
+  m_Name: ct3s1
+  m_EditorClassIdentifier: 
+  sentences:
+  - text: huh, that's quite draining. I can't imagine these monsters attacking civilians.
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: 'If there are creatures like this on a large scale, it''s no exaggeration
+      that an entire country could collapse. I must immediately stop the person who
+      is about to do so. '
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: let's explore this building
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  background: {fileID: 21300000, guid: 6762427a2d66a2b46af76417612314db, type: 3}
+  nextScene: {fileID: 11400000, guid: 0df225d9dccaecb4192a7003d6ed5cb9, type: 2}
+  SceneName: ct3s1

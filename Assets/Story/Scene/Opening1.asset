@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c822a48f69cd100468220e1c1f20194a, type: 3}
+  m_Name: Opening1
+  m_EditorClassIdentifier: 
+  sentences:
+  - text: I didn't expect my guess to be right.
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: 'Analyzing the traces I found yesterday led me here, and sure enough, this
+      place was one of those criminals'' hideouts. '
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: 'But, what kind of monster or creature is it? It looks like someone''s
+      creature and looks dangerous. '
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: Uga booga uga booga Uga booga uga booga Uga booga uga booga
+    speaker: {fileID: 0}
+  - text: '!?'
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  - text: Damn, they seem to be aware of my presence here. Time to warm up before
+      bed!
+    speaker: {fileID: 11400000, guid: a7422e181883f6143af6ccf354a11804, type: 2}
+  background: {fileID: 21300000, guid: c2380195d51ebff479c3e37771a9aeda, type: 3}
+  nextScene: {fileID: 0}
+  SceneName: Opening1
