@@ -15,7 +15,8 @@ public class powerUpDamage : MonoBehaviour
     void Awake ()
     {
         player = GameObject.FindGameObjectWithTag ("Player");
-        playerShooting = player.GetComponent <PlayerShooting> ();
+        playerShooting = FindObjectOfType<PlayerShooting>();
+
     }
 
     void OnTriggerEnter(Collider other)

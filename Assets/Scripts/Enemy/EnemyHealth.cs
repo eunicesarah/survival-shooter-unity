@@ -1,106 +1,130 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 
-namespace Nightmare
-{
-    public class EnemyHealth : MonoBehaviour
+    namespace Nightmare
     {
-        public int startingHealth = 100;
-        public float sinkSpeed = 2.5f;
-        public int scoreValue = 10;
-        public AudioClip deathClip;
-        public GameObject powerUpOrb;
-
-        int currentHealth;
-        Animator anim;
-        AudioSource enemyAudio;
-        ParticleSystem hitParticles;
-        CapsuleCollider capsuleCollider;
-        EnemyMovement enemyMovement;
-
-        void Awake ()
+        public class EnemyHealth : MonoBehaviour
         {
-            anim = GetComponent <Animator> ();
-            enemyAudio = GetComponent <AudioSource> ();
-            hitParticles = GetComponentInChildren <ParticleSystem> ();
-            capsuleCollider = GetComponent <CapsuleCollider> ();
-            enemyMovement = this.GetComponent<EnemyMovement>();
-        }
+            public int startingHealth = 100;
+            public float sinkSpeed = 2.5f;
+            public int scoreValue = 10;
+            public AudioClip deathClip;
+            public GameObject powerUpOrb;
 
-        void OnEnable()
-        {
-            currentHealth = startingHealth;
-            SetKinematics(false);
-        }
+            int currentHealth;
+            Animator anim;
+            AudioSource enemyAudio;
+            ParticleSystem hitParticles;
+            CapsuleCollider capsuleCollider;
+            EnemyMovement enemyMovement;
 
-        private void SetKinematics(bool isKinematic)
-        {
-            capsuleCollider.isTrigger = isKinematic;
-            capsuleCollider.attachedRigidbody.isKinematic = isKinematic;
-        }
+            EnemyManager enemyManager;
 
-        void Update ()
-        {
-            if (IsDead())
+            PowerUp powerUp;
+
+
+            void Awake ()
             {
-                transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
-                if (transform.position.y < -10f)
-                {
-                    Destroy(this.gameObject);
-                }
+                anim = GetComponent <Animator> ();
+                enemyAudio = GetComponent <AudioSource> ();
+                hitParticles = GetComponentInChildren <ParticleSystem> ();
+                capsuleCollider = GetComponent <CapsuleCollider> ();
+                enemyMovement = this.GetComponent<EnemyMovement>();
+                powerUp = GetComponent<PowerUp>();
+
             }
-        }
 
-        public bool IsDead()
-        {
-            return (currentHealth <= 0f);
-        }
-
-        public void TakeDamage (int amount, Vector3 hitPoint)
-        {
-            if (!IsDead())
+            void OnEnable()
             {
-                enemyAudio.Play();
-                currentHealth -= amount;
+                currentHealth = startingHealth;
+                SetKinematics(false);
+            }
 
+            private void SetKinematics(bool isKinematic)
+            {
+                capsuleCollider.isTrigger = isKinematic;
+                capsuleCollider.attachedRigidbody.isKinematic = isKinematic;
+            }
+
+            void Update ()
+            {
                 if (IsDead())
                 {
-                    Death();
-                }
-                else
-                {
-                    enemyMovement.GoToPlayer();
+                    transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+                    if (transform.position.y < -10f)
+                    {
+                        Destroy(this.gameObject);
+                    }
                 }
             }
-                
-            hitParticles.transform.position = hitPoint;
-            hitParticles.Play();
-        }
 
-        void Death ()
-        {
-            EventManager.TriggerEvent("Sound", this.transform.position);
-            anim.SetTrigger ("Dead");
-
-            enemyAudio.clip = deathClip;
-            enemyAudio.Play ();
-            if (Random.value < 0.3f)
+            public bool IsDead()
             {
-                GameObject orb = Instantiate(powerUpOrb, transform.position, Quaternion.identity);
-                Destroy(orb, 5f); // orb will be destroyed after 5 seconds
+                return (currentHealth <= 0f);
             }
-        }
 
-        public void StartSinking ()
-        {
-            GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
-            SetKinematics(true);
+            public void TakeDamage (int amount, Vector3 hitPoint)
+            {
+                if (!IsDead())
+                {
+                    enemyAudio.Play();
+                    currentHealth -= amount;
 
-            ScoreManager.score += scoreValue;
-        }
+                    if (IsDead())
+                    {
+                        Death();
+                    }
+                    else
+                    {
+                        enemyMovement.GoToPlayer();
+                    }
+                }
+                    
+                hitParticles.transform.position = hitPoint;
+                hitParticles.Play();
+            }
 
-        public int CurrentHealth()
-        {
-            return currentHealth;
+            void Death ()
+            {
+                EventManager.TriggerEvent("Sound", this.transform.position);
+                anim.SetTrigger ("Dead");
+
+                enemyAudio.clip = deathClip;
+                enemyAudio.Play ();
+                // if (Random.value < 0.5f)
+                // {
+                //     GameObject orb = Instantiate(powerUpOrb, transform.position, Quaternion.identity);
+                //     Debug.Log("Orb created");
+                    
+                // }
+                // if(powerUpOrb != null)
+                // {
+                //     GameObject orb = Instantiate(powerUpOrb, transform.position, Quaternion.identity);
+                //     Debug.Log("Orb created");
+
+                // }else{
+                //     Debug.Log("Orb is null");
+                
+                // }
+                // GameObject orb = Instantiate(powerUpOrb, transform.position, Quaternion.identity);
+                // Debug.Log("Orb created");
+                SpawnOrbs spawnOrbs = FindObjectOfType<SpawnOrbs>();
+
+                // Call the SpawnOrb method
+                spawnOrbs.SpawnOrb(transform.position);
+
+            }
+
+            public void StartSinking ()
+            {
+                GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
+                SetKinematics(true);
+
+                ScoreManager.score += scoreValue;
+            }
+
+            public int CurrentHealth()
+            {
+                return currentHealth;
+            }
         }
     }
-}

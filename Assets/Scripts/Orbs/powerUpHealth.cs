@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Nightmare;
 
-public class powerUp : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     public GameObject player;
 
@@ -11,19 +11,26 @@ public class powerUp : MonoBehaviour
 
     public float healthIncreasePercentage = 0.2f; 
     public GameObject pickupEffect;
-
+    public void StartDestroyTimer(float delay)
+        {
+            StartCoroutine(DestroyAfterDelay(delay));
+        }
+    private GameObject activeOrb;
     void Awake ()
     {
-
         player = GameObject.FindGameObjectWithTag ("Player");
         playerHealth = player.GetComponent <PlayerHealth> ();
-
+        StartCoroutine(DestroyAfterDelay(5f));
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Pickup(other);
+            // StopCoroutine(DestroyAfterDelay(5f)); 
+            // Destroy(gameObject);
+            
         }
     }
 
@@ -38,6 +45,14 @@ public class powerUp : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+    }
+
+    IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }
