@@ -82,6 +82,10 @@ namespace Nightmare
 
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
+            SpawnOrbs spawnOrbs = FindObjectOfType<SpawnOrbs>();
+
+                // Call the SpawnOrb method
+            spawnOrbs.SpawnOrb(transform.position);
         }
 
         public void StartSinking ()
