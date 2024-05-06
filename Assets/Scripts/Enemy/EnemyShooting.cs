@@ -8,8 +8,11 @@ namespace Nightmare
     public class EnemyShooting : PausibleObject
     {
         public int damagePerShot = 20;
-        public float timeBetweenBullets = 0.15f;
-        public float range = 100f;
+        public float timeBetweenBullets = 1.5f;
+        public float range = 10f;
+        public float spread = 5f;
+
+        public int bulletsPerTap = 5;
 
         float timer;
         Ray shootRay = new Ray();
@@ -21,6 +24,10 @@ namespace Nightmare
         Light gunLight;
         //public Light faceLight;
         float effectsDisplayTime = 0.2f;
+
+        bool readyToShoot = true;
+        int bulletsShot;
+
         //private UnityAction listener;
 
         void Awake()
@@ -86,7 +93,7 @@ namespace Nightmare
         }
 
 
-        void Shoot()
+        void Shoot ()
         {
             // Reset the timer.
             timer = 0f;
@@ -96,42 +103,63 @@ namespace Nightmare
 
             // Enable the lights.
             gunLight.enabled = true;
-            //faceLight.enabled = true;
 
             // Stop the particles from playing if they were, then start the particles.
             gunParticles.Stop();
             gunParticles.Play();
 
-            // Enable the line renderer and set it's first position to be the end of the gun.
-            gunLine.enabled = true;
-            gunLine.SetPosition(0, transform.position);
-
-            // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
             shootRay.origin = transform.position;
-            shootRay.direction = transform.forward;
 
-            // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-            if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+
+            for (int i = 0; i < bulletsPerTap; i++)
             {
-                // Try and find an EnemyHealth script on the gameobject hit.
-                PlayerHealth playerHealth = shootHit.collider.GetComponent<PlayerHealth>();
 
-                // If the EnemyHealth component exist...
-                if (playerHealth != null)
+                Vector3 spreadDirection = Quaternion.Euler(0, Random.Range(-spread, spread), 0) * transform.forward;
+                shootRay.direction = spreadDirection;
+                
+
+                // Create a new LineRenderer for each bullet
+                LineRenderer bulletLine = new GameObject("BulletLine").AddComponent<LineRenderer>();
+                bulletLine.material = gunLine.material;
+                bulletLine.startWidth = gunLine.startWidth;
+                bulletLine.endWidth = gunLine.endWidth;
+                bulletLine.positionCount = 2;
+                bulletLine.SetPosition(0, transform.position);
+
+                // Perform the raycast against gameobjects on the shootable layer and if it hits something...
+                if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
                 {
-                    // ... the enemy should take damage.
-                    playerHealth.TakeDamage(damagePerShot);
+                    // Try and find an EnemyHealth script on the gameobject hit.
+                    PlayerHealth playerHealth = shootHit.collider.GetComponent<PlayerHealth>();
+
+                    // If the EnemyHealth component exist...
+                    if (playerHealth != null)
+                    {
+                        // ... the enemy should take damage.
+                        playerHealth.TakeDamage(damagePerShot);
+                    }
+
+                    // Set the second position of the line renderer to the point the raycast hit.
+                    bulletLine.SetPosition(1, shootHit.point);
+                }
+                // If the raycast didn't hit anything on the shootable layer...
+                else
+                {
+                    // ... set the second position of the line renderer to the fullest extent of the gun's range.
+                    bulletLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
                 }
 
-                // Set the second position of the line renderer to the point the raycast hit.
-                gunLine.SetPosition(1, shootHit.point);
+                // Start a coroutine to disable the LineRenderer after a delay
+                StartCoroutine(DisableLineAfterDelay(bulletLine, 0.2f));
             }
-            // If the raycast didn't hit anything on the shootable layer...
-            else
-            {
-                // ... set the second position of the line renderer to the fullest extent of the gun's range.
-                gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
-            }
+
+            readyToShoot = true;
+        }
+
+        private IEnumerator DisableLineAfterDelay(LineRenderer line, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            Destroy(line.gameObject);
         }
 
         private void ChangeGunLine(float midPoint)
