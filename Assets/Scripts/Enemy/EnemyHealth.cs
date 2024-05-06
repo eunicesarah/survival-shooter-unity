@@ -8,7 +8,7 @@
             public float sinkSpeed = 2.5f;
             public int scoreValue = 10;
             public AudioClip deathClip;
-            public GameObject powerUpOrb;
+            // public GameObject powerUpOrb;
 
             int currentHealth;
             Animator anim;
@@ -29,7 +29,7 @@
                 hitParticles = GetComponentInChildren <ParticleSystem> ();
                 capsuleCollider = GetComponent <CapsuleCollider> ();
                 enemyMovement = this.GetComponent<EnemyMovement>();
-                powerUp = GetComponent<PowerUp>();
+                // powerUp = GetComponent<PowerUp>();
 
             }
 

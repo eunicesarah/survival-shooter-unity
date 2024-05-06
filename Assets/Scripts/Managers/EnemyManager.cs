@@ -4,8 +4,8 @@ namespace Nightmare
 {
     public class EnemyManager : PausibleObject
     {
-         public GameObject enemy;
-        public GameObject healthOrb; 
+        public GameObject enemy;
+        // public GameObject healthOrb; 
         private PlayerHealth playerHealth;
         public float spawnTime = 3f;
         public Transform[] spawnPoints;
@@ -57,14 +57,16 @@ namespace Nightmare
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
             
              // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-        GameObject spawnedEnemy = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        // GameObject spawnedEnemy = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+       
+        Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
         // Debug.Log("Spawned enemy at " + spawnPoints[spawnPointIndex].position);
 
         // Get the EnemyHealth component of the spawned enemy
-        EnemyHealth enemyHealth = spawnedEnemy.GetComponent<EnemyHealth>();
+        // EnemyHealth enemyHealth = spawnedEnemy.GetComponent<EnemyHealth>();
 
         // Assign the powerUpOrb to the EnemyHealth component
-        enemyHealth.powerUpOrb = healthOrb;
+        // enemyHealth.powerUpOrb = healthOrb;
         }
     }
 }

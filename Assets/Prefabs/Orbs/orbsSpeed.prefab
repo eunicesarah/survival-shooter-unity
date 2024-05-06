@@ -9623,9 +9623,9 @@ GameObject:
   m_Component:
   - component: {fileID: 631977410891700244}
   - component: {fileID: 5392022237313432856}
-  - component: {fileID: 4437804189290288443}
+  - component: {fileID: 4428130739250792627}
   m_Layer: 0
-  m_Name: orbsDamage
+  m_Name: orbsSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9640,7 +9640,7 @@ Transform:
   m_GameObject: {fileID: 5056088179288712129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: 1.55, z: 2.46}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9674,7 +9674,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.55
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4437804189290288443
+--- !u!114 &4428130739250792627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9683,12 +9683,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5056088179288712129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f6c5e76adab48dc9122a1da6c8c29e, type: 3}
+  m_Script: {fileID: 11500000, guid: 22c9f07e33bc24dd294cc93b18340ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerShooting: {fileID: 0}
-  damageIncreasePercentage: 0.1
+  playerMovement: {fileID: 0}
+  speedIncreasePercentage: 0.2
+  powerUpDuration: 15
   pickupEffect: {fileID: 0}
 --- !u!1 &6948523868329762218
 GameObject:
