@@ -11,6 +11,12 @@ namespace Nightmare
 
         public GameObject shopUI;
         public GameObject HUDUI;
+
+        public GameObject player;
+        public GameObject shopKeeper;
+
+        public GameObject interactText;
+
         [SerializeField]
         private bool shopOpen = false;
 
@@ -18,18 +24,31 @@ namespace Nightmare
         {
             shopUI = GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject;
             HUDUI = GameObject.Find("HUDCanvas");
+            interactText = HUDUI.transform.GetChild(8).gameObject;
+            player = GameObject.FindGameObjectWithTag("Player");
+            shopKeeper = GameObject.FindGameObjectWithTag("ShopKeeper");
         }
 
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if(Vector3.Distance(player.transform.position, shopKeeper.transform.position) < 5f)
             {
-                shopOpen = !shopOpen;
-                shopUI.SetActive(shopOpen);
-                HUDUI.SetActive(!shopOpen);
+                interactText.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    shopOpen = !shopOpen;
+                    shopUI.SetActive(shopOpen);
+                    HUDUI.SetActive(!shopOpen);
 
+                }
+                // shopOpen = false;
+                // shopUI.SetActive(shopOpen);
+                // HUDUI.SetActive(!shopOpen);
+            }else{
+                interactText.SetActive(false);
             }
+
         }
     }
 
