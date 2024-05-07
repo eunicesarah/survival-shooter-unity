@@ -19,12 +19,12 @@ public class CoinsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinsUI.text = "Coins : " + coins.ToString();
+        coinsUI.text = coins.ToString();
     }
 
     public void UpdateCoinsUI()
     {
-        coinsUI.text = "Coins : " + coins.ToString();
+        coinsUI.text = coins.ToString();
     }
 
     public void AddCoins(int amount)

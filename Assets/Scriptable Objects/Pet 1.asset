@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pet 1
   m_EditorClassIdentifier: 
   title: Shroomie
-  description: jamur baik yang akan menambah darahmu
+  description: Pet Will Attack The Enemy
   price: 100
