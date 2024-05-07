@@ -13,76 +13,65 @@ public class powerUpSpeed : MonoBehaviour
 
     private Coroutine activePowerUp = null;
     private float baseSpeed;
-
-    void Awake ()
+    private float remainingDuration = 0f;
+    public void StartDestroyTimer(float delay)
+        {
+            StartCoroutine(DestroyAfterDelay(delay));
+        }
+    void Awake()
     {
-        player = GameObject.FindGameObjectWithTag ("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.GetComponent<PlayerMovement>();
         baseSpeed = playerMovement.speed; // Store the base speed
-        // StartCoroutine(DestroyAfterDelay(5f)); // Start the destroy timer
+        StartDestroyTimer(5f); // Start the destroy timer
     }
 
-    // IEnumerator DestroyAfterDelay(float delay)
-    // {
-    //     yield return new WaitForSeconds(delay);
-    //     if (gameObject != null)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
+
+    IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {   
-            Debug.Log("Player collided with speed power up");
             Pickup(other);
         }
     }
 
-    void Pickup(Collider player)
+    void Pickup(Collider playerCollider)
     {
         if (activePowerUp != null)
         {
-            StopCoroutine(activePowerUp);
-            playerMovement.speed = baseSpeed; // Reset speed to base speed
+            // Update remaining duration and reset speed
+            remainingDuration += powerUpDuration;
+            playerMovement.speed = baseSpeed * (1 + speedIncreasePercentage);
         }
-        activePowerUp = StartCoroutine(PowerUpTimer());
+        else
+        {
+            activePowerUp = StartCoroutine(PowerUpTimer());
+            playerMovement.speed = baseSpeed * (1 + speedIncreasePercentage);
+        }
 
         Debug.Log("Picked up speed power up");
-        Destroy(gameObject); // Destroy the orb when picked up
+        Destroy(gameObject);
     }
 
-    // IEnumerator PowerUpTimer()
-    // {
-    //     Debug.Log("Power up started. Initial speed: " + playerMovement.speed);
-
-    //     playerMovement.speed *= (1 + speedIncreasePercentage);
-
-    //     Debug.Log("Speed increased to: " + playerMovement.speed);
-
-    //     yield return new WaitForSeconds(powerUpDuration);
-     
-
-    //     playerMovement.speed = baseSpeed; // Reset speed to base speed
-
-    //     Debug.Log("Power up ended. Speed reset to: " + playerMovement.speed);
-
-    //     activePowerUp = null;
-    // }
     IEnumerator PowerUpTimer()
     {
         Debug.Log("Power up started. Initial speed: " + playerMovement.speed);
 
-        playerMovement.speed *= (1 + speedIncreasePercentage);
-
-        Debug.Log("Speed increased to: " + playerMovement.speed);
-
         // Countdown
-        for (float i = powerUpDuration; i > 0; i--)
+        while (remainingDuration > 0)
         {
-            Debug.Log("Power up ends in: " + i + " seconds");
+            Debug.Log("Power up ends in: " + remainingDuration + " seconds");
             yield return new WaitForSeconds(1);
+            remainingDuration--;
         }
 
         playerMovement.speed = baseSpeed; // Reset speed to base speed
