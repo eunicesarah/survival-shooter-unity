@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Pet
+  - ShopKeeper
   layers:
   - Default
   - TransparentFX
