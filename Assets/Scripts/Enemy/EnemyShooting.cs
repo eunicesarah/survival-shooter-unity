@@ -33,7 +33,7 @@ namespace Nightmare
         void Awake()
         {
             // Create a layer mask for the Shootable layer.
-            shootableMask = LayerMask.GetMask("Shootable", "Player");
+            shootableMask = LayerMask.GetMask("Shootable", "Player", "Pet");
 
             // Set up the references.
             gunParticles = GetComponent<ParticleSystem>();
