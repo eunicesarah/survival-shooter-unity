@@ -10,15 +10,18 @@ namespace Nightmare{
 
         public float timeAttackRadius = 1f;
         public int attackDamage = 10;
+        public float swordThreshold = 4f;
 
         Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
         bool playerInRange;
+        float distance;
 
         bool playerInRadius;
-        float timer;
+        float timerSword;
+        float timerArea;
 
         void Awake ()
         {
@@ -27,6 +30,7 @@ namespace Nightmare{
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
+            
 
             StartPausible();
         }
@@ -61,15 +65,32 @@ namespace Nightmare{
                 return;
             
             // Add the time since Update was last called to the timer.
-            timer += Time.deltaTime;
+            timerSword += Time.deltaTime;
+            timerArea += Time.deltaTime;
+
+            distance = Vector3.Distance(player.transform.position, transform.position);
+
+            if (distance < swordThreshold)
+            {
+                Debug.Log("Player is near the enemy!");
+                playerInRange = true;
+            }
+            else
+            {
+                playerInRange = false;
+            }
 
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.CurrentHealth() > 0)
+            if(timerSword >= timeBetweenAttacks && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
+                //anim.SetBool("isWalking", false);
+                anim.SetTrigger("attack");
+                Debug.Log("SwordAttack");
                 Attack ();
+
             }
-            if(timer >= timeAttackRadius && playerInRadius && enemyHealth.CurrentHealth() > 0)
+            if(timerArea >= timeAttackRadius && playerInRadius && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
                 Debug.Log("AreaDamage");
@@ -82,24 +103,26 @@ namespace Nightmare{
                 // ... tell the animator the player is dead.
                 anim.SetTrigger ("PlayerDead");
             }
+            anim.SetBool("isWalking", true);
+
         }
 
         void Attack ()
         {
             // Reset the timer.
-            timer = 0f;
+            timerSword = 0f;
 
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerHealth.TakeDamage (attackDamage);
+                playerHealth.TakeDamage (attackDamage*2);
             }
         }
 
         void AreaDamage()
         {
-            timer = 0f;
+            timerArea = 0f;
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
