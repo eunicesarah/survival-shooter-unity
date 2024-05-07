@@ -86,7 +86,7 @@ namespace Nightmare
                 }
 
                 // If the Fire1 button is being press and it's time to fire...
-                else if (Input.GetButton("Fire1"))
+                else if (Input.GetButton("Fire1") && (weapon == 0 || weapon == 1))
                 {
                     // ... shoot the gun.
                     bulletsShot = bulletsPerTap;
