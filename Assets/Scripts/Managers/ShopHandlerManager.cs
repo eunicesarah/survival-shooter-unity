@@ -36,22 +36,25 @@ namespace Nightmare
 
         void Update()
         {
-            if(Vector3.Distance(player.transform.position, shopKeeper.transform.position) < 5f)
+            if(shopKeeper!=null)
             {
-                interactText.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if(Vector3.Distance(player.transform.position, shopKeeper.transform.position) < 5f)
                 {
-                    shopOpen = !shopOpen;
-                    shopUI.SetActive(shopOpen);
-                    HUDUI.SetActive(!shopOpen);
-                    pauseManager.Pause();
+                    interactText.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        shopOpen = !shopOpen;
+                        shopUI.SetActive(shopOpen);
+                        HUDUI.SetActive(!shopOpen);
+                        pauseManager.Pause();
 
+                    }
+                    // shopOpen = false;
+                    // shopUI.SetActive(shopOpen);
+                    // HUDUI.SetActive(!shopOpen);
+                }else{
+                    interactText.SetActive(false);
                 }
-                // shopOpen = false;
-                // shopUI.SetActive(shopOpen);
-                // HUDUI.SetActive(!shopOpen);
-            }else{
-                interactText.SetActive(false);
             }
 
         }
