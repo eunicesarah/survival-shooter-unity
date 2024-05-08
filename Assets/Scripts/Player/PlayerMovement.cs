@@ -8,7 +8,6 @@ namespace Nightmare
     public class PlayerMovement : PausibleObject
     {
         public float speed = 6f;            // The speed that the player will move at.
-
         // private float baseSpeed = 6f;
         private float maxSpeed = 7.2f;
         private float speedIncreasePercentage = 0.2f;
@@ -38,7 +37,6 @@ namespace Nightmare
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
             baseSpeed = speed;
-
             // StartPausible();
         }
 
@@ -77,6 +75,10 @@ namespace Nightmare
 
             // Move the player to it's current position plus the movement.
             playerRigidbody.MovePosition (transform.position + movement);
+
+            MainManager.Instance.totalDistanceTraveled += movement.magnitude;
+            
+
         }
 
 

@@ -140,10 +140,12 @@ namespace Nightmare
             {
                 bulletsShot = 1;
                 shootRay.direction = transform.forward;
+                MainManager.Instance.totalbullets++;
             }
             else if (weapon == 1)
             {
                 bulletsShot = bulletsPerTap;
+                MainManager.Instance.totalbullets += bulletsPerTap;
             }
 
             for (int i = 0; i < bulletsShot; i++)
@@ -172,6 +174,7 @@ namespace Nightmare
                     if (enemyHealth != null)
                     {
                         // ... the enemy should take damage.
+                        MainManager.Instance.bulletsHit++;
                         enemyHealth.TakeDamage(damagePerShot, shootHit.point);
                         if(petJendralHealth != null)
                         {

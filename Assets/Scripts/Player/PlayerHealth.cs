@@ -88,6 +88,7 @@ namespace Nightmare
             if (currentHealth <= 0 && !isDead)
             {
                 // ... it should die.
+                MainManager.Instance.deathCount++;
                 Death();
             }
         }
