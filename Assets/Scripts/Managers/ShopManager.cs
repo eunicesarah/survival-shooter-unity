@@ -27,7 +27,7 @@ namespace Nightmare
             {
                 shopPanelsGO[i].SetActive(true);
             }
-            coinsUI.text = "Coins : " + coinsManager.coins.ToString();
+            coinsUI.text = coinsManager.coins.ToString();
             LoadPanels();
             CheckPurchaseable();
         }
@@ -35,7 +35,7 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            coinsUI.text = "Coins : " + coinsManager.coins.ToString();
+            coinsUI.text = coinsManager.coins.ToString();
         }
 
         public void CheckPurchaseable()
@@ -68,7 +68,7 @@ namespace Nightmare
             {
                 shopPanels[i].titleText.text = shopItemSO[i].title;
                 shopPanels[i].descriptionText.text = shopItemSO[i].description;
-                shopPanels[i].priceText.text = "$ " + shopItemSO[i].price.ToString();
+                shopPanels[i].priceText.text = shopItemSO[i].price.ToString();
             }
         }
     }

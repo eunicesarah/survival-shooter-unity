@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pet 2
   m_EditorClassIdentifier: 
   title: Spiky
-  description: kaktus hijau penyerang
+  description: Pet Will Heal the player every 2 s
   price: 140

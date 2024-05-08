@@ -9,7 +9,7 @@ namespace Nightmare
         public int scoreValue = 10;
         public AudioClip deathClip;
 
-        int currentHealth;
+        public int currentHealth;
         Animator anim;
         AudioSource enemyAudio;
         ParticleSystem hitParticles;
@@ -73,6 +73,33 @@ namespace Nightmare
                 
             hitParticles.transform.position = hitPoint;
             hitParticles.Play();
+        }
+
+        public void SwordDamage(int amount)
+        {
+            if (!IsDead())
+            {
+                enemyAudio.Play();
+
+                if (currentHealth < amount)
+                {
+                    currentHealth = 0;
+                }
+                else
+                {
+                    currentHealth -= amount;
+                }
+                
+
+                if (IsDead())
+                {
+                    Death();
+                }
+                else
+                {
+                    enemyMovement.GoToPlayer();
+                }
+            }
         }
 
         void Death ()

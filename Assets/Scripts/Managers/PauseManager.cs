@@ -6,23 +6,29 @@ using UnityEngine.Audio;
 using UnityEditor;
 #endif
 
+
 public class PauseManager : MonoBehaviour {
 	
 	public AudioMixerSnapshot paused;
 	public AudioMixerSnapshot unpaused;
 	
-	Canvas canvas;
+	public GameObject canvas;
+	public GameObject pauseUI;
+
+	public bool  lagiPause = false;
 	
-	void Start()
+	void Awake()
 	{
-		canvas = GetComponent<Canvas>();
+		pauseUI = GameObject.Find("PauseCanvas").transform.GetChild(0).gameObject;
 	}
 	
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.P))
 		{
-			canvas.enabled = !canvas.enabled;
+			lagiPause = !lagiPause;
+			//canvas.enabled = !canvas.enabled;
+			pauseUI.SetActive(lagiPause);
 			Pause();
 		}
 	}
@@ -36,16 +42,16 @@ public class PauseManager : MonoBehaviour {
 	
 	void Lowpass()
 	{
-		if (Time.timeScale == 0)
-		{
-			paused.TransitionTo(.01f);
-		}
+		// if (Time.timeScale == 0)
+		// {
+		// 	paused.TransitionTo(.01f);
+		// }
 		
-		else
+		// else
 			
-		{
-			unpaused.TransitionTo(.01f);
-		}
+		// {
+		// 	unpaused.TransitionTo(.01f);
+		// }
 	}
 	
 	public void Quit()

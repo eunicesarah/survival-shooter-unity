@@ -16,6 +16,10 @@ namespace Nightmare
         ShopManager shopManager;
         CoinsManager coinsManager;
 
+        GameObject player;
+
+        SpawnOrbs orbsManager;
+
 
         [SerializeField]
         private bool playerTyping = false;
@@ -28,9 +32,11 @@ namespace Nightmare
             playerHealth = FindObjectOfType<PlayerHealth>();
             playerMovement = FindObjectOfType<PlayerMovement>();
             playerShooting = FindObjectOfType<PlayerShooting>();
+            orbsManager = FindObjectOfType<SpawnOrbs>();
             anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
             enterMark = GameObject.Find("HUDCanvas").transform.GetChild(6).gameObject;
             coinsManager = FindObjectOfType<CoinsManager>();
+            player = GameObject.FindGameObjectWithTag("Player");
         }
 
         void Update()
@@ -101,6 +107,13 @@ namespace Nightmare
                 coinsManager.unlimitedCoins = true;
                 coinsManager.coins = 9999999;
                 coinsManager.UpdateCoinsUI();
+                anim.SetTrigger("Cheat");
+                return true;
+            }
+            else if(_input=="orbs")
+            {
+                Debug.Log("Cheat Activate " + _input);
+                orbsManager.SpawnAllOrbs(player.transform);
                 anim.SetTrigger("Cheat");
                 return true;
             }
