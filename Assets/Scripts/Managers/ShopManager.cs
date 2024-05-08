@@ -17,6 +17,9 @@ namespace Nightmare
         public ShopTemplate[] shopPanels;
         public Button[] myPurchaseButton;
 
+        PetManager petManager;
+        GameObject player;
+
         CoinsManager coinsManager;
         //public bool unlimitedCoins = false;
         // Start is called before the first frame update
@@ -28,6 +31,8 @@ namespace Nightmare
                 shopPanelsGO[i].SetActive(true);
             }
             coinsUI.text = coinsManager.coins.ToString();
+            petManager = FindObjectOfType<PetManager>();
+            player = GameObject.FindGameObjectWithTag("Player");
             LoadPanels();
             CheckPurchaseable();
         }
@@ -57,6 +62,17 @@ namespace Nightmare
             {
                 coinsManager.coins -= shopItemSO[buttonNo].price;
                 coinsUI.text = "Coins : " + coinsManager.coins.ToString();
+                if(buttonNo == 1)
+                {
+                    petManager.isCactus = true;
+                    petManager.isMushroom = false;
+                }
+                else if(buttonNo == 0)
+                {
+                    petManager.isCactus = false;
+                    petManager.isMushroom = true;
+                }
+                petManager.SpawnPet(player.transform.position);
                 CheckPurchaseable();
 
             }

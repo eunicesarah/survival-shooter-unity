@@ -30,7 +30,8 @@ public class CactusHealer : MonoBehaviour
     void Update()
     {
         timerPet += Time.deltaTime;
-        nav.SetDestination(target.position);
+        Vector3 behindPlayer = player.transform.position - player.transform.forward * 1;
+        nav.SetDestination(behindPlayer);
         //Debug.Log("Current time " + timerPet);
 
             if (Vector3.Distance(player.position, transform.position) <= healRadius && playerHealth.currentHealth < 100)
@@ -51,7 +52,7 @@ public class CactusHealer : MonoBehaviour
     {
 
             playerHealth.currentHealth += 1;
-            //playerHealthSlider.value = playerHealth.currentHealth;
+            playerHealth.healthSlider.value = playerHealth.currentHealth;
     }
 }
 }
