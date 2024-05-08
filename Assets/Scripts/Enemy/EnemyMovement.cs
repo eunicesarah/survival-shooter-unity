@@ -28,8 +28,8 @@ namespace Nightmare
         void Awake ()
         {
             player = GameObject.FindGameObjectWithTag ("Player").transform;
-            mushroom = GameObject.Find("MushroomSmilePA")?.transform;
-            cactus = GameObject.Find("CactusPA")?.transform;
+            mushroom = GameObject.Find("MushroomSmilePA(Clone)")?.transform;
+            cactus = GameObject.Find("CactusPA(Clone)")?.transform;
             playerHealth = player.GetComponent <PlayerHealth> ();
             //mushroomHealth = mushroom.GetComponent <MushroomHealth> ();
             //cactusHealth = cactus.GetComponent<CactusHealth>();

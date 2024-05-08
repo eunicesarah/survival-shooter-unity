@@ -20,6 +20,13 @@ namespace Nightmare
 
         SpawnOrbs orbsManager;
 
+        PetManager petManager;
+
+        Transform mushroom;
+        Transform cactus;
+        MushroomHealth mushroomHealth;
+        CactusHealth cactusHealth;
+
 
         [SerializeField]
         private bool playerTyping = false;
@@ -37,10 +44,18 @@ namespace Nightmare
             enterMark = GameObject.Find("HUDCanvas").transform.GetChild(6).gameObject;
             coinsManager = FindObjectOfType<CoinsManager>();
             player = GameObject.FindGameObjectWithTag("Player");
+            petManager = FindObjectOfType<PetManager>();
         }
 
         void Update()
         {
+            mushroom = GameObject.Find("MushroomSmilePA(Clone)")?.transform;
+            cactus = GameObject.Find("CactusPA(Clone)")?.transform;
+            if (mushroom != null)
+                mushroomHealth = mushroom.GetComponent<MushroomHealth>();
+
+            if (cactus != null)
+                cactusHealth = cactus.GetComponent<CactusHealth>();
             
             if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -116,6 +131,59 @@ namespace Nightmare
                 orbsManager.SpawnAllOrbs(player.transform);
                 anim.SetTrigger("Cheat");
                 return true;
+            }
+            else if(_input=="opet") //heal pet
+            {
+                Debug.Log("Cheat Activate " + _input);
+                if(mushroom!=null)
+                {
+                    Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
+                    if (petManager.isMushroom)
+                    {
+
+                        mushroomHealth.currentHealth = 40;
+                        Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
+                    }
+                }else if (cactus != null)
+                {
+
+                    Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
+                    if (petManager.isCactus)
+                    {
+                        cactusHealth.currentHealth = 40;
+                        Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
+                    }
+                }
+                anim.SetTrigger("Cheat");
+                return true;
+            }
+            else if(_input=="xpet")// kill pet
+            {
+                Debug.Log("Cheat Activate " + _input);
+                if(cactus!=null)
+                {
+                    // Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
+                    if (petManager.isCactus)
+                    {
+                        cactusHealth.currentHealth = 0;
+                        petManager.isCactus = false;
+                    }
+
+                }else if ( mushroom!= null)
+                {
+                    if (petManager.isMushroom)
+                    {
+                        mushroomHealth.currentHealth = 0;
+                        petManager.isMushroom = false;
+                    }
+                }
+                anim.SetTrigger("Cheat");
+                return true;
+            }
+            else
+            {
+                Debug.Log("Cheat not found");
+                return false;
             }
             return false;
         }

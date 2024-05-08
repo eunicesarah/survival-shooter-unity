@@ -16,6 +16,7 @@ namespace Nightmare
         public GameObject[] shopPanelsGO;
         public ShopTemplate[] shopPanels;
         public Button[] myPurchaseButton;
+        public GameObject[] myImage;
 
         PetManager petManager;
         GameObject player;
@@ -47,12 +48,23 @@ namespace Nightmare
         {
             for (int i = 0; i < shopItemSO.Length; i++)
             {
-                if (coinsManager.coins >= shopItemSO[i].price)
+                if(petManager.isCactus || petManager.isMushroom)
                 {
-                    myPurchaseButton[i].interactable = true;
+                    myPurchaseButton[i].interactable = false;
+                    myImage[i].SetActive(true);
                 }
                 else
-                    myPurchaseButton[i].interactable = false;
+                {
+                    if (coinsManager.coins >= shopItemSO[i].price)
+                    {
+                        myPurchaseButton[i].interactable = true;
+                    }
+                    else
+                    {
+                        myPurchaseButton[i].interactable = false;
+                    }
+
+                }
             }
         }
 
@@ -62,15 +74,13 @@ namespace Nightmare
             {
                 coinsManager.coins -= shopItemSO[buttonNo].price;
                 coinsUI.text = "Coins : " + coinsManager.coins.ToString();
-                if(buttonNo == 1)
+                if(buttonNo == 0)
+                {
+                    petManager.isMushroom = true;
+                }
+                else if(buttonNo == 1)
                 {
                     petManager.isCactus = true;
-                    petManager.isMushroom = false;
-                }
-                else if(buttonNo == 0)
-                {
-                    petManager.isCactus = false;
-                    petManager.isMushroom = true;
                 }
                 petManager.SpawnPet(player.transform.position);
                 CheckPurchaseable();

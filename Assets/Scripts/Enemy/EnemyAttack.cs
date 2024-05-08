@@ -23,8 +23,8 @@ namespace Nightmare
         {
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
-            mushroom = GameObject.Find("MushroomSmilePA");
-            cactus = GameObject.Find("CactusPA");
+            mushroom = GameObject.Find("MushroomSmilePA(Clone)");
+            cactus = GameObject.Find("CactusPA(Clone)");
             playerHealth = player.GetComponent <PlayerHealth> ();
             //mushroomHealth = mushroom.GetComponent <MushroomHealth> ();
             //cactusHealth = cactus.GetComponent<CactusHealth>();
@@ -93,15 +93,23 @@ namespace Nightmare
             timer = 0f;
 
             // If the player has health to lose...
-            if (mushroomHealth != null && mushroomHealth.currentHealth > 0)
+            if (mushroom != null)
             {
-                mushroomHealth.TakeDamage(attackDamage);
+                if(mushroomHealth.currentHealth > 0)
+                {
+                    mushroomHealth.TakeDamage(attackDamage);
+                }
             }
-            else if (cactusHealth != null && cactusHealth.currentHealth > 0)
+            if (cactus != null )
             {
-                cactusHealth.TakeDamage(attackDamage);
+                if(cactusHealth.currentHealth > 0)
+                {
+                    Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
+                    cactusHealth.TakeDamage(attackDamage);
+                }
+                // cactusHealth.TakeDamage(attackDamage);
             }
-            else if (playerHealth != null && playerHealth.currentHealth > 0)
+            if (playerHealth != null && playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
                 playerHealth.TakeDamage(attackDamage);
