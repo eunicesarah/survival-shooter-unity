@@ -162,18 +162,19 @@ namespace Nightmare
                 Debug.Log("Cheat Activate " + _input);
                 if(cactus!=null)
                 {
-                    // Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
+                    Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
                     if (petManager.isCactus)
                     {
-                        cactusHealth.currentHealth = 0;
+                        cactusHealth.TakeDamage(cactusHealth.currentHealth);
                         petManager.isCactus = false;
                     }
 
                 }else if ( mushroom!= null)
                 {
+                    Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
                     if (petManager.isMushroom)
                     {
-                        mushroomHealth.currentHealth = 0;
+                        mushroomHealth.TakeDamage(mushroomHealth.currentHealth);
                         petManager.isMushroom = false;
                     }
                 }

@@ -48,6 +48,8 @@ namespace Nightmare
         {
             for (int i = 0; i < shopItemSO.Length; i++)
             {
+                Debug.Log("Checking purchaseable "+ petManager.isCactus + " " + petManager.isMushroom );
+
                 if(petManager.isCactus || petManager.isMushroom)
                 {
                     myPurchaseButton[i].interactable = false;
@@ -58,6 +60,7 @@ namespace Nightmare
                     if (coinsManager.coins >= shopItemSO[i].price)
                     {
                         myPurchaseButton[i].interactable = true;
+                        myImage[i].SetActive(false);
                     }
                     else
                     {

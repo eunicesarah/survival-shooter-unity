@@ -9,13 +9,17 @@ namespace Nightmare
         public int currentHealth;
         GameObject player;
         PlayerHealth playerHealth;
+        PetManager petManager;
+        ShopManager shopManager;
 
         public event Action OnDeath;
         public event Action<Vector3> OnNoise;
         void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
+            petManager = FindObjectOfType<PetManager>();
             playerHealth = player.GetComponent<PlayerHealth>();
+            shopManager = FindObjectOfType<ShopManager>();
         }
         void OnEnable()
         {
@@ -40,6 +44,8 @@ namespace Nightmare
         {
             OnDeath?.Invoke();
             Destroy(gameObject);
+            petManager.isCactus = false;
+            shopManager.CheckPurchaseable();
         }
     }
 }
