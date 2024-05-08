@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using mainmain;
+
 
 public class GameControlleropening : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class GameControlleropening : MonoBehaviour
     {
         bottomBar.PlayScene(currentScene);
         backgroundController.SetImage(currentScene.background);
+        MainManager.Instance.DoSomething();
     }
 
     void Update()
