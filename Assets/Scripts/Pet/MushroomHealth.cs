@@ -1,36 +1,46 @@
 using System;
 using UnityEngine;
 
-public class MushroomHealth : MonoBehaviour
+namespace Nightmare
 {
-    public int startingHealth = 40;
-    public int currentHealth;
 
-    public event Action OnDeath;
-    public event Action<Vector3> OnNoise;
-
-    void OnEnable()
+    public class MushroomHealth : MonoBehaviour
     {
-        currentHealth = startingHealth;
-    }
+        public int startingHealth = 40;
+        public int currentHealth;
+        GameObject player;
+        PlayerHealth playerHealth;
 
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        if (IsDead())
+        public event Action OnDeath;
+        public event Action<Vector3> OnNoise;
+        void Start()
         {
-            Die();
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerHealth = player.GetComponent<PlayerHealth>();
         }
-    }
+        void OnEnable()
+        {
+            currentHealth = startingHealth;
+        }
 
-    public bool IsDead()
-    {
-        return (currentHealth <= 0);
-    }
+        public void TakeDamage(int amount)
+        {
+            currentHealth -= amount;
+            if (IsDead() || playerHealth.currentHealth <= 0)
+            {
+                Die();
+            }
+        }
 
-    void Die()
-    {
-        OnDeath?.Invoke();
-        Destroy(gameObject);
+        public bool IsDead()
+        {
+            return (currentHealth <= 0);
+        }
+
+        void Die()
+        {
+            OnDeath?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }
