@@ -10,7 +10,7 @@ namespace Nightmare{
 
         public float timeAttackRadius = 1f;
         public int attackDamage = 10;
-        public float swordThreshold = 4f;
+        public float radiusTreshold = 6f;
 
         Animator anim;
         GameObject player;
@@ -46,7 +46,7 @@ namespace Nightmare{
             // If the entering collider is the player...
             if(other.gameObject == player)
             {
-                playerInRadius = true;
+                playerInRange = true;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Nightmare{
             // If the exiting collider is the player...
             if(other.gameObject == player)
             {
-                playerInRadius = false;
+                playerInRange = false;
             }
         }
 
@@ -70,14 +70,14 @@ namespace Nightmare{
 
             distance = Vector3.Distance(player.transform.position, transform.position);
 
-            if (distance < swordThreshold)
+            if (distance < radiusTreshold)
             {
                 Debug.Log("Player is near the enemy!");
-                playerInRange = true;
+                playerInRadius = true;
             }
             else
             {
-                playerInRange = false;
+                playerInRadius = false;
             }
 
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
