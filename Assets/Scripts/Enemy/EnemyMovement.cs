@@ -16,7 +16,11 @@ namespace Nightmare
 
         float currentVision; 
         Transform player;
+        Transform mushroom;
+        Transform cactus;
         PlayerHealth playerHealth;
+        MushroomHealth mushroomHealth;
+        CactusHealth cactusHealth;
         EnemyHealth enemyHealth;
         NavMeshAgent nav;
         public float timer = 0f;
@@ -24,7 +28,16 @@ namespace Nightmare
         void Awake ()
         {
             player = GameObject.FindGameObjectWithTag ("Player").transform;
+            mushroom = GameObject.Find("MushroomSmilePA")?.transform;
+            cactus = GameObject.Find("CactusPA")?.transform;
             playerHealth = player.GetComponent <PlayerHealth> ();
+            //mushroomHealth = mushroom.GetComponent <MushroomHealth> ();
+            //cactusHealth = cactus.GetComponent<CactusHealth>();
+            if (mushroom != null)
+                mushroomHealth = mushroom.GetComponent<MushroomHealth>();
+
+            if (cactus != null)
+                cactusHealth = cactus.GetComponent<CactusHealth>();
             enemyHealth = GetComponent <EnemyHealth> ();
             nav = GetComponent<NavMeshAgent>();
 
@@ -50,13 +63,28 @@ namespace Nightmare
         {
             if (!isPaused)
             {
+                if (player == null || mushroom == null || cactus == null)
+                {
+                    // One of the GameObject references is null, handle this case appropriately.
+                    return;
+                }
                 // If both the enemy and the player have health left...
-                if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
+                if (enemyHealth.CurrentHealth() > 0 && mushroomHealth.currentHealth > 0)
+                {
+                    LookForMushroom();
+                    // WanderOrIdle();
+                }
+                else if (enemyHealth.CurrentHealth() > 0 && cactusHealth.currentHealth > 0)
+                {
+                    LookForCactus();
+                    // WanderOrIdle();
+                }
+                else if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
                 {
                     LookForPlayer();
                     // WanderOrIdle();
                  }
-                 else
+                else
                  {
                      nav.enabled = false;
                  }
@@ -67,6 +95,22 @@ namespace Nightmare
         {
             nav.enabled = false;
             StopPausible();
+            if (cactus != null)
+            {
+                if (cactusHealth != null)
+                {
+                    cactusHealth.OnDeath -= GoToCactus;
+                    cactusHealth.OnNoise -= HearPoint;
+                }
+            }
+            else if(mushroom != null)
+            {
+                if (mushroomHealth != null)
+                {
+                    mushroomHealth.OnDeath -= GoToMushroom;
+                    mushroomHealth.OnNoise -= HearPoint;
+                }
+            }
         }
 
         public override void OnPause()
@@ -85,6 +129,14 @@ namespace Nightmare
         {
             TestSense(player.position, currentVision);
         }
+        private void LookForMushroom()
+        {
+            TestSense(mushroom.position, currentVision);
+        }
+        private void LookForCactus()
+        {
+            TestSense(cactus.position, currentVision);
+        }
 
         private void HearPoint(Vector3 position)
         {
@@ -102,6 +154,14 @@ namespace Nightmare
         public void GoToPlayer()
         {
             GoToPosition(player.position);
+        }
+        public void GoToMushroom()
+        {
+            GoToPosition(mushroom.position);
+        }
+        public void GoToCactus()
+        {
+            GoToPosition(cactus.position);
         }
 
         private void GoToPosition(Vector3 position)
@@ -144,6 +204,16 @@ namespace Nightmare
         private void IsPsychic()
         {
             GoToPlayer();
+            if (mushroom != null)
+            {
+            GoToMushroom();
+
+            }
+            else if (cactus != null)
+            {
+
+            GoToCactus();
+            }
         }
 
         private Vector3 GetRandomPoint(float distance, int layermask)

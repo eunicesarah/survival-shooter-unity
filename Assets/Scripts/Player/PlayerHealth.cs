@@ -23,6 +23,7 @@ namespace Nightmare
         bool isDead;
         bool damaged;
 
+
         void Awake()
         {
             // Setting up the references.

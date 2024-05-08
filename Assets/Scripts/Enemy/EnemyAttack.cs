@@ -10,7 +10,11 @@ namespace Nightmare
 
         Animator anim;
         GameObject player;
+        GameObject mushroom;
+        GameObject cactus;
         PlayerHealth playerHealth;
+        MushroomHealth mushroomHealth;
+        CactusHealth cactusHealth;
         EnemyHealth enemyHealth;
         bool playerInRange;
         float timer;
@@ -19,7 +23,16 @@ namespace Nightmare
         {
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
+            mushroom = GameObject.Find("MushroomSmilePA");
+            cactus = GameObject.Find("CactusPA");
             playerHealth = player.GetComponent <PlayerHealth> ();
+            //mushroomHealth = mushroom.GetComponent <MushroomHealth> ();
+            //cactusHealth = cactus.GetComponent<CactusHealth>();
+            if (mushroom != null)
+                mushroomHealth = mushroom.GetComponent<MushroomHealth>();
+
+            if (cactus != null)
+                cactusHealth = cactus.GetComponent<CactusHealth>();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
 
@@ -34,7 +47,7 @@ namespace Nightmare
         void OnTriggerEnter (Collider other)
         {
             // If the entering collider is the player...
-            if(other.gameObject == player)
+            if(other.gameObject == player || other.gameObject == mushroom || other.gameObject == cactus)
             {
                 // ... the player is in range.
                 playerInRange = true;
@@ -44,7 +57,7 @@ namespace Nightmare
         void OnTriggerExit (Collider other)
         {
             // If the exiting collider is the player...
-            if(other.gameObject == player)
+            if(other.gameObject == player || other.gameObject == mushroom || other.gameObject == cactus)
             {
                 // ... the player is no longer in range.
                 playerInRange = false;
@@ -80,10 +93,18 @@ namespace Nightmare
             timer = 0f;
 
             // If the player has health to lose...
-            if(playerHealth.currentHealth > 0)
+            if (mushroomHealth != null && mushroomHealth.currentHealth > 0)
+            {
+                mushroomHealth.TakeDamage(attackDamage);
+            }
+            else if (cactusHealth != null && cactusHealth.currentHealth > 0)
+            {
+                cactusHealth.TakeDamage(attackDamage);
+            }
+            else if (playerHealth != null && playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerHealth.TakeDamage (attackDamage);
+                playerHealth.TakeDamage(attackDamage);
             }
         }
     }
