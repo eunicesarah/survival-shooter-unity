@@ -12,14 +12,20 @@ namespace Nightmare
         public AudioClip deathClip;
 
         public int currentHealth;
+        Transform jendral;
+
         Animator anim;
         AudioSource enemyAudio;
         ParticleSystem hitParticles;
         CapsuleCollider capsuleCollider;
         PetJendralMovement enemyMovement;
+        EnemyHealth enemyHealth;
+
 
         void Awake ()
         {
+            jendral = GameObject.FindGameObjectWithTag ("Jendral").transform;
+            enemyHealth = jendral.GetComponent <EnemyHealth> ();
             anim = GetComponent <Animator> ();
             enemyAudio = GetComponent <AudioSource> ();
             hitParticles = GetComponentInChildren <ParticleSystem> ();
@@ -48,6 +54,7 @@ namespace Nightmare
                 // {
                 //     Destroy(this.gameObject);
                 // }
+                Debug.Log("PetJendral is dead");
                 Destroy(this.gameObject);
 
             }
@@ -55,7 +62,8 @@ namespace Nightmare
 
         public bool IsDead()
         {
-            return (currentHealth <= 0f);
+            return ((currentHealth <= 0f) || (enemyHealth.CurrentHealth() <= 0));
+
         }
 
         public void TakeDamage (int amount, Vector3 hitPoint)
@@ -67,11 +75,13 @@ namespace Nightmare
 
                 if (IsDead())
                 {
+                Debug.Log("PetJendral is dead");
+
                     Death();
                 }
                 else
                 {
-                    enemyMovement.GoToPlayer();
+                    // enemyMovement.GoToPlayer();
                 }
             }
                 
@@ -101,16 +111,17 @@ namespace Nightmare
                 }
                 else
                 {
-                    enemyMovement.GoToPlayer();
+                    // enemyMovement.GoToPlayer();
                 }
             }
         }
 
         void Death ()
+
         {
             EventManager.TriggerEvent("Sound", this.transform.position);
-            anim.SetTrigger ("Dead");
-
+            // anim.SetTrigger ("Dead");
+            Debug.Log("PetJendral is dead");
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
 

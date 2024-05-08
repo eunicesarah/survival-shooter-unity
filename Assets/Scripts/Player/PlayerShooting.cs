@@ -173,7 +173,10 @@ namespace Nightmare
                     {
                         // ... the enemy should take damage.
                         enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-                        petJendralHealth.TakeDamage(damagePerShot, shootHit.point);
+                        if(petJendralHealth != null)
+                        {
+                            petJendralHealth.TakeDamage(damagePerShot, shootHit.point);
+                        }
                     }
 
                     // Set the second position of the line renderer to the point the raycast hit.
