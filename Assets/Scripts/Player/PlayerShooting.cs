@@ -167,12 +167,13 @@ namespace Nightmare
                 {
                     // Try and find an EnemyHealth script on the gameobject hit.
                     EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-
+                    PetJendralHealth petJendralHealth = shootHit.collider.GetComponent<PetJendralHealth>();
                     // If the EnemyHealth component exist...
                     if (enemyHealth != null)
                     {
                         // ... the enemy should take damage.
                         enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                        petJendralHealth.TakeDamage(damagePerShot, shootHit.point);
                     }
 
                     // Set the second position of the line renderer to the point the raycast hit.
