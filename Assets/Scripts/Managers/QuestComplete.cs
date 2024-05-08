@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 
 namespace Nightmare
 {
@@ -22,7 +22,7 @@ namespace Nightmare
 
             playerhealth = FindObjectOfType<PlayerHealth>();
             scoreManager = scores.GetComponent<ScoreManager>();
-            SceneManager.LoadScene(1);
+            // SceneManager.LoadScene(1);
 
 
         }

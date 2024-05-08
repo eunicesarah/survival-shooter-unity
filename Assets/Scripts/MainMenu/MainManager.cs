@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace mainmain
+namespace main
 {
     public class MainManager : Singleton<MainManager>
     {
