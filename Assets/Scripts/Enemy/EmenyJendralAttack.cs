@@ -15,7 +15,7 @@ namespace Nightmare{
         Animator anim;
         GameObject player;
         GameObject pet;
-        // GameObject[] petAlive;
+        GameObject[] petAlive;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
         bool playerInRange;
@@ -26,12 +26,12 @@ namespace Nightmare{
         float timerArea;
         private int baseAttackDamage;
         private int currentAttackDamage;
+        public int alivePets;
 
         void Awake ()
         {
             // Setting up the references.
             pet = GameObject.Find("Eagle");
-
             player = GameObject.FindGameObjectWithTag ("Player");
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
@@ -68,8 +68,9 @@ namespace Nightmare{
 
         void Update ()
         {
-            // petAlive = GameObject.FindGameObjectsWithTag("Eagle");
-
+            petAlive = GameObject.FindGameObjectsWithTag("PetEnemy");
+            alivePets = petAlive.Length;
+            
             if (isPaused)
                 return;
             
@@ -114,14 +115,16 @@ namespace Nightmare{
             }
             anim.SetBool("isWalking", true);
 
-            if (pet!=null)
-            
-         
-            {
-                currentAttackDamage = (int)(baseAttackDamage * 1.2f);
+            if (petAlive!=null)
+            {   
+                
+                currentAttackDamage = (int)(baseAttackDamage * (1 + 0.2f * alivePets));
+                attackDamage = currentAttackDamage;
+                Debug.Log("alivePets: " + alivePets);
             }
             else
             {
+                Debug.Log("No pets alive");
                 currentAttackDamage = baseAttackDamage;
                 attackDamage = baseAttackDamage;
             }
