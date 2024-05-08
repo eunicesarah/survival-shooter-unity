@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnitySampleAssets.CrossPlatformInput;
+using System.Collections;
+
 
 namespace Nightmare
 {
@@ -7,7 +9,16 @@ namespace Nightmare
     {
         public float speed = 6f;            // The speed that the player will move at.
 
-
+        // private float baseSpeed = 6f;
+        private float maxSpeed = 7.2f;
+        private float speedIncreasePercentage = 0.2f;
+        // private Coroutine activePowerUp = null;
+        // private float powerUpDuration = 15f;
+        // private float timeRemaining = 0f;
+        // private bool isPowerUpActive = false;
+        private float baseSpeed;
+        private Coroutine activePowerUp = null;
+        private float powerUpDuration = 15f;
         Vector3 movement;                   // The vector to store the direction of the player's movement.
         Animator anim;                      // Reference to the animator component.
         Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
@@ -26,6 +37,7 @@ namespace Nightmare
             // Set up references.
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
+            baseSpeed = speed;
 
             // StartPausible();
         }
@@ -121,6 +133,34 @@ namespace Nightmare
 
             // Tell the animator whether or not the player is walking.
             anim.SetBool ("IsWalking", walking);
+        }
+
+          public void ActivatePowerUp()
+        {
+            if (activePowerUp != null)
+            {
+                StopCoroutine(activePowerUp); 
+            }
+
+            activePowerUp = StartCoroutine(PowerUpTimer()); 
+
+            float newSpeed = speed * (1 + speedIncreasePercentage);
+
+            if (newSpeed > maxSpeed)
+            {
+                newSpeed = maxSpeed;
+            }
+
+            speed = newSpeed;
+        }
+
+        IEnumerator PowerUpTimer()
+        {
+            yield return new WaitForSeconds(powerUpDuration); 
+
+            speed = baseSpeed;
+
+            activePowerUp = null; 
         }
     }
 }

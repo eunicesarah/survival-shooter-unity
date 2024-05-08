@@ -10,7 +10,6 @@ namespace Nightmare
 
         public float timeBetweenAttacks = 0.5f;
         public int attackDamage = 20;
-        public Transform target;
 
         public float slowdownDistance = 5f;
         public float slowdownFactor = 0.2f;
@@ -19,9 +18,10 @@ namespace Nightmare
 
         Animator anim;
         GameObject player;
-        GameObject pet;
+        //GameObject mushroom;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
+        //MushroomHealth mushroomHealth;
         NavMeshAgent nav;
         bool playerInRange;
         //float timer;
@@ -32,8 +32,9 @@ namespace Nightmare
         void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            pet = GameObject.FindGameObjectWithTag("Pet");
+            //mushroom = GameObject.Find("MushroomSmilePA");
             playerHealth = player.GetComponent<PlayerHealth>();
+            //mushroomHealth = mushroom.GetComponent<MushroomHealth>();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent<Animator>();
             playerDamage = FindObjectOfType<PlayerShooting>();
@@ -77,18 +78,24 @@ namespace Nightmare
                     timer = 0f;
 
                     // Inflict damage on the player
+                    anim.SetTrigger("GolemAttack");
                     playerHealth.TakeDamage(1);
                 }
 
                 playerDamage.damagePerShot = (int)(playerDamage.damagePerShot)/2;
-                Debug.Log("player damage " + playerDamage.damagePerShot);
-                Debug.Log("Current PLayer health: " + playerHealth.currentHealth);
+                //Debug.Log("player damage " + playerDamage.damagePerShot);
+                //Debug.Log("Current PLayer health: " + playerHealth.currentHealth);
             }
             else if (distanceToPlayer > slowdownDistance)
             {
                 player.GetComponent<NavMeshAgent>().speed = nav.speed;
                 playerDamage.damagePerShot = originalDamagePerShot;
 
+            }
+            else if (playerHealth.currentHealth <= 0)
+            {
+                anim.SetTrigger("PlayerDead");
+                anim.SetBool("isGolemVictory", true);
             }
         }
 

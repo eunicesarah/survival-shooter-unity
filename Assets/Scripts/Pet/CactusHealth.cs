@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MushroomHealth : MonoBehaviour
+public class CactusHealth : MonoBehaviour
 {
     public int startingHealth = 40;
     public int currentHealth;
