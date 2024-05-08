@@ -63,23 +63,23 @@ namespace Nightmare
         {
             if (!isPaused)
             {
-                if (player == null || mushroom == null || cactus == null)
+                if (player == null && mushroom == null && cactus == null)
                 {
                     // One of the GameObject references is null, handle this case appropriately.
                     return;
                 }
                 // If both the enemy and the player have health left...
-                if (enemyHealth.CurrentHealth() > 0 && mushroomHealth.currentHealth > 0)
+                if (enemyHealth.CurrentHealth() > 0 && mushroomHealth.currentHealth > 0 && mushroom != null)
                 {
                     LookForMushroom();
                     // WanderOrIdle();
                 }
-                else if (enemyHealth.CurrentHealth() > 0 && cactusHealth.currentHealth > 0)
+                else if (enemyHealth.CurrentHealth() > 0 && cactusHealth.currentHealth > 0 && cactus != null)
                 {
                     LookForCactus();
                     // WanderOrIdle();
                 }
-                else if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
+                else if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0 && player != null)
                 {
                     LookForPlayer();
                     // WanderOrIdle();
