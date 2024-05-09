@@ -16,10 +16,12 @@ namespace Nightmare
         public GameObject shopKeeper;
 
         public GameObject interactText;
+        public GameObject noShopText;
         public GameObject pauseGO;
         public PauseManager pauseManager;
 
         public QuestComplete questComplete;
+        Animator anim;
 
         [SerializeField]
         private bool shopOpen = false;
@@ -30,6 +32,7 @@ namespace Nightmare
             // HUDUI = GameObject.Find("HUDCanvas");
             // interactText = HUDUI.transform.GetChild(8).gameObject;
             player = GameObject.FindGameObjectWithTag("Player");
+            anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
             // shopKeeper = GameObject.FindGameObjectWithTag("ShopKeeper");
             // pauseGO = GameObject.Find("PauseCanvas");
             pauseManager = FindObjectOfType<PauseManager>();
@@ -58,6 +61,10 @@ namespace Nightmare
                 }else{
                     interactText.SetActive(false);
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                anim.SetTrigger("NoShop");
             }
 
         }

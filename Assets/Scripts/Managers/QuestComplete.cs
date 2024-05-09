@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Nightmare
 {
@@ -25,11 +26,15 @@ namespace Nightmare
 
         public GameObject shop;
 
+        public GameObject CountDown;
+        public TextMeshProUGUI CountDownText;
+
 
         public bool isQuestCompleted = false;
 
         public bool isQuestJendralCompleted = false;
 
+        public float countDown = 90f;
         Animator anim;
 
 
@@ -100,6 +105,9 @@ namespace Nightmare
                 }
                 if (countKepalaKeroco<=1)
                 {
+                    countDown -= Time.deltaTime;
+                    CountDown.SetActive(true);
+                    CountDownText.text = Mathf.RoundToInt(countDown).ToString();
                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
                     if(enemies!=null)
@@ -121,7 +129,7 @@ namespace Nightmare
                     }
                     isQuestCompleted = true;
 
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space) || countDown<=0f)
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
