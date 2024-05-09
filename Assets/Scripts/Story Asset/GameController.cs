@@ -1,9 +1,11 @@
+using Nightmare;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    SceneNav sceneNav;
     public StoryScene currentScene;
     public BottomBarController bottomBar;
     public BackgroundController backgroundController;
@@ -24,7 +26,8 @@ public class GameController : MonoBehaviour
                 {
                     if (!currentScene.nextScene)
                     {
-                        // blabla
+                        sceneNav = FindObjectOfType<SceneNav>();
+                        sceneNav.PlayGame();
                     } 
                     else
                     {
