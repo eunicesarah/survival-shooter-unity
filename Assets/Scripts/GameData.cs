@@ -11,6 +11,8 @@ namespace Nightmare
         public string ArenaName;
         public int health;
 
+        public int coins;
+
         public string getName()
         {
             return Name;
