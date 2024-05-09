@@ -8,6 +8,7 @@ TagManager:
   - Pet
   - ShopKeeper
   - Jendral
+  - PetEnemy
   layers:
   - Default
   - TransparentFX

@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 7693347457150698632}
   m_Layer: 7
   m_Name: Eagle
-  m_TagString: Enemy
+  m_TagString: PetEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,8 +225,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762453023381254824}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.89, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960.9, y: -602.5558, z: -79.3}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -504,12 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dabc11e244a7b4aa794b35ea2698c2fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRange: 10
-  hearingRange: 20
-  wanderDistance: 10
-  idleTimeRange: {x: 0, y: 0}
-  psychicLevels: 0.2
-  timer: 0
 --- !u!1 &857019208352958867
 GameObject:
   m_ObjectHideFlags: 0
