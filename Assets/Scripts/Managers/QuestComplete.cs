@@ -25,6 +25,7 @@ namespace Nightmare
 
         public GameObject shop;
 
+
         public bool isQuestCompleted = false;
 
         public bool isQuestJendralCompleted = false;
