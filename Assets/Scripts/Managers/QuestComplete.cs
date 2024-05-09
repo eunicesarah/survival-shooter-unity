@@ -103,7 +103,7 @@ namespace Nightmare
                         }
                     }
                 }
-                if (countKepalaKeroco<=1)
+                if (countKepalaKeroco<=5)
                 {
                     countDown -= Time.deltaTime;
                     CountDown.SetActive(true);

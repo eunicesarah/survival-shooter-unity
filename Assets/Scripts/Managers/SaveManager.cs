@@ -27,6 +27,7 @@ namespace Nightmare {
 
     [SerializeField]
     private bool saveOpen = false;
+    private bool open = false;
 
 
         void Awake()
@@ -91,9 +92,9 @@ namespace Nightmare {
         public void SaveGame3(){
             MainManager.Instance.SaveGame(saveName3.text, "3");
         }
-    }
 
-    public void Cancel()
+
+        public void Cancel()
     {
         open = false;
         saveOpen = !saveOpen;
@@ -101,5 +102,9 @@ namespace Nightmare {
         HudUI.SetActive(!saveOpen);
         pauseManager.Pause();
     }
+
+    }
+
+    
 
 }
