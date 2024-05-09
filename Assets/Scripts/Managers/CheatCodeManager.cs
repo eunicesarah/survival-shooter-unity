@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 namespace Nightmare
@@ -93,14 +95,14 @@ namespace Nightmare
         }
         private bool CheckCheat(string _input)
         {
-            if (_input == "god")
+            if (_input == "god") //god mode
             {
                 Debug.Log("Cheat Activate " + _input);
                 playerHealth.godMode = true;
                 anim.SetTrigger("Cheat");
                 return true;
             }
-            else if (_input == "fast")
+            else if (_input == "fast") // twice the speed
             {
                 Debug.Log("Cheat Activate " + _input);
                 playerMovement.speed = 12f;
@@ -108,24 +110,24 @@ namespace Nightmare
                 return true;
 
             }
-            else if (_input == "kill")
+            else if (_input == "kill") // 1 hit kill
             {
                 Debug.Log("Cheat Activate " + _input);
-                playerShooting.damagePerShot = 1000000;
+                playerShooting.damagePerShot = 999999999;
                 anim.SetTrigger("Cheat");
                 return true;
 
             }
-            else if (_input == "rich")
+            else if (_input == "rich") // unlimited coins
             {
                 Debug.Log("Cheat Activate " + _input);
                 coinsManager.unlimitedCoins = true;
-                coinsManager.coins = 9999999;
+                coinsManager.coins = 999999999;
                 coinsManager.UpdateCoinsUI();
                 anim.SetTrigger("Cheat");
                 return true;
             }
-            else if(_input=="orbs")
+            else if(_input=="orbs") //spawn orbs
             {
                 Debug.Log("Cheat Activate " + _input);
                 orbsManager.SpawnAllOrbs(player.transform);
@@ -179,6 +181,13 @@ namespace Nightmare
                     }
                 }
                 anim.SetTrigger("Cheat");
+                return true;
+            }
+            else if(_input=="next") //skip level
+            {
+                Debug.Log("Cheat Activate " + _input);
+                anim.SetTrigger("Cheat");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 return true;
             }
             else
