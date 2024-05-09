@@ -26,7 +26,7 @@ namespace Nightmare
             sText.text = "Score: " + score;
             if (score >= levelThreshhold)
             {
-                AdvanceLevel();
+                //AdvanceLevel();
             }
         }
 
