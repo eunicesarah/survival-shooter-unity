@@ -167,11 +167,41 @@ namespace Nightmare
                         enemyManager.SetActive(true);
                         shop.SetActive(false);
                         raja.SetActive(true);
+                        isQuestCompleted = false;
                     }
-
-
-
                    
+                }
+                if(raja==null)
+                {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                    if(enemies!=null)
+                    {
+                        foreach (GameObject enemy in enemies)
+                        {
+                            Destroy(enemy);
+                        }
+                    }
+                    enemyManager.SetActive(false);
+                    // shop.SetActive(true);
+
+
+                    // questCompleteCanvas.SetActive(true);
+                    // playerhealth.godMode = true;
+                    if(!isQuestCompleted)
+                    {
+                        anim.SetTrigger("QuestCompleted");
+                    }
+                    isQuestCompleted = true;
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        MainManager.Instance.questCompleted++;
+                        MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                        MainManager.Instance.coin = coinsmanager.coins;
+                        currentCanvas.SetActive(false);
+                        nextCanvas.SetActive(true);
+                    }
                 }
                
             }
