@@ -48,7 +48,9 @@ namespace Nightmare
 
     public IEnumerable<string> ListSaves() {
         foreach (string path in Directory.EnumerateFiles(dataPath)) {
-            if (Path.GetExtension(path) == fileExtension) {
+            // Debug.Log(path);
+            // Debug.Log(Path.GetExtension(path));
+            if (Path.GetExtension(path) == "." + fileExtension) {
                 yield return Path.GetFileNameWithoutExtension(path);
             }
         }

@@ -1,48 +1,95 @@
-using Nightmare;
+// using Nightmare;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
-public class SaveManager : MonoBehaviour
-{
-
-    GameObject player;
-    PauseManager pauseManager;
-
-    public GameObject SaveSpot;
-    public GameObject SaveText;
-    public GameObject SaveUI;
-    public GameObject HudUI;
-    public GameObject pauseGO;
-
-    [SerializeField]
-    private bool saveOpen = false;
-
-
-    void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-
-    void Update()
+namespace Nightmare {
+    public class SaveManager : MonoBehaviour
     {
 
-        if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f)
+        GameObject player;
+        PauseManager pauseManager;
+
+        public GameObject SaveSpot;
+        public GameObject SaveText;
+        public GameObject SaveUI;
+        public GameObject HudUI;
+        public GameObject pauseGO;
+
+        public TextMeshProUGUI saveName1;
+        public TextMeshProUGUI saveName2;
+        public TextMeshProUGUI saveName3;
+        public TextMeshProUGUI saveNameDate1;
+        public TextMeshProUGUI saveNameDate2;
+        public TextMeshProUGUI saveNameDate3;
+
+        [SerializeField]
+        private bool saveOpen = false;
+
+
+        void Awake()
         {
-            SaveText.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
+            player = GameObject.FindGameObjectWithTag("Player");
+            pauseManager = FindObjectOfType<PauseManager>();
+        }
+
+
+        void Update()
+        {
+
+            if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f)
             {
-                saveOpen = !saveOpen;
-                SaveUI.SetActive(saveOpen);
-                HudUI.SetActive(!saveOpen);
-                pauseManager.Pause();
+                SaveText.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    saveOpen = !saveOpen;
+                    SaveUI.SetActive(saveOpen);
+                    HudUI.SetActive(!saveOpen);
+                    pauseManager.Pause();
+                    IEnumerable<string> saves = MainManager.Instance.ListSaves();
+                    foreach (string save in saves)
+                    {
+                        Debug.Log(save);
+                        if (save[0] == '1')
+                        {   
+                            string[] parts = save.Split('_');
+                            saveName1.text = parts[1];
+                            saveNameDate1.text = parts[2];
+                        }
+                        else if (save[0] == '2')
+                        {
+                            string[] parts = save.Split('_');
+                            saveName2.text = parts[1];
+                            saveNameDate2.text = parts[2];
+                        }
+                        else if (save[0] == '3')
+                        {
+                            string[] parts = save.Split('_');
+                            saveName3.text = parts[1];
+                            saveNameDate3.text = parts[2];
+                        }
+                    }
+                }
             }
-        }
-        else
-        {
-            SaveText.SetActive(false);
-        }
+            else
+            {
+                SaveText.SetActive(false);
+            }
 
+        }
+        public void SaveGame1(){
+            Debug.Log("SaveGame1");
+            Debug.Log(saveName1.text);
+            MainManager.Instance.SaveGame(saveName1.text, "1");
+        }
+        public void SaveGame2(){
+            MainManager.Instance.SaveGame(saveName2.text, "2");
+        }
+        public void SaveGame3(){
+            MainManager.Instance.SaveGame(saveName3.text, "3");
+        }
     }
 }

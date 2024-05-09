@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Collections.Generic;
+using System;
 
 namespace Nightmare
 {
@@ -13,6 +14,12 @@ namespace Nightmare
 
         public int coins;
 
+        public DateTime currentTime;
+
+        public GameData()
+        {
+            
+        }
         public string getName()
         {
             return Name;
@@ -39,5 +46,6 @@ namespace Nightmare
             this.health = health;
 
         }
+
     }
 }

@@ -29,7 +29,8 @@ namespace Nightmare
 
         DataManager dataService;
         PlayerHealth playerhealth;
-        // CoinsManager coinsmanager;
+
+        CameraFollow camera;
 
         public int playerHealth = 100;
         public int coin = 100;
@@ -50,6 +51,7 @@ namespace Nightmare
         public int bulletsHitScene = 0;
         public int enemyKilledScene = 0;
 
+        public string saveName;
 
         private bool loads = false;
         [SerializeField] private bool save = false;
@@ -65,32 +67,36 @@ namespace Nightmare
             if (save)
             {
                 save = false;
-                playerhealth = FindObjectOfType<PlayerHealth>();
-                // coinsmanager = FindObjectOfType<CoinsManager>();
-                gameData.ArenaName = SceneManager.GetActiveScene().name;
-                gameData.health = playerhealth.currentHealth;
-                gameData.coins = this.coin;
-                gameData.Name = "Save1";
-                SaveGame();
+                // playerhealth = FindObjectOfType<PlayerHealth>();
+                // gameData.ArenaName = SceneManager.GetActiveScene().name;
+                // gameData.health = playerhealth.currentHealth;
+                // gameData.coins = this.coin;
+                // gameData.Name = "Save1";
+                SaveGame("Save1", "1");
                 
             }
 
             if (load)
             {
                 load = false;
-                LoadGame("Save1");
+                LoadGame(saveName);
             }
 
             if (test){
                 test = false;
-                float totalDistanceTraveledKm = totalDistanceTraveled / 1000f;
-                Debug.Log(totalDistanceTraveledKm + " km");
+                // float totalDistanceTraveledKm = totalDistanceTraveled / 1000f;
+                // Debug.Log(totalDistanceTraveledKm + " km");
+                Debug.Log("masuk");
+                IEnumerable<string> saves = ListSaves();
+                foreach (string save in saves)
+                {
+                    Debug.Log(save);
+                }
             }
 
             if (increase)
             {
                 increase = false;
-                // score += 10;
                 this.coin += 10;
             }
         }
@@ -113,6 +119,7 @@ namespace Nightmare
             SceneManager.sceneLoaded += OnSceneLoaded;
             startTime = DateTime.Now;
             dataService = new DataManager();
+            gameData = new GameData();
         }
 
         void Update(){
@@ -161,11 +168,13 @@ namespace Nightmare
             }
             
             PlayerHealth playerhealth = FindObjectOfType<PlayerHealth>();
+
             if (playerhealth != null)
             {
             
                 playerhealth.currentHealth = gameData.health;
                 playerhealth.healthSlider.value = playerhealth.currentHealth;
+                
                 this.playerHealth = gameData.health;
                 this.coin = gameData.coins;
             }
@@ -178,26 +187,31 @@ namespace Nightmare
 
         }
         
-        public void SaveGame() { 
+        public void SaveGame(string gameName, string index) { 
+            playerhealth = FindObjectOfType<PlayerHealth>();
+            Debug.Log(SceneManager.GetActiveScene().name);
+            gameData.ArenaName = SceneManager.GetActiveScene().name;
+            
+            Debug.Log(gameData.ArenaName);
+            gameData.health = playerhealth.currentHealth;
+            gameData.coins = this.coin;
+            gameData.Name = index + "_" +  gameName + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            gameData.currentTime = DateTime.Now;
             dataService.Save(gameData);
             
             }
 
         public void LoadGame(string gameName) {
             gameData = dataService.Load(gameName);
-
-
-            if (String.IsNullOrWhiteSpace(gameData.ArenaName)) {
-                gameData.ArenaName = "Testing";
-            }
-
             SceneManager.LoadScene(gameData.ArenaName);
             loads = true;
-            
-
         }
         public void DeleteGame(string gameName) { 
             dataService.Delete(gameName);
-            }
+        }
+        
+        public IEnumerable<string> ListSaves() {
+            return dataService.ListSaves();
+        }
     }
 }
