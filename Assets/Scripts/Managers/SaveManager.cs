@@ -1,4 +1,3 @@
-// using Nightmare;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,8 +25,8 @@ namespace Nightmare {
         public TextMeshProUGUI saveNameDate2;
         public TextMeshProUGUI saveNameDate3;
 
-        [SerializeField]
-        private bool saveOpen = false;
+    [SerializeField]
+    private bool saveOpen = false;
 
 
         void Awake()
@@ -40,12 +39,13 @@ namespace Nightmare {
         void Update()
         {
 
-            if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f)
+            if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f && !open)
             {
                 SaveText.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    saveOpen = !saveOpen;
+                    open = true;
+                saveOpen = !saveOpen;
                     SaveUI.SetActive(saveOpen);
                     HudUI.SetActive(!saveOpen);
                     pauseManager.Pause();
@@ -92,4 +92,14 @@ namespace Nightmare {
             MainManager.Instance.SaveGame(saveName3.text, "3");
         }
     }
+
+    public void Cancel()
+    {
+        open = false;
+        saveOpen = !saveOpen;
+        SaveUI.SetActive(saveOpen);
+        HudUI.SetActive(!saveOpen);
+        pauseManager.Pause();
+    }
+
 }
