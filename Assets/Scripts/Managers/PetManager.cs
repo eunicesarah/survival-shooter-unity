@@ -23,17 +23,29 @@ namespace Nightmare
             
         }
 
-        public void SpawnPet(Vector3 position)
+        // public void SpawnPet(Vector3 position)
+        // {
+        //     if (isCactus)
+        //     {
+        //         Instantiate(cactus, position, Quaternion.identity);
+        //     }
+        //     else if (isMushroom)
+        //     {
+        //         Instantiate(mushroom, position, Quaternion.identity);
+        //     }
+        // }
+        public void SpawnPet(Vector3 position, string petType)
         {
-            if (isCactus)
+            if (petType == "Cactus")
             {
                 Instantiate(cactus, position, Quaternion.identity);
             }
-            else if (isMushroom)
+            else if (petType == "Mushroom")
             {
                 Instantiate(mushroom, position, Quaternion.identity);
             }
         }
+
     }
 
 }

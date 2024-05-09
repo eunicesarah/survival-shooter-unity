@@ -43,7 +43,7 @@ namespace Nightmare
             playerShooting = FindObjectOfType<PlayerShooting>();
             orbsManager = FindObjectOfType<SpawnOrbs>();
             anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
-            enterMark = GameObject.Find("HUDCanvas").transform.GetChild(6).gameObject;
+            enterMark = GameObject.Find("HUDCanvas").transform.GetChild(4).gameObject;
             coinsManager = FindObjectOfType<CoinsManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             petManager = FindObjectOfType<PetManager>();
@@ -134,7 +134,7 @@ namespace Nightmare
                 anim.SetTrigger("Cheat");
                 return true;
             }
-            else if(_input=="opet") //heal pet
+            else if(_input=="opat") //heal pet
             {
                 Debug.Log("Cheat Activate " + _input);
                 if(mushroom!=null)
@@ -144,22 +144,25 @@ namespace Nightmare
                     {
 
                         mushroomHealth.currentHealth = 40;
+                        mushroomHealth.godMode = true;
                         Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
                     }
-                }else if (cactus != null)
+                }
+                if (cactus != null)
                 {
 
                     Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
                     if (petManager.isCactus)
                     {
                         cactusHealth.currentHealth = 40;
+                        cactusHealth.godMode = true;
                         Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
                     }
                 }
                 anim.SetTrigger("Cheat");
                 return true;
             }
-            else if(_input=="xpet")// kill pet
+            else if(_input=="xpat")// kill pet
             {
                 Debug.Log("Cheat Activate " + _input);
                 if(cactus!=null)
@@ -171,7 +174,8 @@ namespace Nightmare
                         petManager.isCactus = false;
                     }
 
-                }else if ( mushroom!= null)
+                }
+                if ( mushroom!= null)
                 {
                     Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
                     if (petManager.isMushroom)

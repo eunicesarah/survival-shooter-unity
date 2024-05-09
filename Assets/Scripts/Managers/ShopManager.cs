@@ -50,24 +50,50 @@ namespace Nightmare
             {
                 Debug.Log("Checking purchaseable "+ petManager.isCactus + " " + petManager.isMushroom );
 
-                if(petManager.isCactus || petManager.isMushroom)
+                // if(petManager.isCactus || petManager.isMushroom)
+                // {
+                //     myPurchaseButton[i].interactable = false;
+                //     myImage[i].SetActive(true);
+                // }
+                // else
+                // {
+                //     if (coinsManager.coins >= shopItemSO[i].price)
+                //     {
+                //         myPurchaseButton[i].interactable = true;
+                //         myImage[i].SetActive(false);
+                //     }
+                //     else
+                //     {
+                //         myPurchaseButton[i].interactable = false;
+                //     }
+
+                // }
+                if (coinsManager.coins >= shopItemSO[i].price)
                 {
-                    myPurchaseButton[i].interactable = false;
-                    myImage[i].SetActive(true);
-                }
-                else
-                {
-                    if (coinsManager.coins >= shopItemSO[i].price)
+                    if(i == 0 && petManager.isMushroom)
+                    {
+                        myPurchaseButton[i].interactable = false;
+                        myImage[i].SetActive(true);
+                    }
+                    else if(i == 1 && petManager.isCactus)
+                    {
+                        myPurchaseButton[i].interactable = false;
+                        myImage[i].SetActive(true);
+                    }
+                    else
                     {
                         myPurchaseButton[i].interactable = true;
                         myImage[i].SetActive(false);
                     }
-                    else
-                    {
-                        myPurchaseButton[i].interactable = false;
-                    }
-
                 }
+                else
+                {
+                    myPurchaseButton[i].interactable = false;
+                    myImage[i].SetActive(true);
+                }
+
+
+
             }
         }
 
@@ -80,12 +106,14 @@ namespace Nightmare
                 if(buttonNo == 0)
                 {
                     petManager.isMushroom = true;
+                    petManager.SpawnPet(player.transform.position, "Mushroom");
                 }
                 else if(buttonNo == 1)
                 {
                     petManager.isCactus = true;
+                    petManager.SpawnPet(player.transform.position, "Cactus");
                 }
-                petManager.SpawnPet(player.transform.position);
+                // petManager.SpawnPet(player.transform.position);
                 CheckPurchaseable();
 
             }

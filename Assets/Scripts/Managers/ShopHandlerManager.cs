@@ -52,7 +52,7 @@ namespace Nightmare
                         shopOpen = !shopOpen;
                         shopUI.SetActive(shopOpen);
                         HUDUI.SetActive(!shopOpen);
-                        pauseManager.Pause();
+                        // pauseManager.Pause();
 
                     }
                     // shopOpen = false;
