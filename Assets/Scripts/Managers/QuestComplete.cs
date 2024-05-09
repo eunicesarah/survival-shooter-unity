@@ -8,6 +8,9 @@ namespace Nightmare
     public class QuestComplete : MonoBehaviour
     {
         PlayerHealth playerhealth;
+
+        CoinsManager coinsmanager;
+
         int playerScore;
         ScoreManager scoreManager;
         public GameObject scores;
@@ -30,6 +33,7 @@ namespace Nightmare
 
             playerhealth = FindObjectOfType<PlayerHealth>();
             scoreManager = scores.GetComponent<ScoreManager>();
+            coinsmanager = FindObjectOfType<CoinsManager>();
             anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
             
 
@@ -67,6 +71,8 @@ namespace Nightmare
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         MainManager.Instance.questCompleted++;
+                        MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                        MainManager.Instance.coin = coinsmanager.coins;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
                     }
