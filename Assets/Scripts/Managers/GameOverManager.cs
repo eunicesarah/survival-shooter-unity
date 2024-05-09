@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 namespace Nightmare
 {
@@ -12,11 +13,15 @@ namespace Nightmare
         LevelManager lm;
         private UnityEvent listener;
 
+        public GameObject retry;
+
         void Awake ()
         {
             playerHealth = FindObjectOfType<PlayerHealth>();
             anim = GetComponent <Animator> ();
             lm = FindObjectOfType<LevelManager>();
+            MainManager.Instance.startTimeScene = System.DateTime.Now;
+            MainManager.Instance.enemyKilledScene = 0;
             EventManager.StartListening("GameOver", ShowGameOver);
         }
 
@@ -27,7 +32,9 @@ namespace Nightmare
 
         void ShowGameOver()
         {
-            anim.SetBool("GameOver", true);
+            // anim.SetBool("GameOver", true);
+            retry.SetActive(true);
+
         }
 
         private void ResetLevel()
