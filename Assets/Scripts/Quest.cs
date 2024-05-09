@@ -27,7 +27,14 @@ namespace Nightmare
                 }
                 else
                 {
-                    animator.SetTrigger("Quest");
+                    if(questComplete.isQuestJendralCompleted){
+                        animator.SetTrigger("QuestRaja");
+                    }
+                    else{
+                        animator.SetTrigger("Quest");
+                    
+                    }
+                    // animator.SetTrigger("Quest");
                 }
             }
         }
