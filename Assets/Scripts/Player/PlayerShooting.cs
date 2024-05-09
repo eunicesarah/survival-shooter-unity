@@ -40,6 +40,8 @@ namespace Nightmare
         void Awake ()
         {
 
+            MainManager.Instance.totalbulletsScene = 0;
+            MainManager.Instance.bulletsHitScene = 0;
             // Create a layer mask for the Shootable layer.
             shootableMask = LayerMask.GetMask ("Shootable", "Enemy");
 
@@ -141,11 +143,13 @@ namespace Nightmare
                 bulletsShot = 1;
                 shootRay.direction = transform.forward;
                 MainManager.Instance.totalbullets++;
+                MainManager.Instance.totalbulletsScene++;
             }
             else if (weapon == 1)
             {
                 bulletsShot = bulletsPerTap;
                 MainManager.Instance.totalbullets += bulletsPerTap;
+                MainManager.Instance.totalbulletsScene += bulletsPerTap;
             }
 
             for (int i = 0; i < bulletsShot; i++)
@@ -175,6 +179,7 @@ namespace Nightmare
                     {
                         // ... the enemy should take damage.
                         MainManager.Instance.bulletsHit++;
+                        MainManager.Instance.bulletsHitScene++;
                         enemyHealth.TakeDamage(damagePerShot, shootHit.point);
                         if(petJendralHealth != null)
                         {
