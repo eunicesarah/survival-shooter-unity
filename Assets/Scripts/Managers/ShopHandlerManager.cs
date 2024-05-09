@@ -19,18 +19,21 @@ namespace Nightmare
         public GameObject pauseGO;
         public PauseManager pauseManager;
 
+        public QuestComplete questComplete;
+
         [SerializeField]
         private bool shopOpen = false;
 
         void Awake()
         {
-            shopUI = GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject;
-            HUDUI = GameObject.Find("HUDCanvas");
-            interactText = HUDUI.transform.GetChild(8).gameObject;
+            // shopUI = GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject;
+            // HUDUI = GameObject.Find("HUDCanvas");
+            // interactText = HUDUI.transform.GetChild(8).gameObject;
             player = GameObject.FindGameObjectWithTag("Player");
-            shopKeeper = GameObject.FindGameObjectWithTag("ShopKeeper");
-            pauseGO = GameObject.Find("PauseCanvas");
+            // shopKeeper = GameObject.FindGameObjectWithTag("ShopKeeper");
+            // pauseGO = GameObject.Find("PauseCanvas");
             pauseManager = FindObjectOfType<PauseManager>();
+            questComplete = FindObjectOfType<QuestComplete>();
         }
 
 
@@ -38,7 +41,7 @@ namespace Nightmare
         {
             if(shopKeeper!=null)
             {
-                if(Vector3.Distance(player.transform.position, shopKeeper.transform.position) < 5f)
+                if(Vector3.Distance(player.transform.position, shopKeeper.transform.position) < 5f && questComplete.isQuestCompleted)
                 {
                     interactText.SetActive(true);
                     if (Input.GetKeyDown(KeyCode.E))

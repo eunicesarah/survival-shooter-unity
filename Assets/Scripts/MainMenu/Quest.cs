@@ -1,26 +1,40 @@
 using UnityEngine;
 
-public class Quest : MonoBehaviour
+
+namespace Nightmare
 {
-    public Animator animator;
-
-    void Start()
+    public class Quest : MonoBehaviour
     {
-        animator.SetTrigger("Quest");
-    }
+        Animator animator;
+        QuestComplete questComplete;
 
-    void Update()
-    {
-     
-        if (Input.GetKeyDown(KeyCode.Q))
+        void Start()
         {
-            animator.enabled = true;
+            // animator.SetTrigger("Quest");
+            animator = GameObject.Find("HUDCanvas").GetComponent<Animator>();
+            questComplete = FindObjectOfType<QuestComplete>();
             animator.SetTrigger("Quest");
         }
-    }
 
-    public void OnSwitchImageAnimationEnd()
-    {
-        animator.enabled = false;
+        void Update()
+        {
+        
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                // animator.enabled = true;
+                if(questComplete.isQuestCompleted){
+                    animator.SetTrigger("QuestCompleted");
+                }
+                else
+                {
+                    animator.SetTrigger("Quest");
+                }
+            }
+        }
+
+        public void OnSwitchImageAnimationEnd()
+        {
+            // animator.enabled = false;
+        }
     }
 }
