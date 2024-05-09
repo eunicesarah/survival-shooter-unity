@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+namespace Nightmare
+{
 public class BottomBarController : MonoBehaviour
 {
     public TextMeshProUGUI barText;
@@ -28,7 +30,14 @@ public class BottomBarController : MonoBehaviour
     public void PlayNextSentence()
     {
         StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text));
+
+        if (currentScene.sentences[sentenceIndex].speaker.speakerName == "LoneWolf")
+        {
+            name.text = MainManager.Instance.playerName;
+        } else {
+
         name.text = currentScene.sentences[sentenceIndex].speaker?.speakerName ?? "";
+        }
         name.color = currentScene.sentences[sentenceIndex].speaker?.textColor ?? Color.white;
 
     }
@@ -77,4 +86,6 @@ public class BottomBarController : MonoBehaviour
     {
         forceComplete = true;
     }
+}
+
 }
