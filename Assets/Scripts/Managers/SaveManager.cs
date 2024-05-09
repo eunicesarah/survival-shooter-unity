@@ -58,19 +58,19 @@ namespace Nightmare {
                         {   
                             string[] parts = save.Split('_');
                             saveName1.text = parts[1];
-                            saveNameDate1.text = parts[2];
+                            saveNameDate1.text = parts[2] + "\n" + parts[3].Replace("-", ":");
                         }
                         else if (save[0] == '2')
                         {
                             string[] parts = save.Split('_');
                             saveName2.text = parts[1];
-                            saveNameDate2.text = parts[2];
+                            saveNameDate2.text = parts[2] + "\n" + parts[3].Replace("-", ":");
                         }
                         else if (save[0] == '3')
                         {
                             string[] parts = save.Split('_');
                             saveName3.text = parts[1];
-                            saveNameDate3.text = parts[2];
+                            saveNameDate3.text = parts[2] + "\n" + parts[3].Replace("-", ":");
                         }
                     }
                 }

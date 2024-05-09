@@ -188,6 +188,14 @@ namespace Nightmare
         }
         
         public void SaveGame(string gameName, string index) { 
+            IEnumerable<string> saves = ListSaves();
+            foreach (string save in saves)
+            {
+                if (save[0].ToString() == index)
+                {
+                    DeleteGame(save);
+                }
+            }
             playerhealth = FindObjectOfType<PlayerHealth>();
             Debug.Log(SceneManager.GetActiveScene().name);
             gameData.ArenaName = SceneManager.GetActiveScene().name;
