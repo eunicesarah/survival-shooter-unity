@@ -17,6 +17,7 @@ public class SaveManager : MonoBehaviour
 
     [SerializeField]
     private bool saveOpen = false;
+    private bool open = false;
 
 
     void Awake()
@@ -28,11 +29,12 @@ public class SaveManager : MonoBehaviour
     void Update()
     {
 
-        if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f)
+        if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f && !open)
         {
             SaveText.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
+                open = true;
                 saveOpen = !saveOpen;
                 SaveUI.SetActive(saveOpen);
                 HudUI.SetActive(!saveOpen);
@@ -44,5 +46,14 @@ public class SaveManager : MonoBehaviour
             SaveText.SetActive(false);
         }
 
+    }
+
+    public void Cancel()
+    {
+        open = false;
+        saveOpen = !saveOpen;
+        SaveUI.SetActive(saveOpen);
+        HudUI.SetActive(!saveOpen);
+        pauseManager.Pause();
     }
 }
