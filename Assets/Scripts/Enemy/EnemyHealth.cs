@@ -64,6 +64,7 @@ namespace Nightmare
                 if (IsDead())
                 {
                     MainManager.Instance.enemyKilled++;
+                    MainManager.Instance.enemyKilledScene++;
                     Death();
                 }
                 else
