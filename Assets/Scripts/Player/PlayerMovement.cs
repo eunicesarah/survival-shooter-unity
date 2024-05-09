@@ -37,6 +37,7 @@ namespace Nightmare
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
             baseSpeed = speed;
+            MainManager.Instance.distanceTraveledScene = 0f;
             // StartPausible();
         }
 
@@ -77,6 +78,7 @@ namespace Nightmare
             playerRigidbody.MovePosition (transform.position + movement);
 
             MainManager.Instance.totalDistanceTraveled += movement.magnitude;
+            MainManager.Instance.distanceTraveledScene += movement.magnitude;
             
 
         }
