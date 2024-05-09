@@ -29,8 +29,10 @@ namespace Nightmare
 
         DataManager dataService;
         PlayerHealth playerhealth;
+        // CoinsManager coinsmanager;
 
-        public int score;
+        public int playerHealth = 100;
+        public int coin = 100;
 
         public float totalDistanceTraveled = 0f;
         public DateTime startTime;
@@ -42,6 +44,12 @@ namespace Nightmare
         public int deathCount = 0;
         public int questCompleted = 0;
         public int enemyKilled = 0;
+        public DateTime startTimeScene;
+        public float distanceTraveledScene = 0f;
+        public int totalbulletsScene = 0;
+        public int bulletsHitScene = 0;
+        public int enemyKilledScene = 0;
+
 
         private bool loads = false;
         [SerializeField] private bool save = false;
@@ -58,8 +66,10 @@ namespace Nightmare
             {
                 save = false;
                 playerhealth = FindObjectOfType<PlayerHealth>();
+                // coinsmanager = FindObjectOfType<CoinsManager>();
                 gameData.ArenaName = SceneManager.GetActiveScene().name;
                 gameData.health = playerhealth.currentHealth;
+                gameData.coins = this.coin;
                 gameData.Name = "Save1";
                 SaveGame();
                 
@@ -80,7 +90,8 @@ namespace Nightmare
             if (increase)
             {
                 increase = false;
-                score += 10;
+                // score += 10;
+                this.coin += 10;
             }
         }
      
@@ -101,6 +112,7 @@ namespace Nightmare
         void Start() {
             SceneManager.sceneLoaded += OnSceneLoaded;
             startTime = DateTime.Now;
+            dataService = new DataManager();
         }
 
         void Update(){
@@ -140,20 +152,28 @@ namespace Nightmare
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-            if (scene.name == "Menu" || !loads) return;
+            if (!loads) return;
+
+            if (scene.name == "Menu"){
+                this.playerHealth = 100;
+                this.coin = 100;
+                return;
+            }
             
             PlayerHealth playerhealth = FindObjectOfType<PlayerHealth>();
             if (playerhealth != null)
-        {
+            {
             
-            playerhealth.currentHealth = gameData.health;
-            playerhealth.healthSlider.value = playerhealth.currentHealth;
-        }
+                playerhealth.currentHealth = gameData.health;
+                playerhealth.healthSlider.value = playerhealth.currentHealth;
+                this.playerHealth = gameData.health;
+                this.coin = gameData.coins;
+            }
 
-        else
-        {
-            Debug.LogWarning("PlayerHealth component not found in the loaded scene.");
-        }
+            else
+            {
+                Debug.LogWarning("PlayerHealth component not found in the loaded scene.");
+            }
 
 
         }
