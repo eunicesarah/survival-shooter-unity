@@ -1,30 +1,53 @@
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MushroomHealth : MonoBehaviour
+namespace Nightmare
 {
-    public int startingHealth = 40;
-    public int currentHealth;
-    public Slider healthSlider;
 
-    void OnEnable()
+    public class MushroomHealth : MonoBehaviour
     {
-        currentHealth = startingHealth;
-        UpdateSlider();
-    }
+        public int startingHealth = 40;
+        public int currentHealth;
+        GameObject player;
+        PlayerHealth playerHealth;
+        PetManager petManager;
 
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        UpdateSlider();
-    }
+        ShopManager shopManager;
 
-    void UpdateSlider()
-    {
-        if (healthSlider != null)
+        public event Action OnDeath;
+        public event Action<Vector3> OnNoise;
+        void Start()
         {
-            float sliderValue = (float)currentHealth / startingHealth;
-            healthSlider.value = sliderValue;
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerHealth = player.GetComponent<PlayerHealth>();
+            petManager = FindObjectOfType<PetManager>();
+            shopManager = FindObjectOfType<ShopManager>();
+        }
+        void OnEnable()
+        {
+            currentHealth = startingHealth;
+        }
+
+        public void TakeDamage(int amount)
+        {
+            currentHealth -= amount;
+            if (IsDead() || playerHealth.currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        public bool IsDead()
+        {
+            return (currentHealth <= 0);
+        }
+
+        void Die()
+        {
+            OnDeath?.Invoke();
+            Destroy(gameObject);
+            petManager.isMushroom = false;
+            shopManager.CheckPurchaseable();
         }
     }
 }

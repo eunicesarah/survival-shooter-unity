@@ -23,6 +23,7 @@ namespace Nightmare
         bool isDead;
         bool damaged;
 
+
         void Awake()
         {
             // Setting up the references.
@@ -87,6 +88,7 @@ namespace Nightmare
             if (currentHealth <= 0 && !isDead)
             {
                 // ... it should die.
+                MainManager.Instance.deathCount++;
                 Death();
             }
         }

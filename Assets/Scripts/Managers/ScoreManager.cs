@@ -12,7 +12,7 @@ namespace Nightmare
 
         Text sText;
 
-        void Awake ()
+        void Start ()
         {
             sText = GetComponent <Text> ();
 
@@ -35,6 +35,10 @@ namespace Nightmare
             levelThreshhold = score + LEVEL_INCREASE;
             LevelManager lm = FindObjectOfType<LevelManager>();
             lm.AdvanceLevel();
+        }
+        public int getScore()
+        {
+            return score;
         }
     }
 }

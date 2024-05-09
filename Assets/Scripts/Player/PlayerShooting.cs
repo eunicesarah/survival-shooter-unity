@@ -140,10 +140,12 @@ namespace Nightmare
             {
                 bulletsShot = 1;
                 shootRay.direction = transform.forward;
+                MainManager.Instance.totalbullets++;
             }
             else if (weapon == 1)
             {
                 bulletsShot = bulletsPerTap;
+                MainManager.Instance.totalbullets += bulletsPerTap;
             }
 
             for (int i = 0; i < bulletsShot; i++)
@@ -167,12 +169,17 @@ namespace Nightmare
                 {
                     // Try and find an EnemyHealth script on the gameobject hit.
                     EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-
+                    PetJendralHealth petJendralHealth = shootHit.collider.GetComponent<PetJendralHealth>();
                     // If the EnemyHealth component exist...
                     if (enemyHealth != null)
                     {
                         // ... the enemy should take damage.
+                        MainManager.Instance.bulletsHit++;
                         enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                        if(petJendralHealth != null)
+                        {
+                            petJendralHealth.TakeDamage(damagePerShot, shootHit.point);
+                        }
                     }
 
                     // Set the second position of the line renderer to the point the raycast hit.

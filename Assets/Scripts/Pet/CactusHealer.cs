@@ -15,8 +15,7 @@ public class CactusHealer : MonoBehaviour
         public float healRadius = 5f;
         public float petSpeed = 5f;
         float timerPet;
-        public int startingHealth = 100;
-        public int CurrentHealth;
+
         // Start is called before the first frame update
         void Start()
     {
@@ -25,14 +24,14 @@ public class CactusHealer : MonoBehaviour
             playerHealth = player.GetComponent<PlayerHealth>();
             nav = GetComponent<NavMeshAgent>();
             nav.speed = petSpeed;
-            ResetCactus();
         }
 
     // Update is called once per frame
     void Update()
     {
         timerPet += Time.deltaTime;
-        nav.SetDestination(target.position);
+        Vector3 behindPlayer = player.transform.position - player.transform.forward * 1;
+        nav.SetDestination(behindPlayer);
         //Debug.Log("Current time " + timerPet);
 
             if (Vector3.Distance(player.position, transform.position) <= healRadius && playerHealth.currentHealth < 100)
@@ -53,16 +52,7 @@ public class CactusHealer : MonoBehaviour
     {
 
             playerHealth.currentHealth += 1;
-            //playerHealthSlider.value = playerHealth.currentHealth;
+            playerHealth.healthSlider.value = playerHealth.currentHealth;
     }
-        public void TakeDamage(int amount)
-        {
-            CurrentHealth -= amount;
-            Debug.Log("Cactus Health " + CurrentHealth);
-        }
-        public void ResetCactus()
-        {
-            CurrentHealth = startingHealth;
-        }
 }
 }

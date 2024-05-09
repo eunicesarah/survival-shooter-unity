@@ -131,13 +131,23 @@ namespace Nightmare
                 {
                     // Try and find an EnemyHealth script on the gameobject hit.
                     PlayerHealth playerHealth = shootHit.collider.GetComponent<PlayerHealth>();
-
+                    MushroomHealth mushroomHealth = shootHit.collider.GetComponent<MushroomHealth>();
+                    CactusHealth cactusHealth = shootHit.collider.GetComponent<CactusHealth>();
                     // If the EnemyHealth component exist...
+                    if(mushroomHealth != null)
+                    {
+                        mushroomHealth.TakeDamage(damagePerShot);
+                    }
+                    if (cactusHealth != null)
+                    {
+                        cactusHealth.TakeDamage(damagePerShot);
+                    }
                     if (playerHealth != null)
                     {
                         // ... the enemy should take damage.
                         playerHealth.TakeDamage(damagePerShot);
                     }
+
 
                     // Set the second position of the line renderer to the point the raycast hit.
                     bulletLine.SetPosition(1, shootHit.point);

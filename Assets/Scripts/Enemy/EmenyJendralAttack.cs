@@ -10,10 +10,12 @@ namespace Nightmare{
 
         public float timeAttackRadius = 1f;
         public int attackDamage = 10;
-        public float swordThreshold = 4f;
+        public float radiusTreshold = 6f;
 
         Animator anim;
         GameObject player;
+        GameObject pet;
+        GameObject[] petAlive;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
         bool playerInRange;
@@ -22,15 +24,20 @@ namespace Nightmare{
         bool playerInRadius;
         float timerSword;
         float timerArea;
+        private int baseAttackDamage;
+        private int currentAttackDamage;
+        public int alivePets;
 
         void Awake ()
         {
             // Setting up the references.
+            pet = GameObject.Find("Eagle");
             player = GameObject.FindGameObjectWithTag ("Player");
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
-            
+            baseAttackDamage = attackDamage; // Store the base attack damage
+            currentAttackDamage = baseAttackDamage;
 
             StartPausible();
         }
@@ -46,7 +53,7 @@ namespace Nightmare{
             // If the entering collider is the player...
             if(other.gameObject == player)
             {
-                playerInRadius = true;
+                playerInRange = true;
             }
         }
 
@@ -55,12 +62,15 @@ namespace Nightmare{
             // If the exiting collider is the player...
             if(other.gameObject == player)
             {
-                playerInRadius = false;
+                playerInRange = false;
             }
         }
 
         void Update ()
         {
+            petAlive = GameObject.FindGameObjectsWithTag("PetEnemy");
+            alivePets = petAlive.Length;
+            
             if (isPaused)
                 return;
             
@@ -70,14 +80,14 @@ namespace Nightmare{
 
             distance = Vector3.Distance(player.transform.position, transform.position);
 
-            if (distance < swordThreshold)
+            if (distance < radiusTreshold)
             {
                 Debug.Log("Player is near the enemy!");
-                playerInRange = true;
+                playerInRadius = true;
             }
             else
             {
-                playerInRange = false;
+                playerInRadius = false;
             }
 
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
@@ -105,6 +115,20 @@ namespace Nightmare{
             }
             anim.SetBool("isWalking", true);
 
+            if (petAlive!=null)
+            {   
+                
+                currentAttackDamage = (int)(baseAttackDamage * (1 + 0.2f * alivePets));
+                attackDamage = currentAttackDamage;
+                Debug.Log("alivePets: " + alivePets);
+            }
+            else
+            {
+                Debug.Log("No pets alive");
+                currentAttackDamage = baseAttackDamage;
+                attackDamage = baseAttackDamage;
+            }
+
         }
 
         void Attack ()
@@ -116,7 +140,7 @@ namespace Nightmare{
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerHealth.TakeDamage (attackDamage*2);
+                playerHealth.TakeDamage (currentAttackDamage*2);
             }
         }
 

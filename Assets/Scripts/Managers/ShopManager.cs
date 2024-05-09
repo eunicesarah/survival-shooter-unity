@@ -16,6 +16,10 @@ namespace Nightmare
         public GameObject[] shopPanelsGO;
         public ShopTemplate[] shopPanels;
         public Button[] myPurchaseButton;
+        public GameObject[] myImage;
+
+        PetManager petManager;
+        GameObject player;
 
         CoinsManager coinsManager;
         //public bool unlimitedCoins = false;
@@ -28,6 +32,8 @@ namespace Nightmare
                 shopPanelsGO[i].SetActive(true);
             }
             coinsUI.text = coinsManager.coins.ToString();
+            petManager = FindObjectOfType<PetManager>();
+            player = GameObject.FindGameObjectWithTag("Player");
             LoadPanels();
             CheckPurchaseable();
         }
@@ -42,12 +48,26 @@ namespace Nightmare
         {
             for (int i = 0; i < shopItemSO.Length; i++)
             {
-                if (coinsManager.coins >= shopItemSO[i].price)
+                Debug.Log("Checking purchaseable "+ petManager.isCactus + " " + petManager.isMushroom );
+
+                if(petManager.isCactus || petManager.isMushroom)
                 {
-                    myPurchaseButton[i].interactable = true;
+                    myPurchaseButton[i].interactable = false;
+                    myImage[i].SetActive(true);
                 }
                 else
-                    myPurchaseButton[i].interactable = false;
+                {
+                    if (coinsManager.coins >= shopItemSO[i].price)
+                    {
+                        myPurchaseButton[i].interactable = true;
+                        myImage[i].SetActive(false);
+                    }
+                    else
+                    {
+                        myPurchaseButton[i].interactable = false;
+                    }
+
+                }
             }
         }
 
@@ -57,6 +77,15 @@ namespace Nightmare
             {
                 coinsManager.coins -= shopItemSO[buttonNo].price;
                 coinsUI.text = "Coins : " + coinsManager.coins.ToString();
+                if(buttonNo == 0)
+                {
+                    petManager.isMushroom = true;
+                }
+                else if(buttonNo == 1)
+                {
+                    petManager.isCactus = true;
+                }
+                petManager.SpawnPet(player.transform.position);
                 CheckPurchaseable();
 
             }
