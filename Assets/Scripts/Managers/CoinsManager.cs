@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+namespace Nightmare {
 public class CoinsManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -13,7 +14,7 @@ public class CoinsManager : MonoBehaviour
 
     void Awake()
     {
-        
+        coins = MainManager.Instance.coin;
     }
 
     // Update is called once per frame
@@ -41,4 +42,5 @@ public class CoinsManager : MonoBehaviour
 
 
     }
+}
 }
