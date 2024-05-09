@@ -19,6 +19,8 @@ namespace Nightmare
         EmenyJendralAttack emenyJendralAttack;
 
         NavMeshAgent nav;
+        public float safeDistance = 3f; 
+        public float avoidanceWeight = 2f;
 
 
         void Awake ()
@@ -29,38 +31,29 @@ namespace Nightmare
             enemyHealth = jendral.GetComponent <EnemyHealth> ();
             emenyJendralAttack = jendral.GetComponent <EmenyJendralAttack> ();
             nav = GetComponent<NavMeshAgent>();
+            nav.speed = 10f;
 
             // StartPausible();
         }
+    void Update ()
+    {
 
-        // void OnEnable()
-        // {
-        //     nav.enabled = true;
-        //     ClearPath();
-        //     ScaleVision(1f);
-        //     IsPsychic();
-        //     timer = 0f;
-        // }
-
-        // void ClearPath()
-        // {
-        //     if (nav.hasPath)
-        //         nav.ResetPath();
-        // }
-        void Start()
+        Vector3 directionToJendral = jendral.position - transform.position;
+        Vector3 directionToPlayer = transform.position - player.position;
+        Vector3 combinedDirection = directionToJendral * 2f - directionToPlayer * avoidanceWeight;
+        Vector3 targetPosition = transform.position + combinedDirection.normalized;
+        float distanceToJendral = Vector3.Distance(transform.position, jendral.position);
+        if (distanceToJendral < 1f)
         {
-            int damageToAdd = (int)(emenyJendralAttack.attackDamage * 0.2f);
-            emenyJendralAttack.attackDamage = emenyJendralAttack.attackDamage + damageToAdd;
+            targetPosition = transform.position + (transform.position - jendral.position).normalized;
         }
-        void Update ()
-        {   
-            
-            nav.SetDestination(jendral.position);
-
-
-
-
+        else if (distanceToJendral > 5f)
+        {
+            targetPosition = transform.position + (jendral.position - transform.position).normalized;
         }
+        
+        nav.SetDestination(targetPosition);
+    }
     }
 
 }
