@@ -21,9 +21,13 @@ namespace Nightmare
 
         public GameObject enemyManager;
 
+        public GameObject raja;
+
         public GameObject shop;
 
         public bool isQuestCompleted = false;
+
+        public bool isQuestJendralCompleted = false;
 
         Animator anim;
 
@@ -126,6 +130,49 @@ namespace Nightmare
                     }
 
                 }
+            }
+            else if(currentCanvas.name == "GameScene3")
+            {
+                GameObject jendral = GameObject.FindGameObjectWithTag("Jendral");
+                if(jendral==null)
+                {
+                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                    if(enemies!=null)
+                    {
+                        foreach (GameObject enemy in enemies)
+                        {
+                            Destroy(enemy);
+                        }
+                    }
+                    enemyManager.SetActive(false);
+                    shop.SetActive(true);
+
+
+                    // questCompleteCanvas.SetActive(true);
+                    // playerhealth.godMode = true;
+                    if(!isQuestCompleted)
+                    {
+                        anim.SetTrigger("QuestCompleted");
+                    }
+                    isQuestCompleted = true;
+                    isQuestJendralCompleted = true;
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        MainManager.Instance.questCompleted++;
+                        MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                        MainManager.Instance.coin = coinsmanager.coins;
+                        enemyManager.SetActive(true);
+                        shop.SetActive(false);
+                        raja.SetActive(true);
+                    }
+
+
+
+                   
+                }
+               
             }
         }
     }
