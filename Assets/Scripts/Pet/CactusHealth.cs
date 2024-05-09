@@ -14,6 +14,8 @@ namespace Nightmare
 
         public event Action OnDeath;
         public event Action<Vector3> OnNoise;
+
+        public bool godMode = false;
         void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
@@ -28,6 +30,10 @@ namespace Nightmare
 
         public void TakeDamage(int amount)
         {
+            if(godMode)
+            {
+                return;
+            }
             currentHealth -= amount;
             if (IsDead() || playerHealth.currentHealth <= 0)
             {

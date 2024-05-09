@@ -236,7 +236,7 @@ namespace Nightmare
         {
             AdjustGrenadeStock(-1);
             timer = timeBetweenBullets - grenadeFireDelay;
-            GameObject clone = PoolManager.Pull("Grenade", transform.position, Quaternion.identity);
+            // GameObject clone = PoolManager.Pull("Grenade", transform.position, Quaternion.identity);
             EventManager.TriggerEvent("ShootGrenade", grenadeSpeed * transform.forward);
             //GameObject clone = Instantiate(grenade, transform.position, Quaternion.identity);
             //Grenade grenadeClone = clone.GetComponent<Grenade>();
