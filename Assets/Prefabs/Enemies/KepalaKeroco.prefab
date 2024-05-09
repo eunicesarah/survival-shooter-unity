@@ -5199,9 +5199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerShot: 20
   timeBetweenBullets: 2
-  range: 100
+  range: 10
   spread: 5
-  bulletsPerTap: 5
+  bulletsPerTap: 3
 --- !u!1 &1877589379010923095
 GameObject:
   m_ObjectHideFlags: 0

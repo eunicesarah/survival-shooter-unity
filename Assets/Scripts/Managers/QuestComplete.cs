@@ -45,7 +45,55 @@ namespace Nightmare
 
             if(currentCanvas.name == "GameScene1" )
             {
-                if (playerScore >= 100 || Time.timeSinceLevelLoad >= 60f)
+                if (playerScore >= 500)
+                {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                    if(enemies!=null)
+                    {
+                        foreach (GameObject enemy in enemies)
+                        {
+                            Destroy(enemy);
+                        }
+                    }
+                    enemyManager.SetActive(false);
+                    shop.SetActive(true);
+
+
+                    // questCompleteCanvas.SetActive(true);
+                    // playerhealth.godMode = true;
+                    if(!isQuestCompleted)
+                    {
+                        anim.SetTrigger("QuestCompleted");
+                    }
+                    isQuestCompleted = true;
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        MainManager.Instance.questCompleted++;
+                        MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                        MainManager.Instance.coin = coinsmanager.coins;
+                        currentCanvas.SetActive(false);
+                        nextCanvas.SetActive(true);
+                    }
+
+                }
+            }
+            else if(currentCanvas.name == "GameScene2")
+            {
+                GameObject[] kepala = GameObject.FindGameObjectsWithTag("Enemy");
+                int countKepalaKeroco = 0;
+                if(kepala!=null)
+                {
+                    foreach (GameObject obj in kepala)
+                    {
+                        if (obj.name == "KepalaKeroco")
+                        {
+                            countKepalaKeroco++;
+                        }
+                    }
+                }
+                if (countKepalaKeroco<=1)
                 {
                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 

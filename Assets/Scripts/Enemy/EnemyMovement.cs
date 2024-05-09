@@ -209,7 +209,7 @@ namespace Nightmare
 
         private void IsPsychic()
         {
-            GoToPlayer();
+            // GoToPlayer();
             if (mushroom != null)
             {
             GoToMushroom();
