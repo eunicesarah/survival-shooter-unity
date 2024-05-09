@@ -38,8 +38,10 @@ namespace Nightmare
         public void ResetPlayer()
         {
             // Set the initial health of the player.
-            currentHealth = startingHealth;
-
+            // currentHealth = startingHealth;
+            currentHealth = MainManager.Instance.playerHealth;
+            healthSlider.value = currentHealth;
+            
             playerMovement.enabled = true;
             playerShooting.enabled = true;
 
