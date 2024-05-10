@@ -36,6 +36,8 @@ namespace Nightmare
 
         public bool isQuestJendralCompleted = false;
 
+        public bool isFromLoad = false;
+
         public float countDown = 90f;
         Animator anim;
 
@@ -55,9 +57,9 @@ namespace Nightmare
         {
             playerScore = scoreManager.getScore();
 
-            if(currentCanvas.name == "GameScene1" )
+            if(currentCanvas.name == "GameScene1" && !isFromLoad)
             {
-                if (playerScore >= 500)
+                if (playerScore >= 10)
                 {
                     countDown -= Time.deltaTime;
                     CountDown.SetActive(true);
@@ -96,7 +98,7 @@ namespace Nightmare
 
                 }
             }
-            else if(currentCanvas.name == "GameScene2")
+            else if(currentCanvas.name == "GameScene2" && !isFromLoad)
             {
                 GameObject[] kepala = GameObject.FindGameObjectsWithTag("Enemy");
                 int countKepalaKeroco = 0;
@@ -149,7 +151,7 @@ namespace Nightmare
 
                 }
             }
-            else if(currentCanvas.name == "GameScene3")
+            else if(currentCanvas.name == "GameScene3" && !isFromLoad)
             {
                 GameObject jendral = GameObject.FindGameObjectWithTag("Jendral");
                 if(jendral==null)
@@ -227,6 +229,37 @@ namespace Nightmare
                     }
                 }
                
+            }
+            else if(isFromLoad)
+            {
+            
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                if(enemies!=null)
+                {
+                    foreach (GameObject enemy in enemies)
+                    {
+                        Destroy(enemy);
+                    }
+                }
+                enemyManager.SetActive(false);
+                // shop.SetActive(true);
+                // save.SetActive(true);
+                if(!isQuestCompleted)
+                    {
+                        anim.SetTrigger("QuestCompleted");
+                    }
+                
+                isQuestCompleted = true;
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    MainManager.Instance.questCompleted++;
+                    MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                    currentCanvas.SetActive(false);
+                    nextCanvas.SetActive(true);
+                }
+                
             }
         }
     }

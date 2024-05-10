@@ -26,6 +26,10 @@ namespace Nightmare {
         public TextMeshProUGUI saveNameDate2;
         public TextMeshProUGUI saveNameDate3;
 
+        public TMP_InputField editName1;
+        public TMP_InputField editName2;
+        public TMP_InputField editName3;
+
     [SerializeField]
     private bool saveOpen = false;
     private bool open = false;
@@ -63,18 +67,21 @@ namespace Nightmare {
                                     string[] parts = save.Split('_');
                                     saveName1.text = parts[1];
                                     saveNameDate1.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                                    editName1.text = parts[1];
                                 }
                                 else if (save[0] == '2')
                                 {
                                     string[] parts = save.Split('_');
                                     saveName2.text = parts[1];
                                     saveNameDate2.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                                    editName2.text = parts[1];
                                 }
                                 else if (save[0] == '3')
                                 {
                                     string[] parts = save.Split('_');
                                     saveName3.text = parts[1];
                                     saveNameDate3.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                                    editName3.text = parts[1];
                                 }
                             }
                         }
