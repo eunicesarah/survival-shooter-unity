@@ -17,6 +17,7 @@ namespace Nightmare
         GameObject enterMark;
         ShopManager shopManager;
         CoinsManager coinsManager;
+        // PlayerSword playerSword;
 
         GameObject player;
 
@@ -41,6 +42,7 @@ namespace Nightmare
             playerHealth = FindObjectOfType<PlayerHealth>();
             playerMovement = FindObjectOfType<PlayerMovement>();
             playerShooting = FindObjectOfType<PlayerShooting>();
+            // playerSword = FindObjectOfType<PlayerSword>();
             orbsManager = FindObjectOfType<SpawnOrbs>();
             anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
             enterMark = GameObject.Find("HUDCanvas").transform.GetChild(4).gameObject;
@@ -105,7 +107,7 @@ namespace Nightmare
             else if (_input == "fast") // twice the speed
             {
                 Debug.Log("Cheat Activate " + _input);
-                playerMovement.speed = 12f;
+                playerMovement.speed = playerMovement.speed * 2;
                 anim.SetTrigger("Cheat");
                 return true;
 
@@ -114,6 +116,7 @@ namespace Nightmare
             {
                 Debug.Log("Cheat Activate " + _input);
                 playerShooting.damagePerShot = 999999999;
+                // playerSword.attackDamage = 999999999;
                 anim.SetTrigger("Cheat");
                 return true;
 

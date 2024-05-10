@@ -61,12 +61,15 @@ namespace Nightmare
             }
             if (countDown <= 0f)
             {
-                // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 anim.SetBool("GameOver", true);
-                // HUDUI.SetActive(false);
-
+                Invoke("LoadSceneDelayed", 4f);
             }
 
+        }
+
+        void LoadSceneDelayed()
+        {
+            SceneManager.LoadScene(0);
         }
 
     }
