@@ -69,7 +69,7 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
-                    save.SetActive(true);
+                    // save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
@@ -121,7 +121,7 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
-                    save.SetActive(true);
+                    // save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
@@ -148,6 +148,9 @@ namespace Nightmare
                 GameObject jendral = GameObject.FindGameObjectWithTag("Jendral");
                 if(jendral==null)
                 {
+                    countDown -= Time.deltaTime;
+                    CountDown.SetActive(true);
+                    CountDownText.text = Mathf.RoundToInt(countDown).ToString();
                      GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
                     if(enemies!=null)
@@ -159,7 +162,7 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
-                    save.SetActive(true);
+                    // save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
@@ -171,15 +174,16 @@ namespace Nightmare
                     isQuestCompleted = true;
                     isQuestJendralCompleted = true;
 
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space)|| countDown<=0f)
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
                         MainManager.Instance.coin = coinsmanager.coins;
                         enemyManager.SetActive(true);
                         shop.SetActive(false);
-                        save.SetActive(false);
+                        // save.SetActive(false);
                         raja.SetActive(true);
+                        CountDown.SetActive(false);
                         isQuestCompleted = false;
                     }
                    
