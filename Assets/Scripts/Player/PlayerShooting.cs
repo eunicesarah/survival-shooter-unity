@@ -9,6 +9,8 @@ namespace Nightmare
     public class PlayerShooting : PausibleObject
     {
         public int damagePerShot = 20;
+
+        private float baseDamage;
         public int bulletsPerTap = 3;
         public float timeBetweenBullets = 0.15f;
         public float range = 100f;
@@ -16,6 +18,8 @@ namespace Nightmare
         public float grenadeSpeed = 200f;
         public float grenadeFireDelay = 0.5f;
         public float spread = 2f;
+        private int maxOrbs = 15;
+        private int currentOrbs = 0;
 
         float timer;
         Ray shootRay = new Ray();
@@ -42,6 +46,7 @@ namespace Nightmare
 
             MainManager.Instance.totalbulletsScene = 0;
             MainManager.Instance.bulletsHitScene = 0;
+            baseDamage = damagePerShot;
             // Create a layer mask for the Shootable layer.
             shootableMask = LayerMask.GetMask ("Shootable", "Enemy");
 
@@ -241,6 +246,18 @@ namespace Nightmare
             //GameObject clone = Instantiate(grenade, transform.position, Quaternion.identity);
             //Grenade grenadeClone = clone.GetComponent<Grenade>();
             //grenadeClone.Shoot(grenadeSpeed * transform.forward);
+        }
+
+        public void takeOrb()
+        {
+            if (currentOrbs < maxOrbs)
+            {
+                currentOrbs++;
+                damagePerShot = (int)(damagePerShot + baseDamage * 0.1);
+                Debug.Log("Picked up damage power up");
+                Debug.Log("Current orbs: " + currentOrbs);
+
+            }
         }
     }
 }
