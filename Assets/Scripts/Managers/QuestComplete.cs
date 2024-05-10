@@ -17,6 +17,7 @@ namespace Nightmare
         public GameObject scores;
         public GameObject questCompleteCanvas;
         public GameObject currentCanvas;
+        AudioSource attachedAudioSource;
         public GameObject nextCanvas;
         //private float survivalTime = 60f;
 
@@ -53,6 +54,7 @@ namespace Nightmare
             scoreManager = scores.GetComponent<ScoreManager>();
             coinsmanager = FindObjectOfType<CoinsManager>();
             anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
+            attachedAudioSource = nextCanvas.GetComponent<AudioSource>();
             
 
 
@@ -273,6 +275,7 @@ namespace Nightmare
                     MainManager.Instance.playerHealth = playerhealth.currentHealth;
                     currentCanvas.SetActive(false);
                     nextCanvas.SetActive(true);
+                    // attachedAudioSource.Play();
                 }
                 
             }
