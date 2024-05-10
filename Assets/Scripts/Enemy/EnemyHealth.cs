@@ -4,8 +4,8 @@ namespace Nightmare
 {
     public class EnemyHealth : MonoBehaviour
     {
-        public int startingHealth = 100 * MainManager.Instance.difficulty;
-        public float sinkSpeed = 2.5f * MainManager.Instance.difficulty;
+        public int startingHealth = 100;
+        public float sinkSpeed = 2.5f;
         public int scoreValue = 10;
         public AudioClip deathClip;
 
@@ -23,6 +23,7 @@ namespace Nightmare
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
             enemyMovement = this.GetComponent<EnemyMovement>();
+            startingHealth = startingHealth * MainManager.Instance.difficulty;
         }
 
         void OnEnable()

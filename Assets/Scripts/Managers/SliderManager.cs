@@ -7,7 +7,7 @@ namespace Nightmare
 public class SliderManager : MonoBehaviour
 {
     [SerializeField] public string sliderText = "Easy";
-    public int sliderValue = 1;
+        [SerializeField] public int sliderValue = 1;
 
     public void SliderChange(float value)
     {
@@ -35,7 +35,7 @@ public class SliderManager : MonoBehaviour
     }
     public void SetSliderValue(float value)
     {
-        this.sliderValue = (int) value + 1;
+        sliderValue = (int) value + 1;
             MainManager.Instance.difficulty = this.sliderValue;
     }
 }

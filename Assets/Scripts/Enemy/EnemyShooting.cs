@@ -40,9 +40,10 @@ namespace Nightmare
             gunLine = GetComponent<LineRenderer>();
             gunAudio = GetComponent<AudioSource>();
             gunLight = GetComponent<Light>();
-            //faceLight = GetComponentInChildren<Light> ();
+            damagePerShot = damagePerShot * MainManager.Instance.difficulty;
+           //faceLight = GetComponentInChildren<Light> ();
 
-            StartPausible();
+           StartPausible();
         }
 
         void OnDestroy()
