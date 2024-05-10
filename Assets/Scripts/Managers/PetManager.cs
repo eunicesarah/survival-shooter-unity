@@ -12,9 +12,25 @@ namespace Nightmare
 
         public GameObject cactus;
         public GameObject mushroom;
+        GameObject player;
         void Awake()
         {
-            
+            player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log("Mushroom " + MainManager.Instance.isMushroom);
+            Debug.Log("Cactus " + MainManager.Instance.isCactus);
+            if (MainManager.Instance.isMushroom)
+            {
+                // petManager.isMushroom = true;
+                this.SpawnPet(player.transform.position, "Mushroom");
+
+            }
+
+            if (MainManager.Instance.isCactus)
+            {
+                this.SpawnPet(player.transform.position, "Cactus");
+                // petManager.isCactus = true;
+
+            }
         }
 
         // Update is called once per frame

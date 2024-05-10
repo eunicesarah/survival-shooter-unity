@@ -18,6 +18,9 @@ namespace Nightmare
 
         public string playerName;
 
+        public bool isMushroom;
+
+        public bool isCactus;
         public GameData()
         {
             
