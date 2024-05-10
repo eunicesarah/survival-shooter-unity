@@ -10,8 +10,9 @@ namespace Nightmare {
     {
 
         GameObject player;
-        PauseManager pauseManager;
 
+        public QuestComplete questComplete;        
+        public PauseManager pauseManager;
         public GameObject SaveSpot;
         public GameObject SaveText;
         public GameObject SaveUI;
@@ -34,52 +35,55 @@ namespace Nightmare {
         {
             player = GameObject.FindGameObjectWithTag("Player");
             pauseManager = FindObjectOfType<PauseManager>();
+            questComplete = FindObjectOfType<QuestComplete>();
         }
 
 
         void Update()
         {
-
-            if (Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f && !open)
+            if (SaveSpot != null)
             {
-                SaveText.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if(Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f && !open && questComplete.isQuestCompleted)
                 {
-                    open = true;
-                saveOpen = !saveOpen;
-                    SaveUI.SetActive(saveOpen);
-                    HudUI.SetActive(!saveOpen);
-                    pauseManager.Pause();
-                    IEnumerable<string> saves = MainManager.Instance.ListSaves();
-                    foreach (string save in saves)
-                    {
-                        Debug.Log(save);
-                        if (save[0] == '1')
-                        {   
-                            string[] parts = save.Split('_');
-                            saveName1.text = parts[1];
-                            saveNameDate1.text = parts[2] + "\n" + parts[3].Replace("-", ":");
-                        }
-                        else if (save[0] == '2')
+                        SaveText.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.E))
                         {
-                            string[] parts = save.Split('_');
-                            saveName2.text = parts[1];
-                            saveNameDate2.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                            open = true;
+                            saveOpen = !saveOpen;
+                            SaveUI.SetActive(saveOpen);
+                            HudUI.SetActive(!saveOpen);
+                            pauseManager.Pause();
+                            Debug.Log("Pause");
+                            IEnumerable<string> saves = MainManager.Instance.ListSaves();
+                            foreach (string save in saves)
+                            {
+                                Debug.Log(save);
+                                if (save[0] == '1')
+                                {
+                                    string[] parts = save.Split('_');
+                                    saveName1.text = parts[1];
+                                    saveNameDate1.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                                }
+                                else if (save[0] == '2')
+                                {
+                                    string[] parts = save.Split('_');
+                                    saveName2.text = parts[1];
+                                    saveNameDate2.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                                }
+                                else if (save[0] == '3')
+                                {
+                                    string[] parts = save.Split('_');
+                                    saveName3.text = parts[1];
+                                    saveNameDate3.text = parts[2] + "\n" + parts[3].Replace("-", ":");
+                                }
+                            }
                         }
-                        else if (save[0] == '3')
-                        {
-                            string[] parts = save.Split('_');
-                            saveName3.text = parts[1];
-                            saveNameDate3.text = parts[2] + "\n" + parts[3].Replace("-", ":");
-                        }
-                    }
+                }
+                else
+                {
+                      SaveText.SetActive(false);
                 }
             }
-            else
-            {
-                SaveText.SetActive(false);
-            }
-
         }
         public void SaveGame1(){
             Debug.Log("SaveGame1");
@@ -95,13 +99,12 @@ namespace Nightmare {
 
 
         public void Cancel()
-    {
-        open = false;
-        saveOpen = !saveOpen;
-        SaveUI.SetActive(saveOpen);
-        HudUI.SetActive(!saveOpen);
-        pauseManager.Pause();
-    }
+        {
+            open = false;
+            saveOpen = !saveOpen;
+            SaveUI.SetActive(saveOpen);
+            HudUI.SetActive(!saveOpen);
+        }
 
     }
 
