@@ -34,7 +34,14 @@ namespace Nightmare
             Distance.text = (MainManager.Instance.distanceTraveledScene /1000f).ToString() + " km";
             DeathCount.text = MainManager.Instance.deathCount.ToString();
             EnemyKilled.text = MainManager.Instance.enemyKilledScene.ToString();
-            StoryProgress.text = ((float) MainManager.Instance.questCompleted / 4 * 100).ToString() + "%";
+            if (MainManager.Instance.questCompleted >= 4)
+            {
+                StoryProgress.text = "100%";
+            }
+            else
+            {
+                StoryProgress.text = ((float) MainManager.Instance.questCompleted / 4 * 100).ToString() + "%";
+            }
             if (MainManager.Instance.totalbulletsScene == 0)
             {
                 Accuracy.text = "0%";

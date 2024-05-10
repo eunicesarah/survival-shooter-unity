@@ -22,32 +22,6 @@ namespace Nightmare
         {
             
         }
-        public string getName()
-        {
-            return Name;
-        }
-        public string getArenaName()
-        {
-            return ArenaName;
-        }
-        public void setName(string name)
-        {
-            Name = name;
-        }
-
-        public void setArenaName(string arenaName)
-        {
-            ArenaName = arenaName;
-        }
-        public int getHealth()
-        {
-            return health;
-        }
-        public void setHealth(int health)
-        {
-            this.health = health;
-
-        }
 
     }
 }

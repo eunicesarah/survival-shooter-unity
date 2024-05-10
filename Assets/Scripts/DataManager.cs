@@ -14,7 +14,7 @@ namespace Nightmare
         this.fileExtension = "json";
     }
 
-    string GetPathToFile(string fileName) {
+    public string GetPathToFile(string fileName) {
         return Path.Combine(dataPath, string.Concat(fileName, ".", fileExtension));
     }
     
@@ -63,5 +63,27 @@ namespace Nightmare
     public T Deserialize<T>(string json) {
             return JsonUtility.FromJson<T>(json);
         }
+
+    public void saveStatistic(StatisticData data, bool overwrite = true) {
+        string fileLocation = GetPathToFile("Statistic");
+
+        if (!overwrite && File.Exists(fileLocation)) {
+            throw new IOException("The file already exists and cannot be overwritten.");
+        }
+
+        File.WriteAllText(fileLocation, Serialize(data));
     }
+    public StatisticData loadStatistic() {
+        string fileLocation = GetPathToFile("Statistic");
+
+        if (!File.Exists(fileLocation)) {
+            throw new ArgumentException($"No file : 'Statistic'");
+        }
+
+        return Deserialize<StatisticData>(File.ReadAllText(fileLocation));
+    }
+
+    
+    }
+    
 }

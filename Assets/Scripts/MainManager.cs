@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 namespace Nightmare
 {
@@ -11,9 +12,10 @@ namespace Nightmare
 
         private static MainManager instance;
         [SerializeField] public GameData gameData;
+        [SerializeField] public StatisticData statisticData;
 
         public static MainManager Instance
-    {
+        {
         get
         {
             if (instance == null)
@@ -24,7 +26,7 @@ namespace Nightmare
             }
             return instance;
         }
-    }
+        }
 
 
         DataManager dataService;
@@ -51,11 +53,12 @@ namespace Nightmare
         public int bulletsHitScene = 0;
         public int enemyKilledScene = 0;
 
-        public string saveName;
-
         public string playerName;
 
         public int difficulty = 1;
+        
+        public string saveName;
+        
 
         private bool loads = false;
         [SerializeField] private bool save = false;
@@ -71,11 +74,6 @@ namespace Nightmare
             if (save)
             {
                 save = false;
-                // playerhealth = FindObjectOfType<PlayerHealth>();
-                // gameData.ArenaName = SceneManager.GetActiveScene().name;
-                // gameData.health = playerhealth.currentHealth;
-                // gameData.coins = this.coin;
-                // gameData.Name = "Save1";
                 SaveGame("Save1", "1");
                 
             }
@@ -88,9 +86,6 @@ namespace Nightmare
 
             if (test){
                 test = false;
-                // float totalDistanceTraveledKm = totalDistanceTraveled / 1000f;
-                // Debug.Log(totalDistanceTraveledKm + " km");
-                Debug.Log("masuk");
                 IEnumerable<string> saves = ListSaves();
                 foreach (string save in saves)
                 {
@@ -124,40 +119,53 @@ namespace Nightmare
             startTime = DateTime.Now;
             dataService = new DataManager();
             gameData = new GameData();
+            string statisticPath = dataService.GetPathToFile("Statistic");
+            if (File.Exists(statisticPath))
+            {
+                statisticData = dataService.loadStatistic();
+                this.totalDistanceTraveled = statisticData.totalDistanceTraveled;
+                this.totalbullets = statisticData.totalbullets;
+                this.bulletsHit = statisticData.bulletsHit;
+                this.deathCount = statisticData.deathCount;
+                this.questCompleted = statisticData.questCompleted;
+                this.enemyKilled = statisticData.enemyKilled;
+                this.playTime = TimeSpan.Parse(statisticData.playTime);
+            }
+            else
+            {
+                statisticData = new StatisticData(TimeSpan.Zero.ToString());
+            }
         }
 
         void Update(){
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-            endTime = DateTime.Now;
-            playTime = endTime - startTime;
-            string playTimeFormatted = $"{playTime.Hours:00}:{playTime.Minutes:00}:{playTime.Seconds:00}";
-            Debug.Log("Playtime: " + playTimeFormatted);
+            // if (Input.GetKeyDown(KeyCode.Escape))
+            // {
+            // endTime = DateTime.Now;
+            // playTime = endTime - startTime;
+            // string playTimeFormatted = $"{playTime.Hours:00}:{playTime.Minutes:00}:{playTime.Seconds:00}";
+            // Debug.Log("Playtime: " + playTimeFormatted);
 
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                float accuracy = (float)bulletsHit / totalbullets * 100;
-                Debug.Log(accuracy + "% accuracy");
-            }
+            // }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     float accuracy = (float)bulletsHit / totalbullets * 100;
+            //     Debug.Log(accuracy + "% accuracy");
+            // }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("Story progress: " + (float) (questCompleted / 4 * 100) + "%");
-            }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     Debug.Log("Story progress: " + (float) (questCompleted / 4 * 100) + "%");
+            // }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("Enemies killed: " + enemyKilled);
-            }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     Debug.Log("Enemies killed: " + enemyKilled);
+            // }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("Deaths: " + deathCount);
-            }
-
-
-
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     Debug.Log("Deaths: " + deathCount);
+            // }
 
 
         }
@@ -172,19 +180,9 @@ namespace Nightmare
             }
             
             PlayerHealth playerhealth = FindObjectOfType<PlayerHealth>();
-
-            // GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            //         if(enemies!=null)
-            //         {
-            //             foreach (GameObject enemy in enemies)
-            //             {
-            //                 Destroy(enemy);
-            //             }
-            //         }
             QuestComplete questComplete = FindObjectOfType<QuestComplete>();
             questComplete.isFromLoad = true;
-            
+
             if (playerhealth != null)
             {
                 
@@ -234,6 +232,19 @@ namespace Nightmare
         
         public IEnumerable<string> ListSaves() {
             return dataService.ListSaves();
+        }
+
+        void OnApplicationQuit()
+        {
+            statisticData.totalDistanceTraveled = this.totalDistanceTraveled;
+            statisticData.totalbullets = this.totalbullets;
+            statisticData.bulletsHit = this.bulletsHit;
+            statisticData.deathCount = this.deathCount;
+            statisticData.questCompleted = this.questCompleted;
+            statisticData.enemyKilled = this.enemyKilled;
+            statisticData.playTime = (DateTime.Now - this.startTime + TimeSpan.Parse(statisticData.playTime)).ToString();
+            dataService.saveStatistic(statisticData);
+
         }
     }
 }
