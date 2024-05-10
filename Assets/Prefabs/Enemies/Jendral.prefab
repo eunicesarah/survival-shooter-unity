@@ -782,8 +782,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenAttacks: 2
   timeAttackRadius: 1
-  attackDamage: 10
+  attackDamage: 30
   radiusTreshold: 6
+  alivePets: 0
 --- !u!1 &5623115116557462037
 GameObject:
   m_ObjectHideFlags: 0
