@@ -33,7 +33,7 @@ public class BottomBarController : MonoBehaviour
 
         name.text = currentScene.sentences[sentenceIndex].speaker?.speakerName ?? "";
         // Debug.Log(name.text);
-        Debug.Log(MainManager.Instance.playerName + " nama player");
+        // Debug.Log(MainManager.Instance.playerName + " nama player");
         {
         if (name.text == "LoneWolf")
             name.text = MainManager.Instance.playerName;

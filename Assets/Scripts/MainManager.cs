@@ -181,6 +181,8 @@ namespace Nightmare
             if (scene.name == "Help"){
                 this.playerHealth = 100;
                 this.coin = 100;
+                this.isCactus = false;
+                this.isMushroom = false;
                 return;
             }
             
