@@ -27,6 +27,7 @@ namespace Nightmare
         public GameObject shop;
         public GameObject save;
 
+
         public GameObject CountDown;
         public TextMeshProUGUI CountDownText;
 
@@ -58,6 +59,9 @@ namespace Nightmare
             {
                 if (playerScore >= 500)
                 {
+                    countDown -= Time.deltaTime;
+                    CountDown.SetActive(true);
+                    CountDownText.text = Mathf.RoundToInt(countDown).ToString();
                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
                     if(enemies!=null)
@@ -77,14 +81,15 @@ namespace Nightmare
                     if(!isQuestCompleted)
                     {
                         anim.SetTrigger("QuestCompleted");
+                        MainManager.Instance.coin += 100;
+                        coinsmanager.UpdateCoinsUI();
                     }
                     isQuestCompleted = true;
 
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space) || countDown<=0f)
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
-                        MainManager.Instance.coin = coinsmanager.coins;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
                     }
@@ -129,6 +134,8 @@ namespace Nightmare
                     if(!isQuestCompleted)
                     {
                         anim.SetTrigger("QuestCompleted");
+                        MainManager.Instance.coin += 100;
+                        coinsmanager.UpdateCoinsUI();
                     }
                     isQuestCompleted = true;
 
@@ -136,7 +143,6 @@ namespace Nightmare
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
-                        MainManager.Instance.coin = coinsmanager.coins;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
                     }
@@ -170,6 +176,8 @@ namespace Nightmare
                     if(!isQuestCompleted)
                     {
                         anim.SetTrigger("QuestCompleted");
+                        MainManager.Instance.coin += 100;
+                        coinsmanager.UpdateCoinsUI();
                     }
                     isQuestCompleted = true;
                     isQuestJendralCompleted = true;
@@ -178,7 +186,6 @@ namespace Nightmare
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
-                        MainManager.Instance.coin = coinsmanager.coins;
                         enemyManager.SetActive(true);
                         shop.SetActive(false);
                         // save.SetActive(false);
@@ -215,7 +222,6 @@ namespace Nightmare
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
-                        MainManager.Instance.coin = coinsmanager.coins;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
                     }

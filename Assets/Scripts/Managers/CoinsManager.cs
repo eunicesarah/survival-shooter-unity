@@ -20,24 +20,24 @@ public class CoinsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinsUI.text = coins.ToString();
+        coinsUI.text = MainManager.Instance.coin.ToString();
     }
 
     public void UpdateCoinsUI()
     {
-        coinsUI.text = coins.ToString();
+        coinsUI.text = MainManager.Instance.coin.ToString();
     }
 
     public void AddCoins(int amount)
     {
-        coins += amount;
+        MainManager.Instance.coin += amount;
     }
 
     public void SubstractCoins(int amount)
     {
-        if(coins-amount>=0)
+        if(MainManager.Instance.coin-amount>=0)
         {
-            coins -= amount;
+            MainManager.Instance.coin -= amount;
         }
 
 
