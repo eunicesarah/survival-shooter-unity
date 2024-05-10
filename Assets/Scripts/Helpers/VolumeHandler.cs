@@ -1,25 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Nightmare;
 
 
 public class VolumeHandler : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () 
+    public float volumeBGM;
+    void Start () 
 	{
-		if(GameObject.Find("EffectsSlider"))
-		GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.AddListener(SetVolume);
-	}
+        GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().volume = MainManager.Instance.vol;
+        volumeBGM = MainManager.Instance.vol;
+    }
 
-	void SetVolume(float volume)
+	void Update ()
 	{
-		GetComponent<AudioSource>().volume = volume;
-	}
-
-	void OnDestroy()
-	{
-		if(GameObject.Find("EffectsSlider"))
-		GameObject.Find("EffectsSlider").GetComponent<Slider>().onValueChanged.RemoveListener(SetVolume);
-	}
+        GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().volume = MainManager.Instance.vol;
+        volumeBGM = MainManager.Instance.vol;
+    }
 }

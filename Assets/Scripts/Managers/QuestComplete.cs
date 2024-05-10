@@ -79,12 +79,12 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
-                    // save.SetActive(true);
+                    save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
                     // playerhealth.godMode = true;
-                    if(!isQuestCompleted)
+                    if (!isQuestCompleted)
                     {
                         anim.SetTrigger("QuestCompleted");
                         MainManager.Instance.coin += 100;
@@ -132,12 +132,12 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
-                    // save.SetActive(true);
+                    save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
                     // playerhealth.godMode = true;
-                    if(!isQuestCompleted)
+                    if (!isQuestCompleted)
                     {
                         anim.SetTrigger("QuestCompleted");
                         MainManager.Instance.coin += 100;
@@ -175,12 +175,12 @@ namespace Nightmare
                         }
                         enemyManager.SetActive(false);
                         shop.SetActive(true);
-                        // save.SetActive(true);
+                        save.SetActive(true);
 
 
                         // questCompleteCanvas.SetActive(true);
                         // playerhealth.godMode = true;
-                        if(!isQuestCompleted)
+                        if (!isQuestCompleted)
                         {
                             anim.SetTrigger("QuestCompleted");
                             MainManager.Instance.coin += 100;
@@ -195,7 +195,7 @@ namespace Nightmare
                             MainManager.Instance.playerHealth = playerhealth.currentHealth;
                                 enemyManager.SetActive(true);
                             shop.SetActive(false);
-                            // save.SetActive(false);
+                            save.SetActive(false);
                             raja.SetActive(true);
                             petEnemy.SetActive(true);
                             CountDown.SetActive(false);

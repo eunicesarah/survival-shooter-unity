@@ -109,6 +109,8 @@ namespace Nightmare {
             saveOpen = !saveOpen;
             SaveUI.SetActive(saveOpen);
             HudUI.SetActive(!saveOpen);
+            pauseManager.Pause();
+            Debug.Log("Play");
         }
 
     }

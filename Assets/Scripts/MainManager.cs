@@ -58,7 +58,8 @@ namespace Nightmare
         public int difficulty = 1;
         
         public string saveName;
-        
+
+        public float vol;
 
         private bool loads = false;
         [SerializeField] private bool save = false;
