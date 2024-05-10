@@ -52,7 +52,7 @@ namespace Nightmare
             OnDeath?.Invoke();
             Destroy(gameObject);
             petManager.isMushroom = false;
-            shopManager.CheckPurchaseable();
+            // shopManager.CheckPurchaseable();
         }
     }
 }

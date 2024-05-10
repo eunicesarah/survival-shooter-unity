@@ -170,6 +170,7 @@ namespace Nightmare
                     Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
                     if (petManager.isCactus)
                     {
+                        cactusHealth.godMode = false;
                         cactusHealth.TakeDamage(cactusHealth.currentHealth);
                         petManager.isCactus = false;
                     }
@@ -180,6 +181,7 @@ namespace Nightmare
                     Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
                     if (petManager.isMushroom)
                     {
+                        mushroomHealth.godMode = false;
                         mushroomHealth.TakeDamage(mushroomHealth.currentHealth);
                         petManager.isMushroom = false;
                     }
