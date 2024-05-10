@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -7,6 +8,8 @@ namespace Nightmare
     {
         Animator animator;
         QuestComplete questComplete;
+
+        public bool isQuestRajaShowed = false;
 
         void Start()
         {
@@ -36,6 +39,17 @@ namespace Nightmare
                     }
                     // animator.SetTrigger("Quest");
                 }
+            }
+            if(questComplete.isQuestJendralCompleted && !isQuestRajaShowed)
+            {
+                StartCoroutine(TriggerQuestRaja());
+            }
+
+            IEnumerator TriggerQuestRaja()
+            {
+                yield return new WaitForSeconds(2); // wait for 5 seconds
+                animator.SetTrigger("QuestRaja");
+                isQuestRajaShowed = true;
             }
         }
 

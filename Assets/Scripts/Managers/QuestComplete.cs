@@ -190,6 +190,7 @@ namespace Nightmare
 
                         if (Input.GetKeyDown(KeyCode.Space)|| countDown<=0f)
                         {
+                            isQuestJendralCompleted = true;
                             MainManager.Instance.questCompleted++;
                             MainManager.Instance.playerHealth = playerhealth.currentHealth;
                                 enemyManager.SetActive(true);
@@ -200,7 +201,6 @@ namespace Nightmare
                             CountDown.SetActive(false);
                             isQuestCompleted = false;
                             
-                            isQuestJendralCompleted = true;
 
                         }
             
