@@ -61,7 +61,7 @@ namespace Nightmare {
                             IEnumerable<string> saves = MainManager.Instance.ListSaves();
                             foreach (string save in saves)
                             {
-                                Debug.Log(save);
+                                
                                 if (save[0] == '1')
                                 {
                                     string[] parts = save.Split('_');
@@ -93,8 +93,6 @@ namespace Nightmare {
             }
         }
         public void SaveGame1(){
-            Debug.Log("SaveGame1");
-            Debug.Log(saveName1.text);
             MainManager.Instance.SaveGame(saveName1.text, "1");
         }
         public void SaveGame2(){

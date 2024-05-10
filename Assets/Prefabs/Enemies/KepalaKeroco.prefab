@@ -5197,11 +5197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee371ac0275c5444a83030379c07f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
+  damagePerShot: 5
   timeBetweenBullets: 2
   range: 10
-  spread: 5
-  bulletsPerTap: 3
+  spread: 15
+  bulletsPerTap: 4
 --- !u!1 &1877589379010923095
 GameObject:
   m_ObjectHideFlags: 0
@@ -5556,7 +5556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea9a6ed18654d14db02bf0076cfe488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRange: 6
+  visionRange: 15
   hearingRange: 32
   wanderDistance: 20
   idleTimeRange: {x: 2, y: 6}
@@ -5586,7 +5586,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922357882846689063}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc28e8f7dbbe7494a8d67b6f5f3636bc, type: 3}
   m_Name: 

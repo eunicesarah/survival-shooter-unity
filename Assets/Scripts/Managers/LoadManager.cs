@@ -43,7 +43,7 @@ namespace Nightmare {
             IEnumerable<string> saves = MainManager.Instance.ListSaves();
             foreach (string save in saves)
             {
-                Debug.Log(save);
+                
                 if (save[0] == '1')
                 {
                     savePath1 = save;
