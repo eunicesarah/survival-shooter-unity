@@ -25,6 +25,7 @@ namespace Nightmare
         public GameObject raja;
 
         public GameObject shop;
+        public GameObject save;
 
         public GameObject CountDown;
         public TextMeshProUGUI CountDownText;
@@ -68,6 +69,7 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
+                    save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
@@ -119,6 +121,7 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
+                    save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
@@ -156,6 +159,7 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     shop.SetActive(true);
+                    save.SetActive(true);
 
 
                     // questCompleteCanvas.SetActive(true);
@@ -174,6 +178,7 @@ namespace Nightmare
                         MainManager.Instance.coin = coinsmanager.coins;
                         enemyManager.SetActive(true);
                         shop.SetActive(false);
+                        save.SetActive(false);
                         raja.SetActive(true);
                         isQuestCompleted = false;
                     }

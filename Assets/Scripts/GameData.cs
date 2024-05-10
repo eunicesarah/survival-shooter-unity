@@ -16,6 +16,8 @@ namespace Nightmare
 
         public DateTime currentTime;
 
+        public string playerName;
+
         public GameData()
         {
             
