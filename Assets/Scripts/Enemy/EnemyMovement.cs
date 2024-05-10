@@ -40,6 +40,9 @@ namespace Nightmare
                 cactusHealth = cactus.GetComponent<CactusHealth>();
             enemyHealth = GetComponent <EnemyHealth> ();
             nav = GetComponent<NavMeshAgent>();
+            visionRange = ((MainManager.Instance.difficulty / 10) + 1) * visionRange;
+            hearingRange = ((MainManager.Instance.difficulty / 10) + 1) * hearingRange;
+            wanderDistance = ((MainManager.Instance.difficulty / 10) + 1) * wanderDistance;
 
             StartPausible();
         }

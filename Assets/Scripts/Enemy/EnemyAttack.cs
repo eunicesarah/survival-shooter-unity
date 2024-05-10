@@ -91,13 +91,23 @@ namespace Nightmare
         {
             // Reset the timer.
             timer = 0f;
-
+            int calculatedAttackDamage = attackDamage * MainManager.Instance.difficulty;
+            Debug.Log("haha " + MainManager.Instance.difficulty);
+            Debug.Log("cal " + calculatedAttackDamage);
+            //if (MainManager.Instance.difficulty == .0f)
+            //{
+            //    calculatedAttackDamage *= 2; 
+            //}
+            //else if(MainManager.Instance.difficulty == "Hard")
+            //{
+            //    calculatedAttackDamage *= 3; 
+            //}
             // If the player has health to lose...
             if (mushroom != null)
             {
                 if(mushroomHealth.currentHealth > 0)
                 {
-                    mushroomHealth.TakeDamage(attackDamage);
+                    mushroomHealth.TakeDamage(calculatedAttackDamage);
                 }
             }
             if (cactus != null )
@@ -105,14 +115,14 @@ namespace Nightmare
                 if(cactusHealth.currentHealth > 0)
                 {
                     Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
-                    cactusHealth.TakeDamage(attackDamage);
+                    cactusHealth.TakeDamage(calculatedAttackDamage);
                 }
                 // cactusHealth.TakeDamage(attackDamage);
             }
             if (playerHealth != null && playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerHealth.TakeDamage(attackDamage);
+                playerHealth.TakeDamage(calculatedAttackDamage);
             }
         }
     }
