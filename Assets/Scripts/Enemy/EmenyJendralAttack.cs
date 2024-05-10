@@ -120,11 +120,11 @@ namespace Nightmare{
                 
                 currentAttackDamage = (int)(baseAttackDamage * (1 + 0.2f * alivePets));
                 attackDamage = currentAttackDamage;
-                Debug.Log("alivePets: " + alivePets);
+                // Debug.Log("alivePets: " + alivePets);
             }
             else
             {
-                Debug.Log("No pets alive");
+                // Debug.Log("No pets alive");
                 currentAttackDamage = baseAttackDamage;
                 attackDamage = baseAttackDamage;
             }
