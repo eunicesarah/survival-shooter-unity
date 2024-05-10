@@ -51,7 +51,7 @@ namespace Nightmare
             OnDeath?.Invoke();
             Destroy(gameObject);
             petManager.isCactus = false;
-            shopManager.CheckPurchaseable();
+            // shopManager.CheckPurchaseable();
         }
     }
 }
