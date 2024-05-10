@@ -173,9 +173,21 @@ namespace Nightmare
             
             PlayerHealth playerhealth = FindObjectOfType<PlayerHealth>();
 
+            // GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            //         if(enemies!=null)
+            //         {
+            //             foreach (GameObject enemy in enemies)
+            //             {
+            //                 Destroy(enemy);
+            //             }
+            //         }
+            QuestComplete questComplete = FindObjectOfType<QuestComplete>();
+            questComplete.isFromLoad = true;
+            
             if (playerhealth != null)
             {
-            
+                
                 playerhealth.currentHealth = gameData.health;
                 playerhealth.healthSlider.value = playerhealth.currentHealth;
                 this.playerName = gameData.playerName;
