@@ -8,17 +8,18 @@ namespace Nightmare
 {
 public class VolumeManager : MonoBehaviour
 {
+    public Slider slider;
     public float volumeBGM = 0.5f;
     void Start()
     {
         volumeBGM = GameObject.Find("BGM").GetComponent<AudioSource>().volume;
-        GameObject.Find("VolSlider").GetComponent<Slider>().value = volumeBGM;
+        slider.value = volumeBGM;
         MainManager.Instance.vol = this.volumeBGM;
     }
 
     void Update()
     {
-        GameObject.Find("VolSlider").GetComponent<Slider>().onValueChanged.AddListener(SetVolume);
+        slider.onValueChanged.AddListener(SetVolume);
     }
 
     void SetVolume(float volume)
