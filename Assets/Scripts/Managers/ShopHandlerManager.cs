@@ -28,6 +28,7 @@ namespace Nightmare
 
         public GameObject shopManagerGO;
         ShopManager shopManager;
+        public GameObject backButton;
 
         void Awake()
         {
@@ -41,6 +42,7 @@ namespace Nightmare
             pauseManager = FindObjectOfType<PauseManager>();
             questComplete = FindObjectOfType<QuestComplete>();
             shopManager = shopManagerGO.GetComponent<ShopManager>();
+            backButton = shopUI.transform.GetChild(6).gameObject;
         }
 
 
@@ -72,6 +74,14 @@ namespace Nightmare
                 anim.SetTrigger("NoShop");
             }
 
+        }
+
+        public void CloseShop()
+        {
+            shopOpen = false;
+            shopUI.SetActive(shopOpen);
+            HUDUI.SetActive(!shopOpen);
+            // backButton.SetActive(false);
         }
     }
 

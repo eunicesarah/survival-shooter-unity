@@ -42,14 +42,14 @@ namespace Nightmare
         void Update()
         {
             coinsUI.text = MainManager.Instance.coin.ToString();
-            // CheckPurchaseable();
+            CheckPurchaseable();
         }
 
         public void CheckPurchaseable()
         {
             for (int i = 0; i < shopItemSO.Length; i++)
             {
-                Debug.Log("Checking purchaseable "+ petManager.isCactus + " " + petManager.isMushroom );
+                // Debug.Log("Checking purchaseable "+ petManager.isCactus + " " + petManager.isMushroom );
 
                 // if(petManager.isCactus || petManager.isMushroom)
                 // {
