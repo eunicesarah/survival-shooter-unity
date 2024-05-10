@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Nightmare
@@ -31,12 +32,17 @@ namespace Nightmare
         public void RestartButton()
         {
             Debug.Log("Restart Button Clicked");
+            pauseManager.Pause();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void MainMenuButton()
         {
             Debug.Log("Main Menu Button Clicked");
+            pauseManager.Pause();
+            SceneManager.LoadScene(0);
         }
+
     }
 
 }
