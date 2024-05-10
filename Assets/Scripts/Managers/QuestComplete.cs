@@ -24,6 +24,8 @@ namespace Nightmare
 
         public GameObject raja;
 
+        public GameObject petEnemy;
+
         public GameObject shop;
         public GameObject save;
 
@@ -35,6 +37,8 @@ namespace Nightmare
         public bool isQuestCompleted = false;
 
         public bool isQuestJendralCompleted = false;
+
+        public bool isQuestRajaCompleted = false;
 
         public bool isFromLoad = false;
 
@@ -153,50 +157,59 @@ namespace Nightmare
             }
             else if(currentCanvas.name == "GameScene3" && !isFromLoad)
             {
-                GameObject jendral = GameObject.FindGameObjectWithTag("Jendral");
-                if(jendral==null)
-                {
-                    countDown -= Time.deltaTime;
-                    CountDown.SetActive(true);
-                    CountDownText.text = Mathf.RoundToInt(countDown).ToString();
-                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-                    if(enemies!=null)
+                if(!isQuestJendralCompleted){
+                    GameObject jendral = GameObject.FindGameObjectWithTag("Jendral");
+                    if(jendral==null && !isQuestJendralCompleted && !isQuestRajaCompleted)
                     {
-                        foreach (GameObject enemy in enemies)
+                        countDown -= Time.deltaTime;
+                        CountDown.SetActive(true);
+                        CountDownText.text = Mathf.RoundToInt(countDown).ToString();
+                        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                        if(enemies!=null)
                         {
-                            Destroy(enemy);
+                            foreach (GameObject enemy in enemies)
+                            {
+                                Destroy(enemy);
+                            }
                         }
-                    }
-                    enemyManager.SetActive(false);
-                    shop.SetActive(true);
-                    // save.SetActive(true);
+                        enemyManager.SetActive(false);
+                        shop.SetActive(true);
+                        // save.SetActive(true);
 
 
-                    // questCompleteCanvas.SetActive(true);
-                    // playerhealth.godMode = true;
-                    if(!isQuestCompleted)
-                    {
-                        anim.SetTrigger("QuestCompleted");
-                        MainManager.Instance.coin += 100;
+                        // questCompleteCanvas.SetActive(true);
+                        // playerhealth.godMode = true;
+                        if(!isQuestCompleted)
+                        {
+                            anim.SetTrigger("QuestCompleted");
+                            MainManager.Instance.coin += 100;
                         coinsmanager.UpdateCoinsUI();
                     }
-                    isQuestCompleted = true;
-                    isQuestJendralCompleted = true;
+                        isQuestCompleted = true;
 
-                    if (Input.GetKeyDown(KeyCode.Space)|| countDown<=0f)
-                    {
-                        MainManager.Instance.questCompleted++;
-                        MainManager.Instance.playerHealth = playerhealth.currentHealth;
-                        enemyManager.SetActive(true);
-                        shop.SetActive(false);
-                        // save.SetActive(false);
-                        raja.SetActive(true);
-                        CountDown.SetActive(false);
-                        isQuestCompleted = false;
+                        if (Input.GetKeyDown(KeyCode.Space)|| countDown<=0f)
+                        {
+                            MainManager.Instance.questCompleted++;
+                            MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                                enemyManager.SetActive(true);
+                            shop.SetActive(false);
+                            // save.SetActive(false);
+                            raja.SetActive(true);
+                            petEnemy.SetActive(true);
+                            CountDown.SetActive(false);
+                            isQuestCompleted = false;
+                            
+                            isQuestJendralCompleted = true;
+
+                        }
+            
                     }
-                   
                 }
+                // if(isQuestRajaCompleted){
+
+                // }
+                
                 if(raja==null)
                 {
                     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -226,6 +239,8 @@ namespace Nightmare
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
+                        isQuestRajaCompleted = true;
+
                     }
                 }
                
