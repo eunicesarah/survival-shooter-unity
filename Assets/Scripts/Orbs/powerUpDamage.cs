@@ -10,8 +10,6 @@ public class powerUpDamage : MonoBehaviour
     public float damageIncreasePercentage = 0.1f; 
     public GameObject pickupEffect;
 
-    private int maxOrbs = 15;
-    private int currentOrbs = 0;
     public void StartDestroyTimer(float delay)
         {
             StartCoroutine(DestroyAfterDelay(delay));
@@ -43,12 +41,7 @@ public class powerUpDamage : MonoBehaviour
 
     void Pickup(Collider player)
     {
-        if (currentOrbs < maxOrbs)
-        {
-            currentOrbs++;
-            playerShooting.damagePerShot = (int)(playerShooting.damagePerShot * (1 + damageIncreasePercentage));
-            Debug.Log("Picked up damage power up");
-            Destroy(gameObject); // Destroy the orb when picked up
-        }
+            playerShooting.takeOrb(); 
+            Destroy(gameObject); 
     }
 }
