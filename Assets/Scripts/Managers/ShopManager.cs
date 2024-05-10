@@ -34,6 +34,7 @@ namespace Nightmare
             coinsUI.text = MainManager.Instance.coin.ToString();
             petManager = FindObjectOfType<PetManager>();
             player = GameObject.FindGameObjectWithTag("Player");
+            
             LoadPanels();
             CheckPurchaseable();
         }
@@ -107,10 +108,12 @@ namespace Nightmare
                 if(buttonNo == 0)
                 {
                     petManager.isMushroom = true;
+                    MainManager.Instance.isMushroom = true;
                     petManager.SpawnPet(player.transform.position, "Mushroom");
                 }
                 else if(buttonNo == 1)
                 {
+                    MainManager.Instance.isCactus = true;
                     petManager.isCactus = true;
                     petManager.SpawnPet(player.transform.position, "Cactus");
                 }

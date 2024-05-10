@@ -56,8 +56,12 @@ namespace Nightmare
         public string playerName;
 
         public int difficulty = 1;
+
+        public bool isMushroom = false;
+        public bool isCactus = false;
         
         public string saveName;
+
 
         public float vol;
 
@@ -189,6 +193,8 @@ namespace Nightmare
                 
                 playerhealth.currentHealth = gameData.health;
                 playerhealth.healthSlider.value = playerhealth.currentHealth;
+                this.isCactus = gameData.isCactus;
+                this.isMushroom = gameData.isMushroom;
                 this.playerName = gameData.playerName;
                 this.playerHealth = gameData.health;
                 this.coin = gameData.coins;
@@ -218,6 +224,8 @@ namespace Nightmare
             gameData.coins = this.coin;
             gameData.Name = index + "_" +  gameName + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             gameData.currentTime = DateTime.Now;
+            gameData.isMushroom = this.isMushroom;
+            gameData.isCactus = this.isCactus;
             dataService.Save(gameData);
             
             }
