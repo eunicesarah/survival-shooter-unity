@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Nightmare
+{
 public class SliderManager : MonoBehaviour
 {
     [SerializeField] public string sliderText = "Easy";
+    public int sliderValue = 1;
 
     public void SliderChange(float value)
     {
@@ -22,4 +25,18 @@ public class SliderManager : MonoBehaviour
         }
         
     }
+    public string GetSliderText()
+    {
+        return sliderText;
+    }
+    public float GetSliderValue()
+    {
+        return sliderValue;
+    }
+    public void SetSliderValue(float value)
+    {
+        this.sliderValue = (int) value + 1;
+            MainManager.Instance.difficulty = this.sliderValue;
+    }
 }
+    }
