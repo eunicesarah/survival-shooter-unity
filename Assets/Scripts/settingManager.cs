@@ -1,7 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 namespace Nightmare {
     public class settingManager : MonoBehaviour {
+
+        public TMP_InputField player;
+        void Start() {
+            player.text = MainManager.Instance.playerName;
+        }
         public void setName(string newText) { 
             MainManager.Instance.playerName = newText;
         }

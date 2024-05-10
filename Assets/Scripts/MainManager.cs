@@ -165,7 +165,7 @@ namespace Nightmare
         void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
             if (!loads) return;
 
-            if (scene.name == "Menu"){
+            if (scene.name == "Help"){
                 this.playerHealth = 100;
                 this.coin = 100;
                 return;
@@ -178,7 +178,7 @@ namespace Nightmare
             
                 playerhealth.currentHealth = gameData.health;
                 playerhealth.healthSlider.value = playerhealth.currentHealth;
-                
+                this.playerName = gameData.playerName;
                 this.playerHealth = gameData.health;
                 this.coin = gameData.coins;
             }
@@ -201,10 +201,8 @@ namespace Nightmare
                 }
             }
             playerhealth = FindObjectOfType<PlayerHealth>();
-            Debug.Log(SceneManager.GetActiveScene().name);
+            gameData.playerName = this.playerName;
             gameData.ArenaName = SceneManager.GetActiveScene().name;
-            
-            Debug.Log(gameData.ArenaName);
             gameData.health = playerhealth.currentHealth;
             gameData.coins = this.coin;
             gameData.Name = index + "_" +  gameName + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");

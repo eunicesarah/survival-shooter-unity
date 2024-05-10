@@ -31,13 +31,13 @@ public class BottomBarController : MonoBehaviour
     {
         StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text));
 
-        if (currentScene.sentences[sentenceIndex].speaker.speakerName == "LoneWolf")
-        {
-            name.text = MainManager.Instance.playerName;
-        } else {
-
         name.text = currentScene.sentences[sentenceIndex].speaker?.speakerName ?? "";
-        }
+        // Debug.Log(name.text);
+        Debug.Log(MainManager.Instance.playerName + " nama player");
+        {
+        if (name.text == "LoneWolf")
+            name.text = MainManager.Instance.playerName;
+        } 
         name.color = currentScene.sentences[sentenceIndex].speaker?.textColor ?? Color.white;
 
     }
