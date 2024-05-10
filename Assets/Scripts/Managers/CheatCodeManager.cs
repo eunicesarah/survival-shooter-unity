@@ -125,7 +125,7 @@ namespace Nightmare
             {
                 Debug.Log("Cheat Activate " + _input);
                 coinsManager.unlimitedCoins = true;
-                coinsManager.coins = 999999999;
+                MainManager.Instance.coin = 999999999;
                 coinsManager.UpdateCoinsUI();
                 anim.SetTrigger("Cheat");
                 return true;

@@ -31,7 +31,7 @@ namespace Nightmare
             {
                 shopPanelsGO[i].SetActive(true);
             }
-            coinsUI.text = coinsManager.coins.ToString();
+            coinsUI.text = MainManager.Instance.coin.ToString();
             petManager = FindObjectOfType<PetManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             LoadPanels();
@@ -41,7 +41,8 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            coinsUI.text = coinsManager.coins.ToString();
+            coinsUI.text = MainManager.Instance.coin.ToString();
+            // CheckPurchaseable();
         }
 
         public void CheckPurchaseable()
@@ -57,7 +58,7 @@ namespace Nightmare
                 // }
                 // else
                 // {
-                //     if (coinsManager.coins >= shopItemSO[i].price)
+                //     if (MainManager.Instance.coin >= shopItemSO[i].price)
                 //     {
                 //         myPurchaseButton[i].interactable = true;
                 //         myImage[i].SetActive(false);
@@ -68,7 +69,7 @@ namespace Nightmare
                 //     }
 
                 // }
-                if (coinsManager.coins >= shopItemSO[i].price)
+                if (MainManager.Instance.coin >= shopItemSO[i].price)
                 {
                     if(i == 0 && petManager.isMushroom)
                     {
@@ -99,10 +100,10 @@ namespace Nightmare
 
         public void PurchaseItem(int buttonNo)
         {
-            if (coinsManager.coins >= shopItemSO[buttonNo].price)
+            if (MainManager.Instance.coin >= shopItemSO[buttonNo].price)
             {
-                coinsManager.coins -= shopItemSO[buttonNo].price;
-                coinsUI.text = "Coins : " + coinsManager.coins.ToString();
+                MainManager.Instance.coin -= shopItemSO[buttonNo].price;
+                coinsUI.text = "Coins : " + MainManager.Instance.coin.ToString();
                 if(buttonNo == 0)
                 {
                     petManager.isMushroom = true;

@@ -26,6 +26,9 @@ namespace Nightmare
         [SerializeField]
         private bool shopOpen = false;
 
+        public GameObject shopManagerGO;
+        ShopManager shopManager;
+
         void Awake()
         {
             // shopUI = GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject;
@@ -37,6 +40,7 @@ namespace Nightmare
             // pauseGO = GameObject.Find("PauseCanvas");
             pauseManager = FindObjectOfType<PauseManager>();
             questComplete = FindObjectOfType<QuestComplete>();
+            shopManager = shopManagerGO.GetComponent<ShopManager>();
         }
 
 
@@ -52,6 +56,7 @@ namespace Nightmare
                         shopOpen = !shopOpen;
                         shopUI.SetActive(shopOpen);
                         HUDUI.SetActive(!shopOpen);
+                        shopManager.CheckPurchaseable();
                         // pauseManager.Pause();
 
                     }
