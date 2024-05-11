@@ -23,7 +23,7 @@ Pada aplikasi ini terdapat beberapa spesifikasi sebagai berikut:
 	- Tipe attacker: `Shroomie`
 	- Tipe enemy buff: `Eagle`
 
-    Pemain hanya bisa memiliki satu pet pada satu waktu. Setiap pet memiliki health dan dapat diserang musuh. Ketika pet mati, pemain baru dapat membeli pet baru. Terdapat 2 jenis Pet yang dapat dibeli, yaitu tipe healer dan attacker, sedangkan tipe enemy buff hanya bisa dimiliki oleh musuh.
+    Pemain bisa memiliki dua pet pada satu waktu. Setiap pet memiliki health dan dapat diserang musuh. Ketika pet mati, pemain baru dapat membeli pet baru. Terdapat 2 jenis Pet yang dapat dibeli, yaitu tipe healer dan attacker.Sedangkan tipe enemy buff hanya bisa dimiliki oleh musuh.
 9.  Dalam game ini terdapat 3 jenis orb power up berikut yang akan dijatuhkan oleh musuh secara random ketika musuh mati:
 	- Orb Increase Damage: meningkatkan damage pemain sebesar 10 persen
 	- Orb Restore Health: mengisi ulang health pemain sebesar 20 persen
