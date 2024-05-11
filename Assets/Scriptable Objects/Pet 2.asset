@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Spiky
   description: Pet Will Heal the player every 2 s
-  price: 140
+  price: 100
