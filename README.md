@@ -64,8 +64,8 @@ Unity Scripting API:
 | Fitur | Screenshot |
 |-------|------------|
 | Main Menu | ![Main Menu](Screenshot/MainMenu.jpg) |
-| Load Game |  |
-| Save Game| |
+| Load Game | ![Load Game](Screenshot/Load.jpg)|
+| Save Game|![Save1](Screenshot/Save1.jpg) ![Save2](Screenshot/Save2.jpg) |
 | Statistics | ![Scoreboard](Screenshot/Statistics.jpg) |
 | Settings | ![Settings](Screenshot/Settings.jpg) |
 | Gameplay and Quest |![Gameplay1](Screenshot/Quest1.jpg) ![Gameplay2](Screenshot/Quest2.jpg)![Gameplay3](Screenshot/Quest3.jpg) ![Gameplay4](Screenshot/Quest4.jpg)|
