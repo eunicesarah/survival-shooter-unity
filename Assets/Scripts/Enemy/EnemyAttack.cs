@@ -47,17 +47,30 @@ namespace Nightmare
         void OnTriggerEnter (Collider other)
         {
             // If the entering collider is the player...
-            if(other.gameObject == player || other.gameObject == mushroom || other.gameObject == cactus)
+            if(other.gameObject == player)
             {
                 // ... the player is in range.
                 playerInRange = true;
+            }
+            if(other.gameObject == mushroom)
+            {
+                // ... the player is in range.
+                // playerInRange = true;
+                InvokeRepeating("AttackPet1", 0f, 1f);
+            }
+
+            if(other.gameObject == cactus)
+            {
+                // ... the player is in range.
+                // playerInRange = true;
+                InvokeRepeating("AttackPet2", 0f, 1f);
             }
         }
 
         void OnTriggerExit (Collider other)
         {
             // If the exiting collider is the player...
-            if(other.gameObject == player || other.gameObject == mushroom || other.gameObject == cactus)
+            if(other.gameObject == player)
             {
                 // ... the player is no longer in range.
                 playerInRange = false;
@@ -103,26 +116,49 @@ namespace Nightmare
             //    calculatedAttackDamage *= 3; 
             //}
             // If the player has health to lose...
-            if (mushroom != null)
-            {
-                if(mushroomHealth.currentHealth > 0)
-                {
-                    mushroomHealth.TakeDamage(calculatedAttackDamage);
-                }
-            }
-            if (cactus != null )
-            {
-                if(cactusHealth.currentHealth > 0)
-                {
-                    Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
-                    cactusHealth.TakeDamage(calculatedAttackDamage);
-                }
-                // cactusHealth.TakeDamage(attackDamage);
-            }
+            // if (mushroom != null)
+            // {
+            //     if(mushroomHealth.currentHealth > 0)
+            //     {
+            //         mushroomHealth.TakeDamage(calculatedAttackDamage);
+            //     }
+            // }
+            // if (cactus != null )
+            // {
+            //     if(cactusHealth.currentHealth > 0)
+            //     {
+            //         Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
+            //         cactusHealth.TakeDamage(calculatedAttackDamage);
+            //     }
+            //     // cactusHealth.TakeDamage(attackDamage);
+            // }
             if (playerHealth != null && playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
                 playerHealth.TakeDamage(calculatedAttackDamage);
+            }
+        }
+
+        void AttackPet1()
+        {
+            if(mushroom!=null)
+            {
+                if (mushroomHealth.currentHealth > 0)
+                {
+                    mushroomHealth.TakeDamage(attackDamage);
+                }
+
+            }
+        }
+
+        void AttackPet2()
+        {
+            if(cactus!=null)
+            {
+                if (cactusHealth.currentHealth > 0)
+                {
+                    cactusHealth.TakeDamage(attackDamage);
+                }
             }
         }
     }
