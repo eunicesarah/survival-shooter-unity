@@ -194,7 +194,6 @@ namespace Nightmare
                         {
                             isQuestJendralCompleted = true;
                             MainManager.Instance.questCompleted++;
-                            MainManager.Instance.playerHealth = playerhealth.currentHealth;
                                 enemyManager.SetActive(true);
                             shop.SetActive(false);
                             save.SetActive(false);

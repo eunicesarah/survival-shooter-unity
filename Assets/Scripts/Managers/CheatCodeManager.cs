@@ -198,6 +198,7 @@ namespace Nightmare
             {
                 Debug.Log("Cheat Activate " + _input);
                 anim.SetTrigger("Cheat");
+                MainManager.Instance.questCompleted++;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 return true;
             }

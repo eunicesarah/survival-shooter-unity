@@ -13,8 +13,6 @@ namespace Nightmare
         LevelManager lm;
         private UnityEvent listener;
 
-        public GameObject retry;
-
         void Awake ()
         {
             playerHealth = FindObjectOfType<PlayerHealth>();
@@ -22,18 +20,17 @@ namespace Nightmare
             lm = FindObjectOfType<LevelManager>();
             MainManager.Instance.startTimeScene = System.DateTime.Now;
             MainManager.Instance.enemyKilledScene = 0;
-            EventManager.StartListening("GameOver", ShowGameOver);
+            // EventManager.StartListening("GameOver", ShowGameOver);
         }
 
         void OnDestroy()
         {
-            EventManager.StopListening("GameOver", ShowGameOver);
+            // EventManager.StopListening("GameOver", ShowGameOver);
         }
 
         void ShowGameOver()
         {
             // anim.SetBool("GameOver", true);
-            retry.SetActive(true);
 
         }
 

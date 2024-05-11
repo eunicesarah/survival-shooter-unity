@@ -23,6 +23,8 @@ namespace Nightmare
         bool isDead;
         bool damaged;
 
+        public GameObject retry;
+
 
         void Awake()
         {
@@ -113,11 +115,12 @@ namespace Nightmare
             // Turn off the movement and shooting scripts.
             playerMovement.enabled = false;
             playerShooting.enabled = false;
+            retry.SetActive(true);
         }
 
         public void RestartLevel()
         {
-            EventManager.TriggerEvent("GameOver");
+            
         }
     }
 }
