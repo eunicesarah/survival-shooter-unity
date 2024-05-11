@@ -48,6 +48,8 @@ namespace Nightmare
         public float countDown = 90f;
         Animator anim;
 
+        public GameObject canvas;
+
 
         void Start()
         {
@@ -101,6 +103,7 @@ namespace Nightmare
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                        MainManager.Instance.isFromLoad = false;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
                     }
@@ -164,6 +167,7 @@ namespace Nightmare
                     {
                         MainManager.Instance.questCompleted++;
                         MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                        MainManager.Instance.isFromLoad = false;
                         currentCanvas.SetActive(false);
                         nextCanvas.SetActive(true);
                     }
@@ -176,6 +180,7 @@ namespace Nightmare
                     GameObject jendral = GameObject.FindGameObjectWithTag("Jendral");
                     if(jendral==null && !isQuestJendralCompleted && !isQuestRajaCompleted)
                     {
+                        MainManager.Instance.isFromLoad = true;
                         countDown -= Time.deltaTime;
                         CountDown.SetActive(true);
                         CountDownText.text = Mathf.RoundToInt(countDown).ToString();
@@ -199,8 +204,8 @@ namespace Nightmare
                             MainManager.Instance.isCactus = false;
                         }
                         enemyManager.SetActive(false);
-                        shop.SetActive(true);
-                        save.SetActive(true);
+                        // shop.SetActive(true);
+                        // save.SetActive(true);
 
 
                         // questCompleteCanvas.SetActive(true);
@@ -217,13 +222,14 @@ namespace Nightmare
                         {
                             isQuestJendralCompleted = true;
                             MainManager.Instance.questCompleted++;
-                                enemyManager.SetActive(true);
+                            enemyManager.SetActive(true);
                             shop.SetActive(false);
                             save.SetActive(false);
                             raja.SetActive(true);
                             petEnemy.SetActive(true);
                             CountDown.SetActive(false);
                             isQuestCompleted = false;
+                            
                             
 
                         }
@@ -292,8 +298,8 @@ namespace Nightmare
                     }
                 }
                 enemyManager.SetActive(false);
-                // shop.SetActive(true);
-                // save.SetActive(true);
+                shop.SetActive(false);
+                save.SetActive(false);
                 if(!isQuestCompleted)
                     {
                         anim.SetTrigger("QuestCompleted");
@@ -305,6 +311,7 @@ namespace Nightmare
                 {
                     MainManager.Instance.questCompleted++;
                     MainManager.Instance.playerHealth = playerhealth.currentHealth;
+                    MainManager.Instance.isFromLoad = false;
                     currentCanvas.SetActive(false);
                     nextCanvas.SetActive(true);
                     // attachedAudioSource.Play();

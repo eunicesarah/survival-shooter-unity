@@ -62,6 +62,8 @@ namespace Nightmare
         
         public string saveName;
 
+        public bool isFromLoad = false;
+
 
         public float vol;
 
@@ -189,6 +191,7 @@ namespace Nightmare
             PlayerHealth playerhealth = FindObjectOfType<PlayerHealth>();
             QuestComplete questComplete = FindObjectOfType<QuestComplete>();
             questComplete.isFromLoad = true;
+            
             loads = false;
             if (playerhealth != null)
             {
@@ -236,6 +239,7 @@ namespace Nightmare
 
         public void LoadGame(string gameName) {
             gameData = dataService.Load(gameName);
+            this.isFromLoad = true;
             SceneManager.LoadScene(gameData.ArenaName);
             loads = true;
         }

@@ -45,7 +45,8 @@ namespace Nightmare {
 
         void Update()
         {
-            if (SaveSpot != null)
+            
+            if (SaveSpot != null && !MainManager.Instance.isFromLoad)
             {
                 if(Vector3.Distance(player.transform.position, SaveSpot.transform.position) < 4f && !open && questComplete.isQuestCompleted)
                 {

@@ -48,7 +48,7 @@ namespace Nightmare
 
         void Update()
         {
-            if(shopKeeper!=null)
+            if(shopKeeper!=null && !MainManager.Instance.isFromLoad)
             {
                 if(Vector3.Distance(player.transform.position, shopKeeper.transform.position) < 5f && questComplete.isQuestCompleted)
                 {
