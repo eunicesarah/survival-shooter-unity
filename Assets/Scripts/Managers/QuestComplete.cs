@@ -29,6 +29,8 @@ namespace Nightmare
 
         public GameObject shop;
         public GameObject save;
+        Transform mushroom;
+        Transform cactus;
 
 
         public GameObject CountDown;
@@ -62,6 +64,7 @@ namespace Nightmare
         void Update()
         {
             playerScore = scoreManager.getScore();
+            
 
             if(currentCanvas.name == "GameScene1" && !isFromLoad)
             {
@@ -120,6 +123,16 @@ namespace Nightmare
                 }
                 if (countKepalaKeroco<=1)
                 {
+                    mushroom = GameObject.Find("MushroomSmilePA(Clone)")?.transform;
+                    cactus = GameObject.Find("CactusPA(Clone)")?.transform;
+                    if (mushroom == null)
+                    {
+                        MainManager.Instance.isMushroom = false;
+                    }
+                    if (cactus == null)
+                    {
+                        MainManager.Instance.isCactus = false;
+                    }
                     countDown -= Time.deltaTime;
                     CountDown.SetActive(true);
                     CountDownText.text = Mathf.RoundToInt(countDown).ToString();
@@ -175,6 +188,16 @@ namespace Nightmare
                                 Destroy(enemy);
                             }
                         }
+                        mushroom = GameObject.Find("MushroomSmilePA(Clone)")?.transform;
+                        cactus = GameObject.Find("CactusPA(Clone)")?.transform;
+                        if (mushroom == null)
+                        {
+                            MainManager.Instance.isMushroom = false;
+                        }
+                        if (cactus == null)
+                        {
+                            MainManager.Instance.isCactus = false;
+                        }
                         enemyManager.SetActive(false);
                         shop.SetActive(true);
                         save.SetActive(true);
@@ -224,6 +247,16 @@ namespace Nightmare
                     }
                     enemyManager.SetActive(false);
                     // shop.SetActive(true);
+                    mushroom = GameObject.Find("MushroomSmilePA(Clone)")?.transform;
+                    cactus = GameObject.Find("CactusPA(Clone)")?.transform;
+                    if (mushroom == null)
+                    {
+                        MainManager.Instance.isMushroom = false;
+                    }
+                    if (cactus == null)
+                    {
+                        MainManager.Instance.isCactus = false;
+                    }
 
 
                     // questCompleteCanvas.SetActive(true);
