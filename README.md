@@ -2,6 +2,45 @@
 ## Deskripsi
 **Survival Shooter The Sequel** adalah pengembangan lanjut dari **tutorial Unity Survival Shooter** yang diberikan Agate. Fitur-fitur tambahan mencakup story mode, main menu, load and save game, shopkeeper, weapon, pet, orb power up, dan cheat.
 
+Pada aplikasi ini terdapat beberapa spesifikasi sebagai berikut:
+1. Main menu memiliki beberapa pilihan:
+	- New Game (memulai story mode yang baru)
+	- Load Game (melanjutkan game yang sudah pernah disimpan)
+	- Statistics : melihat playtime, shot accuracy, story progress, enemies killed, death count, dan distance travel.
+	- Settings: mengisi nama, mengatur volume sfx/music, dan difficulty
+	- Exit: keluar dari game
+2. Terdapat cutscene berupa dialog di awal, tengah, dan akhir story mode. Untuk menyelesaikan game, pemain harus menyelesaikan quest dengan mengalahkan sejumlah musuh yang ditentukan.
+3. Terdapat 4 jenis musuh, yaitu Keroco, Kepala Keroco, Jenderal, dan Raja (final boss). Setiap monster yang dikalahkan memiliki reward coin masing-masing.
+4. Pemain dapat mengalahkan monster dengan bergerak menggunakan `W`, `A`, `S`, dan `D` dan menyerang dengan menggunakan *left click* ke arah yang dituju. 
+5. Setiap menyelesaikan quest, pemain diberi kesempatan untuk menyimpan game ke 3 slot yang tersedia dan dapat menginput nama save game.
+6. Setiap menyelesaikan quest, akan muncul `shopkeeper` selama 90 detik. Pemain dapat menekan `e` untuk membuka UI Shop dan membeli pet. Bila pemain menekan `e` ketika tidak ada `shopkeeper` atau `shopkeeper` terlalu jauh, akan ada pesan error.
+7. Pemain dapat berganti senjata dengan *scrolling mouse*. Terdapat 3 jenis senjata sebagai berikut:
+	- Burstgun
+	- Shotgun
+	- Sword   
+8.  Dalam game ini terdapat 3 jenis pet sebagai berikut:
+	- Tipe healer: `Spiky`
+	- Tipe attacker: `Shroomie`
+	- Tipe enemy buff: `Eagle`
+
+    Pemain bisa memiliki dua pet pada satu waktu. Setiap pet memiliki health dan dapat diserang musuh. Ketika pet mati, pemain baru dapat membeli pet baru. Terdapat 2 jenis Pet yang dapat dibeli, yaitu tipe healer dan attacker.Sedangkan tipe enemy buff hanya bisa dimiliki oleh musuh.
+9.  Dalam game ini terdapat 3 jenis orb power up berikut yang akan dijatuhkan oleh musuh secara random ketika musuh mati:
+	- Orb Increase Damage: meningkatkan damage pemain sebesar 10 persen
+	- Orb Restore Health: mengisi ulang health pemain sebesar 20 persen
+	- Orb Increase Speed: meningkatkan speed pemain sebesar 20 persen selama 15 detik
+10. Ketika pemain kehabisan *health*, pemain diberi kesempatan untuk mengulangi quest yang sedang dijalankan dengan menekan `space`. Akan ada *countdown* yang ditampilkan untuk memberi waktu jika ingin mengulangi, apabila melebihi batas waktu maka permainan selesai dan akan dialihkan ke main menu
+11. Terdapat beberapa cheat yang dapat diaktifkan dengan menekan `enter` dan diikuti command kemudian menekan `enter` lagi. Berikut merupakan list command cheat:
+	- `kill`: 1 serangan pemain langsung membunuh musuh
+	- `god`: HP dari pemain tidak akan berkurang
+	- `rich`: pemain mendapat uang tak terhingga
+	- `fast`: kecepatan pemain bertambah 2 kali lipat
+	- `opat`: HP pet tidak akan berkurang
+    - `xpat`: membunuh pet secara instan
+    - `orbs`: orbs power up akan langsung muncul di depan pemain
+    - `next`: pemain dapat melewati level yang sedang dimainkan
+  
+
+
 ## Library
 
 Unity Scripting API:
@@ -25,8 +64,8 @@ Unity Scripting API:
 | Fitur | Screenshot |
 |-------|------------|
 | Main Menu | ![Main Menu](Screenshot/MainMenu.jpg) |
-| Load Game |  |
-| Save Game| |
+| Load Game | ![Load Game](Screenshot/Load.jpg)|
+| Save Game|![Save1](Screenshot/Save1.jpg) ![Save2](Screenshot/Save2.jpg) |
 | Statistics | ![Scoreboard](Screenshot/Statistics.jpg) |
 | Settings | ![Settings](Screenshot/Settings.jpg) |
 | Gameplay and Quest |![Gameplay1](Screenshot/Quest1.jpg) ![Gameplay2](Screenshot/Quest2.jpg)![Gameplay3](Screenshot/Quest3.jpg) ![Gameplay4](Screenshot/Quest4.jpg)|
