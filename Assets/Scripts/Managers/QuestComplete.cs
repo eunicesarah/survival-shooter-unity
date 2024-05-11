@@ -65,7 +65,7 @@ namespace Nightmare
 
             if(currentCanvas.name == "GameScene1" && !isFromLoad)
             {
-                if (playerScore >= 10)
+                if (playerScore >= 500)
                 {
                     countDown -= Time.deltaTime;
                     CountDown.SetActive(true);
@@ -118,7 +118,7 @@ namespace Nightmare
                         }
                     }
                 }
-                if (countKepalaKeroco<=5)
+                if (countKepalaKeroco<=1)
                 {
                     countDown -= Time.deltaTime;
                     CountDown.SetActive(true);

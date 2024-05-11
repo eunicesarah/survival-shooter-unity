@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using System.Text;
 using UnitySampleAssets.CrossPlatformInput;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Nightmare
 {
@@ -20,6 +21,8 @@ namespace Nightmare
         public float spread = 2f;
         private int maxOrbs = 15;
         private int currentOrbs = 0;
+
+        private float rangeBullet;
 
         float timer;
         Ray shootRay = new Ray();
@@ -149,12 +152,14 @@ namespace Nightmare
                 shootRay.direction = transform.forward;
                 MainManager.Instance.totalbullets++;
                 MainManager.Instance.totalbulletsScene++;
+                rangeBullet = range;
             }
             else if (weapon == 1)
             {
                 bulletsShot = bulletsPerTap;
                 MainManager.Instance.totalbullets += bulletsPerTap;
                 MainManager.Instance.totalbulletsScene += bulletsPerTap;
+                rangeBullet = range * 0.1f;
             }
 
             for (int i = 0; i < bulletsShot; i++)
@@ -174,7 +179,7 @@ namespace Nightmare
                 bulletLine.SetPosition(0, transform.position);
 
                 // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-                if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+                if (Physics.Raycast(shootRay, out shootHit, rangeBullet, shootableMask))
                 {
                     // Try and find an EnemyHealth script on the gameobject hit.
                     EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
@@ -199,7 +204,7 @@ namespace Nightmare
                 else
                 {
                     // ... set the second position of the line renderer to the fullest extent of the gun's range.
-                    bulletLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+                    bulletLine.SetPosition(1, shootRay.origin + shootRay.direction * rangeBullet);
                 }
 
                 // Start a coroutine to disable the LineRenderer after a delay

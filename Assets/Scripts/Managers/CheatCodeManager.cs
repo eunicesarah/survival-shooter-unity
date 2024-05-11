@@ -171,22 +171,24 @@ namespace Nightmare
                 if(cactus!=null)
                 {
                     Debug.Log("Cactus Health: " + cactusHealth.currentHealth);
-                    if (petManager.isCactus)
+                    if (MainManager.Instance.isCactus)
                     {
                         cactusHealth.godMode = false;
                         cactusHealth.TakeDamage(cactusHealth.currentHealth);
                         petManager.isCactus = false;
+                        MainManager.Instance.isCactus = false;
                     }
 
                 }
                 if ( mushroom!= null)
                 {
                     Debug.Log("Mushroom Health: " + mushroomHealth.currentHealth);
-                    if (petManager.isMushroom)
+                    if (MainManager.Instance.isMushroom)
                     {
                         mushroomHealth.godMode = false;
                         mushroomHealth.TakeDamage(mushroomHealth.currentHealth);
                         petManager.isMushroom = false;
+                        MainManager.Instance.isMushroom = false;
                     }
                 }
                 anim.SetTrigger("Cheat");

@@ -72,12 +72,12 @@ namespace Nightmare
                 // }
                 if (MainManager.Instance.coin >= shopItemSO[i].price)
                 {
-                    if(i == 0 && petManager.isMushroom)
+                    if(i == 0 && MainManager.Instance.isMushroom)
                     {
                         myPurchaseButton[i].interactable = false;
                         myImage[i].SetActive(true);
                     }
-                    else if(i == 1 && petManager.isCactus)
+                    else if(i == 1 && MainManager.Instance.isCactus)
                     {
                         myPurchaseButton[i].interactable = false;
                         myImage[i].SetActive(true);
