@@ -13,7 +13,7 @@ namespace Nightmare
         public GameObject cactus;
         public GameObject mushroom;
         GameObject player;
-        void Awake()
+        void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
             Debug.Log("Mushroom " + MainManager.Instance.isMushroom);

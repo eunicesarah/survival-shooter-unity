@@ -189,17 +189,19 @@ namespace Nightmare
             PlayerHealth playerhealth = FindObjectOfType<PlayerHealth>();
             QuestComplete questComplete = FindObjectOfType<QuestComplete>();
             questComplete.isFromLoad = true;
-
+            loads = false;
             if (playerhealth != null)
             {
-                
                 playerhealth.currentHealth = gameData.health;
                 playerhealth.healthSlider.value = playerhealth.currentHealth;
                 this.isCactus = gameData.isCactus;
                 this.isMushroom = gameData.isMushroom;
+                Debug.Log(this.isCactus + " isCactus");
+                Debug.Log(this.isMushroom + " isMushroom");
                 this.playerName = gameData.playerName;
                 this.playerHealth = gameData.health;
                 this.coin = gameData.coins;
+                
             }
 
             else
