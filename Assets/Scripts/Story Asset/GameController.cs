@@ -2,6 +2,7 @@ using Nightmare;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -26,8 +27,13 @@ public class GameController : MonoBehaviour
                 {
                     if (!currentScene.nextScene)
                     {
+                        if (currentScene.SceneName == "Ending3"){
+                            Invoke("LoadSceneDelayed", 4f);
+                        } else {
                         sceneNav = FindObjectOfType<SceneNav>();
                         sceneNav.PlayGame();
+
+                        }
                     } 
                     else
                     {
@@ -48,4 +54,10 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
+    void LoadSceneDelayed()
+        {
+            SceneManager.LoadScene(0);
+        }
+
 }
