@@ -10,7 +10,7 @@ namespace Nightmare
         public float timeBetweenAttacks = 0.5f;
         public int attackDamage = 20;
 
-        public float slowdownDistance = 5f;
+        public float slowdownDistance = 10f;
         public float slowdownFactor = 0.2f;
 
         private float timer = 0f;
@@ -84,6 +84,7 @@ namespace Nightmare
                     // Inflict damage on the player
                     anim.SetTrigger("GolemAttack");
                     playerHealth.TakeDamage(1);
+                    Debug.Log("Takedamage");
                 }
 
                 playerDamage.damagePerShot = (int)(playerDamage.damagePerShot) / 2;
@@ -142,6 +143,13 @@ namespace Nightmare
                 else if (distanceToCactus <= slowdownDistance && cactusHealth.currentHealth > 0)
                 {
                     return cactus.transform;
+                }
+            }
+            else
+            {
+                if (distanceToPlayer <= slowdownDistance && playerHealth.currentHealth > 0)
+                {
+                    return player;
                 }
             }
 
