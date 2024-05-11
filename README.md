@@ -21,7 +21,21 @@ Unity Scripting API:
   - System.Linq
 - TMPro
 
-## Screenshot
+## Screenshot 
+| Fitur | Screenshot |
+|-------|------------|
+| Main Menu | ![Main Menu](Screenshot/MainMenu.jpg) |
+| Load Game |  |
+| Save Game| |
+| Statistics | ![Scoreboard](Screenshot/Statistics.jpg) |
+| Settings | ![Settings](Screenshot/Settings.jpg) |
+| Gameplay and Quest |![Gameplay1](Screenshot/Quest1.jpg) ![Gameplay2](Screenshot/Quest2.jpg)![Gameplay3](Screenshot/Quest3.jpg) ![Gameplay4](Screenshot/Quest4.jpg)|
+| Game Over | ![Game Over1](Screenshot/GameOver1.jpg) ![Game Over2](Screenshot/GameOver2.jpg)|
+| Pause Game | ![Pause Game](Screenshot/Pause.jpg) |
+| Shopkeeper | ![Shopkeeper](Screenshot/Shopkeeper.jpg) |
+| Shop | ![Shop](Screenshot/Shop.jpg) |
+| CutScene | ![CutScene](Screenshot/CutScene.jpg) |
+
 
 ## Anggota Kelompok
 <table>
